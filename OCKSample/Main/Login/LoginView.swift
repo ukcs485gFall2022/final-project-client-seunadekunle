@@ -24,11 +24,14 @@ struct LoginView: View {
     @Environment(\.tintColor) var tintColor
     @Environment(\.tintColorFlip) var tintColorFlip
     @ObservedObject var viewModel: LoginViewModel
-    @State var usersname = ""
+    @State var username = ""
     @State var password = ""
+    @State var email = ""
     @State var firstName: String = ""
     @State var lastName: String = ""
     @State var signupLoginSegmentValue = 0
+    let colorStyler = ColorStyler()
+    let appearanceStyler = AppearanceStyler()
 
     var body: some View {
         VStack {
@@ -43,48 +46,35 @@ struct LoginView: View {
                 .frame(width: 150, height: 150, alignment: .center)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color(.white), lineWidth: 4))
-                .shadow(radius: 10)
                 .padding()
 
-            /*
-             Example of how to do the picker here:
-             https://www.swiftkickmobile.com/creating-a-segmented-control-in-swiftui/
-             */
-            Picker(selection: $signupLoginSegmentValue,
-                   label: Text("Login Picker")) {
-                Text("Login").tag(0)
-                Text("Sign Up").tag(1)
-            }
-            .pickerStyle(.segmented)
-            .background(Color(tintColorFlip))
-            .cornerRadius(20.0)
-            .padding()
-
             VStack(alignment: .leading) {
-                TextField("Username", text: $usersname)
+                TextField("Username", text: $username)
                     .padding()
                     .background(.white)
-                    .cornerRadius(20.0)
-                    .shadow(radius: 10.0, x: 20, y: 10)
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
                 SecureField("Password", text: $password)
                     .padding()
-                    .background(.white)
-                    .cornerRadius(20.0)
-                    .shadow(radius: 10.0, x: 20, y: 10)
+                    .background(.black)
+                    .cornerRadius(appearanceStyler.cornerRadius1)
 
                 switch signupLoginSegmentValue {
                 case 1:
+
                     TextField("First Name", text: $firstName)
                         .padding()
-                        .background(.white)
-                        .cornerRadius(20.0)
-                        .shadow(radius: 10.0, x: 20, y: 10)
+                        .background(.black)
+                        .cornerRadius(appearanceStyler.cornerRadius1)
 
                     TextField("Last Name", text: $lastName)
                         .padding()
-                        .background(.white)
-                        .cornerRadius(20.0)
-                        .shadow(radius: 10.0, x: 20, y: 10)
+                        .background(.black)
+                        .cornerRadius(appearanceStyler.cornerRadius1)
+                    TextField("Email (optional)", text: $email)
+                        .padding()
+                        .background(.black)
+                        .cornerRadius(appearanceStyler.cornerRadius1)
+
                 default:
                     EmptyView()
                 }
@@ -100,14 +90,14 @@ struct LoginView: View {
                 case 1:
                     Task {
                         await viewModel.signup(.patient,
-                                               username: usersname,
+                                               username: username,
                                                password: password,
                                                firstName: firstName,
-                                               lastName: lastName)
+                                               lastName: lastName, email: email)
                     }
                 default:
                     Task {
-                        await viewModel.login(username: usersname,
+                        await viewModel.login(username: username,
                                               password: password)
                     }
                 }
@@ -156,10 +146,22 @@ struct LoginView: View {
             }
             Spacer()
         }
-        .background(LinearGradient(gradient: Gradient(colors: [Color(tintColorFlip),
-                                                               Color(tintColor)]),
-                                   startPoint: .top,
-                                   endPoint: .bottom))
+        .background(Color(colorStyler.customBackground))
+
+        /*
+         Example of how to do the picker here:
+         https://www.swiftkickmobile.com/creating-a-segmented-control-in-swiftui/
+         */
+        Picker(selection: $signupLoginSegmentValue,
+               label: Text("Login Picker")) {
+            Text("Login").tag(0)
+            Text("Sign Up").tag(1)
+        }
+        .pickerStyle(.segmented)
+        .background(Color(colorStyler.customBackground))
+        .cornerRadius(appearanceStyler.cornerRadius1)
+        .padding()
+        .frame(height: 50.0)
     }
 }
 

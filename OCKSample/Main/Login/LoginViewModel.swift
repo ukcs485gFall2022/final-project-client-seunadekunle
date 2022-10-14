@@ -142,7 +142,7 @@ class LoginViewModel: ObservableObject {
                 username: String,
                 password: String,
                 firstName: String,
-                lastName: String) async {
+                lastName: String, email: String? = nil) async {
         do {
             guard try await PCKUtility.isServerAvailable() else {
                 Logger.login.error("Server health is not \"ok\"")
@@ -152,6 +152,11 @@ class LoginViewModel: ObservableObject {
             // Set any properties you want saved on the user befor logging in.
             newUser.username = username.lowercased()
             newUser.password = password
+
+            if let userEmail = email {
+                newUser.email = userEmail
+            }
+
             let user = try await newUser.signup()
             Logger.login.info("Parse signup successful: \(user)")
             let patient = try await savePatientAfterSignUp(type,

@@ -208,11 +208,11 @@ class CareViewController: OCKDailyPageViewController {
         case TaskID.nausea:
             var cards = [UIViewController]()
             // dynamic gradient colors
-            let nauseaGradientStart = UIColor { traitCollection -> UIColor in
-                return traitCollection.userInterfaceStyle == .light ? #colorLiteral(red: 0.06253327429, green: 0.6597633362, blue: 0.8644603491, alpha: 1) : #colorLiteral(red: 0, green: 0.2858072221, blue: 0.6897063851, alpha: 1)
+            let nauseaGradientStart = UIColor { _ in
+                return UIColor(Color(TintColorKey.defaultValue))
             }
-            let nauseaGradientEnd = UIColor { traitCollection -> UIColor in
-                return traitCollection.userInterfaceStyle == .light ? #colorLiteral(red: 0, green: 0.2858072221, blue: 0.6897063851, alpha: 1) : #colorLiteral(red: 0.06253327429, green: 0.6597633362, blue: 0.8644603491, alpha: 1)
+            let nauseaGradientEnd = UIColor {_ in
+                return UIColor(Color(TintColorKey.defaultValue))
             }
 
             // Create a plot comparing nausea to medication adherence.
