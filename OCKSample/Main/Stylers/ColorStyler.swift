@@ -23,14 +23,26 @@ struct ColorStyler: OCKColorStyler {
 
     // Changed style variables
     var customBackground: UIColor {
-        UIColor(red: 46, green: 59, blue: 61, alpha: 1)
+        UIColor(red: 0.98, green: 0.98, blue: 0.96, alpha: 1.00)
     }
 
     var quaternaryCustomFill: UIColor {
-        UIColor(red: 248, green: 109, blue: 54, alpha: 1)
+        UIColor(red: 0.97, green: 0.43, blue: 0.21, alpha: 1.00)
     }
 
     var customBlue: UIColor {
-        UIColor(red: 95, green: 119, blue: 130, alpha: 1)
+        iconBlue
+    }
+
+    var iconRed: UIColor {
+        UIColor(red: 0.86, green: 0.17, blue: 0.22, alpha: 1.00)
+    }
+
+    var iconYellow: UIColor {
+        UIColor(red: 0.95, green: 0.65, blue: 0.07, alpha: 1.00)
+    }
+
+    var iconBlue: UIColor {
+        UIColor(red: 0.16, green: 0.20, blue: 0.36, alpha: 1.00)
     }
 }
