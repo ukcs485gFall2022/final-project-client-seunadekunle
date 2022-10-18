@@ -43,13 +43,21 @@ struct LoginView: View {
                     .frame(width: dimensionStyler.splashIconSize,
                            height: dimensionStyler.splashIconSize,
                            alignment: .center)
-                Text("track")
+                Text("Track")
                     .font(.subheadline)
-                    .foregroundColor(.white)
-                    .padding()
-            }.padding(EdgeInsets(top: dimensionStyler.sidePadding * 2.5,
+                    .foregroundColor(.black)
+                    .frame(width: dimensionStyler.splashIconSize,
+                           height: dimensionStyler.sidePadding,
+                           alignment: .center)
+                    .padding(EdgeInsets(top: dimensionStyler.sidePadding / 2,
+                                        leading: 0,
+                                        bottom: 0,
+                                         trailing: 0))
+
+            }.frame(width: dimensionStyler.screenWidth)
+             .padding(EdgeInsets(top: dimensionStyler.sidePadding * 1.05,
                                  leading: 0,
-                                  bottom: 0,
+                                 bottom: dimensionStyler.sidePadding * 1.5,
                                   trailing: 0))
 
             VStack(alignment: .leading) {
@@ -125,7 +133,6 @@ struct LoginView: View {
                                                    firstName: firstName,
                                                    lastName: lastName, email: email)
                         }
-
                     }
                 default:
                     Task {
@@ -212,10 +219,8 @@ struct LoginView: View {
         }.padding(EdgeInsets(top: 0,
                        leading: 0,
                         bottom: 0,
-                        trailing: 0
-
-                        ))
-        .background(convertToUIColor(color: colorStyler.customBackground))
+                        trailing: 0))
+         .background(convertToUIColor(color: colorStyler.customBackground))
     }
 }
 
