@@ -108,7 +108,8 @@ class CareViewController: OCKDailyPageViewController {
             Logger.feed.info("\(errorString)")
             DispatchQueue.main.async {
                 if error != nil {
-                    self.navigationItem.rightBarButtonItem?.tintColor = .red
+                    // swiftlint:disable:next line_length
+                    self.navigationItem.rightBarButtonItem?.tintColor = CustomStylerKey.defaultValue.color.quaternaryCustomFill
                 } else {
                     self.navigationItem.rightBarButtonItem?.tintColor = self.navigationItem.leftBarButtonItem?.tintColor
                 }
@@ -139,12 +140,12 @@ class CareViewController: OCKDailyPageViewController {
         if isCurrentDay {
             if Calendar.current.isDate(date, inSameDayAs: Date()) {
                 // Add a non-CareKit view into the list
-                let tipTitle = "Benefits of exercising"
-                let tipText = "Learn how activity can promote a healthy pregnancy."
+                let tipTitle = "The science of habits"
+                let tipText = "knowablemagazine.org"
                 let tipView = TipView()
                 tipView.headerView.titleLabel.text = tipTitle
                 tipView.headerView.detailLabel.text = tipText
-                tipView.imageView.image = UIImage(named: "exercise.jpg")
+                tipView.imageView.image = UIImage(named: "article_icon")
                 tipView.customStyle = CustomStylerKey.defaultValue
                 listViewController.appendView(tipView, animated: false)
             }
@@ -175,14 +176,16 @@ class CareViewController: OCKDailyPageViewController {
                                     on date: Date) -> [UIViewController]? {
         switch task.id {
         case TaskID.steps:
+            let linkView = LinkView(title: .init(""), links: [.website("https://www.wsj.com/", title: "WSJ")])
             let view = NumericProgressTaskView(
                 task: task,
+
                 eventQuery: OCKEventQuery(for: date),
                 storeManager: self.storeManager)
                 .padding([.vertical], 20)
                 .careKitStyle(CustomStylerKey.defaultValue)
 
-            return [view.formattedHostingController()]
+            return [linkView.formattedHostingController(), view.formattedHostingController()]
         case TaskID.stretch:
             return [OCKInstructionsTaskViewController(task: task,
                                                      eventQuery: .init(for: date),
@@ -255,6 +258,8 @@ class CareViewController: OCKDailyPageViewController {
             return cards
 
         default:
+            print("test")
+            print(task.title)
             return nil
         }
     }

@@ -15,48 +15,51 @@ struct MainTabView: View {
     @State private var selectedTab = 0
 
     var body: some View {
+        // todo: add animations for transition FAB
         TabView(selection: $selectedTab) {
             CareView()
                 .tabItem {
-                    if selectedTab == 0 {
-                        Image("carecard-filled")
-                            .renderingMode(.template)
-                    } else {
-                        Image("carecard")
-                            .renderingMode(.template)
-                    }
+                if selectedTab == 0 {
+                    Image(systemName: "plus.rectangle.fill")
+                        .renderingMode(.template)
+                } else {
+                    Image(systemName: "plus.rectangle")
+                        .renderingMode(.template)
                 }
+            }
                 .tag(0)
 
             ContactView()
                 .tabItem {
-                    if selectedTab == 1 {
-                        Image("phone.bubble.left.fill")
-                            .renderingMode(.template)
-                    } else {
-                        Image("phone.bubble.left")
-                            .renderingMode(.template)
-                    }
+                if selectedTab == 1 {
+                    Image("phone.bubble.left.fill")
+                        .renderingMode(.template)
+                } else {
+                    Image("phone.bubble.left")
+                        .renderingMode(.template)
                 }
+            }
                 .tag(1)
 
             ProfileView(loginViewModel: loginViewModel)
                 .tabItem {
-                    if selectedTab == 2 {
-                        Image("connect-filled")
-                            .renderingMode(.template)
-                    } else {
-                        Image("connect")
-                            .renderingMode(.template)
-                    }
+                if selectedTab == 2 {
+                    Image("connect-filled")
+                        .renderingMode(.template)
+                } else {
+                    Image("connect")
+                        .renderingMode(.template)
                 }
+            }
                 .tag(2)
         }
-        .navigationBarHidden(true)
+            .navigationBarHidden(true)
     }
 }
 
 struct MainTabView_Previews: PreviewProvider {
+    let colorStyler = ColorStyler()
+
     static var previews: some View {
         MainTabView(loginViewModel: .init())
             .accentColor(Color(TintColorKey.defaultValue))

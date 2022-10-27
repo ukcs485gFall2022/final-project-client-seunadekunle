@@ -13,7 +13,7 @@ import os.log
 import ParseSwift
 import ParseCareKit
 
-extension OCKStore {
+public extension OCKStore {
 
     func addTasksIfNotPresent(_ tasks: [OCKTask]) async throws {
         let taskIdsToAdd = tasks.compactMap { $0.id }

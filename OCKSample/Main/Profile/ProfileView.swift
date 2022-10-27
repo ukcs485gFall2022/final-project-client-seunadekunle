@@ -18,6 +18,7 @@ struct ProfileView: View {
     @State var firstName = ""
     @State var lastName = ""
     @State var birthday = Date()
+    @State private var showSheet = false
 
     var body: some View {
         VStack {
@@ -73,6 +74,28 @@ struct ProfileView: View {
             })
             .background(Color(.red))
             .cornerRadius(15)
+
+            // Notice that "action" is a closure (which is essentially
+            // a function as argument like we discussed in class)
+            Button(action: {
+                showSheet.toggle()
+            }, label: {
+                Text("Add Task")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 300, height: 50)
+            })
+            .background(Color(.tertiarySystemFill))
+            .cornerRadius(15)
+            .sheet(isPresented: $showSheet) {
+                NewGoalsView(viewModel: .init(storeManager: Utility.createPreviewStoreManager()))
+                .presentationDetents([.fraction(0.85)])
+                .presentationDragIndicator(.hidden)
+                .cornerRadius(15)
+
+            }
+            Spacer()
         }.onReceive(viewModel.$patient, perform: { patient in
             if let currentFirstName = patient?.name.givenName {
                 firstName = currentFirstName
