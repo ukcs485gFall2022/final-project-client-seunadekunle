@@ -17,10 +17,73 @@ import os.log
 class NewGoalsViewModel: ObservableObject {
 
     @Published var error: AppError?
-//    @State var instructions = ""
 
-    // swiftlint:disable:next line_length
-    func addTask(title: String, instructions: String, start: Date, end: Date, freq: String = "Daily", taskID: String) async {
+    @Published public var taskID = ""
+    @Published public var title = ""
+    @Published public var instructions = ""
+    @Published public var start = Date()
+    @Published public var end = Date()
+
+    func addNormalTask(taskSchedule: OCKSchedule) async {
+
+        var task = OCKTask(id: TaskID.multistep, title: title, carePlanUUID: nil, schedule: taskSchedule)
+        task.instructions = instructions
+
+        do {
+            guard let appDelegate = AppDelegateKey.defaultValue else {
+                self.error = AppError.couldntBeUnwrapped
+                return
+            }
+            try await appDelegate.store?.addTasksIfNotPresent([task])
+        } catch {
+            self.error = AppError.errorString("Could not add new task \(error.localizedDescription)")
+        }
+    }
+
+    func addHealthTask(taskSchedule: OCKSchedule, healthTask: String) async {
+
+        var healthKitLinkage: OCKHealthKitLinkage = OCKHealthKitLinkage(
+            quantityIdentifier: .dietaryWater,
+            quantityType: .cumulative,
+            unit: .cupUS())
+        if healthTask == "Counting Calories" {
+            healthKitLinkage = OCKHealthKitLinkage(quantityIdentifier: .dietarySugar,
+                quantityType: .cumulative,
+                unit: .gram())
+        } else if healthTask == "Water intake" {
+            healthKitLinkage = OCKHealthKitLinkage(quantityIdentifier: .dietaryWater,
+                quantityType: .cumulative,
+                unit: .fluidOunceUS())
+        } else if healthTask == "Protein" {
+            healthKitLinkage = OCKHealthKitLinkage(quantityIdentifier: .dietaryProtein,
+                quantityType: .cumulative,
+                unit: .gram())
+        } else if healthTask == "Flights Climbed" {
+            healthKitLinkage = OCKHealthKitLinkage(quantityIdentifier: .flightsClimbed,
+                quantityType: .cumulative,
+                unit: .count())
+        }
+
+        var healthKitTask = OCKHealthKitTask(
+            id: TaskID.healthSugar,
+            title: title,
+            carePlanUUID: nil,
+            schedule: taskSchedule,
+            healthKitLinkage: healthKitLinkage)
+        healthKitTask.instructions = instructions
+
+        do {
+            guard let appDelegate = AppDelegateKey.defaultValue else {
+                self.error = AppError.couldntBeUnwrapped
+                return
+            }
+            try await appDelegate.healthKitStore.addTasksIfNotPresent([healthKitTask])
+        } catch {
+            self.error = AppError.errorString("Could not add new task \(error.localizedDescription)")
+        }
+    }
+
+    func addTask(freq: String = "Daily", taskType: String, healthTask: String? = nil) async {
 
         if end <= start {
             self.error = AppError.errorString("Start date must before end Date")
@@ -44,23 +107,14 @@ class NewGoalsViewModel: ObservableObject {
             taskSchedule = OCKSchedule(composing: [scheduleElement])
         }
 
-//        var updatedTask = task
-
-//        if instructions != updatedTask.instructions {
-            //        updatedTask?.instructions = instructions
-//        }
-        var task = OCKTask(id: taskID, title: title, carePlanUUID: nil, schedule: taskSchedule)
-        task.instructions = instructions
-
-        do {
-            guard let appDelegate = AppDelegateKey.defaultValue else {
-                self.error = AppError.couldntBeUnwrapped
+        if taskType == "Normal" {
+            await addNormalTask(taskSchedule: taskSchedule)
+        } else if taskType == "Health" {
+            if let healthTaskString = healthTask {
+                await addHealthTask(taskSchedule: taskSchedule, healthTask: healthTaskString)
+            } else {
                 return
             }
-
-            try await appDelegate.store?.addTasksIfNotPresent([task])
-        } catch {
-            self.error = AppError.errorString("Could not add new task \(error.localizedDescription)")
         }
     }
 }

@@ -16,10 +16,6 @@ struct NewGoalsView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @State private var showSheet = false
-    @State var title = ""
-    @State var instructions = ""
-    @State var startDate = Date()
-    @State var endDate = Date()
     @StateObject var viewModel: NewGoalsViewModel
     let colorStyler = ColorStyler()
     let appearanceStyler = AppearanceStyler()
@@ -28,23 +24,40 @@ struct NewGoalsView: View {
     @State private var freq = "Daily"
     let freqTypes = ["Daily", "Weekly", "Monthly"]
 
-    @State private var taskID = TaskID.multistep
-    let taskTypes = ["Weekly", "Monthly"]
+    @State private var taskType = "Normal"
+    let ockTaskTypes = ["Normal", "Health"]
+
+    @State private var healthTask = "Counting Sugar"
+    let healthTaskList = ["Counting Sugar", "Water intake", "Protein", "Flights Climbed"]
 
     var body: some View {
 
         VStack(alignment: .leading) {
 
-            Text("Add habit")
-                .font(.largeTitle)
-                .foregroundColor(.black)
-                .fontWeight(.semibold)
-                .padding(EdgeInsets(top: 0,
-                leading: dimensionStyler.sidePadding,
-                bottom: dimensionStyler.sidePadding * 2,
-                trailing: dimensionStyler.sidePadding + 17))
+            HStack {
+                Text("Add habit")
+                    .font(.largeTitle)
+                    .foregroundColor(.black)
+                    .fontWeight(.semibold)
+                    .padding(EdgeInsets(top: 0,
+                    leading: dimensionStyler.sidePadding,
+                    bottom: dimensionStyler.sidePadding * 2,
+                    trailing: dimensionStyler.sidePadding + 17))
 
-            TextField("Title", text: $title)
+                Picker("Select the type", selection: $taskType) {
+                    ForEach(ockTaskTypes, id: \.self) {
+                        Text($0)
+                    }
+                }
+                    .pickerStyle(.menu)
+                    .padding(EdgeInsets(top: 0,
+                    leading: dimensionStyler.sidePadding,
+                    bottom: dimensionStyler.sidePadding * 2,
+                    trailing: dimensionStyler.sidePadding))
+
+            }
+
+            TextField("Title", text: $viewModel.title)
                 .padding()
                 .background(colorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
@@ -53,7 +66,7 @@ struct NewGoalsView: View {
                 bottom: dimensionStyler.sidePadding * 2,
                 trailing: dimensionStyler.sidePadding))
 
-            TextField("Instructions", text: $instructions)
+            TextField("Instructions", text: $viewModel.instructions)
                 .padding()
                 .background(colorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
@@ -62,16 +75,34 @@ struct NewGoalsView: View {
                 bottom: dimensionStyler.sidePadding * 2,
                 trailing: dimensionStyler.sidePadding))
 
-            Picker("Select the frequency", selection: $freq) {
-                ForEach(freqTypes, id: \.self) {
-                    Text($0)
+            HStack {
+                Picker("Select the frequency", selection: $freq) {
+                    ForEach(freqTypes, id: \.self) {
+                        Text($0)
+                    }
+                }
+                    .pickerStyle(.menu)
+                    .padding(EdgeInsets(top: -40,
+                    leading: dimensionStyler.sidePadding,
+                    bottom: dimensionStyler.sidePadding * 2,
+                    trailing: dimensionStyler.sidePadding))
+
+                switch taskType {
+                case "Health":
+                    Picker("Select the Health Task", selection: $healthTask) {
+                        ForEach(healthTaskList, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                        .pickerStyle(.menu)
+                        .padding(EdgeInsets(top: -40,
+                        leading: dimensionStyler.sidePadding,
+                        bottom: dimensionStyler.sidePadding * 2,
+                        trailing: dimensionStyler.sidePadding))
+                default:
+                    EmptyView()
                 }
             }
-                .pickerStyle(.menu)
-                .padding(EdgeInsets(top: -40,
-                leading: dimensionStyler.sidePadding,
-                bottom: dimensionStyler.sidePadding * 2,
-                trailing: dimensionStyler.sidePadding))
 
             Text("Schedule")
                 .font(.headline)
@@ -79,11 +110,11 @@ struct NewGoalsView: View {
                 ))
                 .fontWeight(.medium)
                 .padding(EdgeInsets(top: 0,
-                leading: dimensionStyler.sidePadding,
+                leading: dimensionStyler.sidePadding * 1.5,
                 bottom: 0,
                 trailing: dimensionStyler.sidePadding))
 
-            DatePicker("Start date", selection: $startDate, displayedComponents: [DatePickerComponents.date])
+            DatePicker("Start date", selection: $viewModel.start, displayedComponents: [DatePickerComponents.date])
                 .padding()
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .padding(EdgeInsets(top: 0,
@@ -91,7 +122,7 @@ struct NewGoalsView: View {
                 bottom: 0,
                 trailing: dimensionStyler.sidePadding))
 
-            DatePicker("End date", selection: $endDate, displayedComponents: [DatePickerComponents.date])
+            DatePicker("End date", selection: $viewModel.end, displayedComponents: [DatePickerComponents.date])
                 .padding()
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .padding(EdgeInsets(top: 0,
@@ -101,10 +132,16 @@ struct NewGoalsView: View {
 
             Button(action: {
                 Task {
-//                    viewModel.instructions
-                    // swiftlint:disable:next line_length
-                    await viewModel.addTask(title: title, instructions: instructions, start: startDate, end: endDate, freq: freq, taskID: taskID)
-//                    self.presentationMode.wrappedValue.dismiss()
+                    switch taskType {
+                    case "Health":
+                        viewModel.taskID = TaskID.healthSugar
+                        await viewModel.addTask(freq: freq, taskType: taskType, healthTask: healthTask)
+                    default:
+                        viewModel.taskID = TaskID.defaultTask
+                        await viewModel.addTask(freq: freq, taskType: taskType)
+                    }
+
+                    self.presentationMode.wrappedValue.dismiss()
                 }
 
             }, label: {
