@@ -151,8 +151,6 @@ class CareViewController: OCKDailyPageViewController {
         Task {
             let tasks = await self.fetchTasks(on: date)
 
-            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
-            
             tasks.compactMap {
                 let cards = self.taskViewController(for: $0, on: date)
                 cards?.forEach {
@@ -161,7 +159,6 @@ class CareViewController: OCKDailyPageViewController {
                     }
                     $0.view.isUserInteractionEnabled = isCurrentDay
                     $0.view.alpha = !isCurrentDay ? 0.4 : 1.0
-                    $0.view.addGestureRecognizer(longPressRecognizer)
                 }
                 return cards
             }.forEach { (cards: [UIViewController]) in
@@ -172,11 +169,6 @@ class CareViewController: OCKDailyPageViewController {
             self.isLoading = false
         }
     }
-    
-    @objc func longPressed(sender: UILongPressGestureRecognizer) {
-        print("longpressed")
-    }
-    
 
     private func taskViewController(for task: OCKAnyTask, on date: Date) ->
     [UIViewController]? {
@@ -270,8 +262,9 @@ class CareViewController: OCKDailyPageViewController {
             let taskView = LabeledValueTaskView(title: Text(task.title ?? "")) {
                 Text(task.instructions ?? "")
             }.careKitStyle(CustomStylerKey.defaultValue)
+
             return [taskView.formattedHostingController()]
-            
+
         default:
             return nil
         }
@@ -283,8 +276,8 @@ class CareViewController: OCKDailyPageViewController {
             var query = OCKTaskQuery(for: date)
             query.excludesTasksWithNoEvents = false
 
-            var tasks = try await storeManager.store.fetchAnyTasks(query: query)
-            
+            let tasks = try await storeManager.store.fetchAnyTasks(query: query)
+
 //            let orderedTasks = TaskID.ordered.compactMap { orderedTaskID in
 //                tasks.first(where: { $0.id == orderedTaskID }) }
 //            for task in orderedTasks {

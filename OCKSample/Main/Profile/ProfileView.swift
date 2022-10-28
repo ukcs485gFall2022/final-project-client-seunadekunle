@@ -20,6 +20,8 @@ struct ProfileView: View {
     @State var birthday = Date()
     @State private var showSheet = false
 
+    let colorStyler = ColorStyler()
+
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
@@ -86,7 +88,7 @@ struct ProfileView: View {
                     .padding()
                     .frame(width: 300, height: 50)
             })
-            .background(Color(.tertiarySystemFill))
+            .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
             .cornerRadius(15)
             .sheet(isPresented: $showSheet) {
                 NewGoalsView(viewModel: .init())
