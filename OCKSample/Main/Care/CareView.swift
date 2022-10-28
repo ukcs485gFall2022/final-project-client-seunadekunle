@@ -14,7 +14,30 @@ import CareKit
 import CareKitStore
 import os.log
 
-struct CareView: UIViewControllerRepresentable {
+struct CareView: View {
+    @State var storeManager = StoreManagerKey.defaultValue
+    let colorStyler = ColorStyler()
+    let appearanceStyler = AppearanceStyler()
+    let dimensionStyler = DimensionStyler()
+
+    var body: some View {
+        VStack(spacing: 15) {
+            Text("0")
+                .font(.largeTitle)
+                .foregroundColor(.black)
+                .fontWeight(.semibold)
+            #if os(iOS)
+                .padding(EdgeInsets(top: dimensionStyler.sidePadding,
+                    leading: dimensionStyler.sidePadding + 17,
+                    bottom: dimensionStyler.sidePadding,
+                    trailing: dimensionStyler.sidePadding + 17))
+            #endif
+            CareViewControllerRepresentable()
+        }
+    }
+}
+
+struct CareViewControllerRepresentable: UIViewControllerRepresentable {
     @State var storeManager = StoreManagerKey.defaultValue
 
     func makeUIViewController(context: Context) -> some UIViewController {
@@ -24,8 +47,7 @@ struct CareView: UIViewControllerRepresentable {
         return navigationController
     }
 
-    func updateUIViewController(_ uiViewController: UIViewControllerType,
-                                context: Context) {}
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
 }
 
 struct CareView_Previews: PreviewProvider {

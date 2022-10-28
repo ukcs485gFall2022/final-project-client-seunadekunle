@@ -81,24 +81,24 @@ extension OCKStore {
 
         let schedule = OCKSchedule(composing: [
             OCKScheduleElement(start: beforeBreakfast, end: nil,
-                               interval: DateComponents(day: 1)),
+                interval: DateComponents(day: 1)),
 
             OCKScheduleElement(start: afterLunch, end: nil,
-                               interval: DateComponents(day: 2))
-        ])
+                interval: DateComponents(day: 2))
+            ])
 
         var doxylamine = OCKTask(id: TaskID.doxylamine, title: "Take Doxylamine",
-                                 carePlanUUID: nil, schedule: schedule)
+            carePlanUUID: nil, schedule: schedule)
         doxylamine.instructions = "Take 25mg of doxylamine when you experience nausea."
         doxylamine.asset = "pills.fill"
 
         let nauseaSchedule = OCKSchedule(composing: [
             OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1),
-                               text: "Anytime throughout the day", targetValues: [], duration: .allDay)
+                text: "Anytime throughout the day", targetValues: [], duration: .allDay)
             ])
 
         var nausea = OCKTask(id: TaskID.nausea, title: "Track your nausea",
-                             carePlanUUID: nil, schedule: nauseaSchedule)
+            carePlanUUID: nil, schedule: nauseaSchedule)
         nausea.impactsAdherence = false
         nausea.instructions = "Tap the button below anytime you experience nausea."
         nausea.asset = "bed.double"
@@ -118,7 +118,7 @@ extension OCKStore {
         try await addTasksIfNotPresent([nausea, doxylamine, kegels, stretch])
 
         var contact1 = OCKContact(id: "jane", givenName: "Jane",
-                                  familyName: "Daniels", carePlanUUID: nil)
+            familyName: "Daniels", carePlanUUID: nil)
         contact1.asset = "JaneDaniels"
         contact1.title = "Family Practice Doctor"
         contact1.role = "Dr. Daniels is a family practice doctor with 8 years of experience."
@@ -136,7 +136,7 @@ extension OCKStore {
         }()
 
         var contact2 = OCKContact(id: "matthew", givenName: "Matthew",
-                                  familyName: "Reiff", carePlanUUID: nil)
+            familyName: "Reiff", carePlanUUID: nil)
         contact2.asset = "MatthewReiff"
         contact2.title = "OBGYN"
         contact2.role = "Dr. Reiff is an OBGYN with 13 years of experience."
