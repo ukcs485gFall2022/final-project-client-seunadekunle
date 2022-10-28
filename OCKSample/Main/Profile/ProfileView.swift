@@ -89,8 +89,8 @@ struct ProfileView: View {
             .background(Color(.tertiarySystemFill))
             .cornerRadius(15)
             .sheet(isPresented: $showSheet) {
-                NewGoalsView(viewModel: .init(storeManager: Utility.createPreviewStoreManager()))
-                .presentationDetents([.fraction(0.85)])
+                NewGoalsView(viewModel: .init())
+                .presentationDetents([.fraction(0.925)])
                 .presentationDragIndicator(.hidden)
                 .cornerRadius(15)
 

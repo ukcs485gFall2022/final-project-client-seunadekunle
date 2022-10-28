@@ -15,18 +15,20 @@ import HealthKit
 import os.log
 
 class NewGoalsViewModel: ObservableObject {
-    // MARK: Public read, private write properties
-    @Published private(set) var task: OCKTask?
-    private(set) var storeManager: OCKSynchronizedStoreManager
 
-    init(storeManager: OCKSynchronizedStoreManager? = nil) {
-        self.storeManager = storeManager ?? StoreManagerKey.defaultValue
-    }
+    @Published var error: AppError?
+//    @State var instructions = ""
 
     // swiftlint:disable:next line_length
-    func addHabit(title: String, instructions: String, start: Date, end: Date, freq: String = "Daily", taskID: String) async throws {
+    func addTask(title: String, instructions: String, start: Date, end: Date, freq: String = "Daily", taskID: String) async {
+
+        if end <= start {
+            self.error = AppError.errorString("Start date must before end Date")
+            return
+        }
+
         let date = Date()
-        var calendar = Calendar.current
+        let calendar = Calendar.current
         let day = calendar.component(.day, from: date)
         let hour = calendar.component(.hour, from: date)
         let minute = calendar.component(.minute, from: date)
@@ -42,27 +44,23 @@ class NewGoalsViewModel: ObservableObject {
             taskSchedule = OCKSchedule(composing: [scheduleElement])
         }
 
+//        var updatedTask = task
+
+//        if instructions != updatedTask.instructions {
+            //        updatedTask?.instructions = instructions
+//        }
         var task = OCKTask(id: taskID, title: title, carePlanUUID: nil, schedule: taskSchedule)
         task.instructions = instructions
 
-        // This is new patient that has never been saved before
-        let addedTask = try await storeManager.store.addAnyTask(task)
-        guard let addedOCKTask = addedTask as? OCKTask else {
-            Logger.profile.error("Could not cast to OCKPatient")
-            return
+        do {
+            guard let appDelegate = AppDelegateKey.defaultValue else {
+                self.error = AppError.couldntBeUnwrapped
+                return
+            }
+
+            try await appDelegate.store?.addTasksIfNotPresent([task])
+        } catch {
+            self.error = AppError.errorString("Could not add new task \(error.localizedDescription)")
         }
-        self.task = addedOCKTask
-
-//        OCKStore.init(name: <#T##String#>)
-//        addTasksIfNotPresent([task])
-
-//        taskViewController = OCKGridTaskViewController(taskID: OCKStore.Tasks.doxylamine.rawValue,
-//                                                       eventQuery: .init(for: Date()), storeManager: storeManager)
-//
-//        @State var storeManager = StoreManagerKey.defaultValue
-//        let careViewcontroller = await CareViewController(storeManager: storeManager)
-
-//        careViewcontroller.
-
     }
 }

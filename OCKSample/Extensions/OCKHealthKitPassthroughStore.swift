@@ -11,7 +11,7 @@ import CareKitStore
 import HealthKit
 import os.log
 
-public extension OCKHealthKitPassthroughStore {
+extension OCKHealthKitPassthroughStore {
 
     func addTasksIfNotPresent(_ tasks: [OCKHealthKitTask]) async throws {
         let tasksToAdd = tasks

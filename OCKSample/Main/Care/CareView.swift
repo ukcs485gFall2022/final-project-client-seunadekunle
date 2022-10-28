@@ -29,7 +29,7 @@ struct CareView: View {
             #if os(iOS)
                 .padding(EdgeInsets(top: dimensionStyler.sidePadding,
                     leading: dimensionStyler.sidePadding + 17,
-                    bottom: dimensionStyler.sidePadding / 2,
+                    bottom: dimensionStyler.sidePadding,
                     trailing: dimensionStyler.sidePadding + 17))
             #endif
             CareViewControllerRepresentable()

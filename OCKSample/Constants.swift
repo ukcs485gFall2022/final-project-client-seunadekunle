@@ -42,16 +42,16 @@ extension AppError: LocalizedError {
         switch self {
         case .couldntCast:
             return NSLocalizedString("OCKSampleError: Could not cast to required type.",
-                                     comment: "Casting error")
+                comment: "Casting error")
         case .couldntBeUnwrapped:
             return NSLocalizedString("OCKSampleError: Could not unwrap a required type.",
-                                     comment: "Unwrapping error")
+                comment: "Unwrapping error")
         case .valueNotFoundInUserInfo:
             return NSLocalizedString("OCKSampleError: Could not find the required value in userInfo.",
-                                     comment: "Value not found error")
+                comment: "Value not found error")
         case .remoteClockIDNotAvailable:
             return NSLocalizedString("OCKSampleError: Could not get remote clock ID.",
-                                     comment: "Value not available error")
+                comment: "Value not available error")
         case .emptyTaskEvents: return "Task events is empty"
         case let .noOutcomeValueForEvent(event, index): return "Event has no outcome value at index \(index): \(event)"
         case .invalidIndexPath(let indexPath): return "Invalid index path \(indexPath)"
@@ -90,7 +90,7 @@ enum TaskID {
     static let stretch = "stretch"
     static let kegels = "kegels"
     static let steps = "steps"
-    static let grid = "grid"
+    static let multistep = "multi-step"
 
     static var ordered: [String] {
         [Self.steps, Self.doxylamine, Self.kegels, Self.stretch, Self.nausea]
@@ -98,13 +98,13 @@ enum TaskID {
 }
 
 enum UserType: String, Codable {
-    case patient                           = "Patient"
-    case none                              = "None"
+    case patient = "Patient"
+    case none = "None"
 
     // Return all types as an array, make sure to maintain order above
     func allTypesAsArray() -> [String] {
         return [UserType.patient.rawValue,
-                UserType.none.rawValue]
+            UserType.none.rawValue]
     }
 }
 
