@@ -172,6 +172,11 @@ class CareViewController: OCKDailyPageViewController {
             self.isLoading = false
         }
     }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        print("longpressed")
+    }
+    
 
     private func taskViewController(for task: OCKAnyTask, on date: Date) ->
     [UIViewController]? {
