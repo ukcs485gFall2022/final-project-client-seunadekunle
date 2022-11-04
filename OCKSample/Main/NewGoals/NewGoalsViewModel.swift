@@ -23,11 +23,13 @@ class NewGoalsViewModel: ObservableObject {
     @Published public var instructions = ""
     @Published public var start = Date()
     @Published public var end = Date()
+    var assetName = "figure.stairs"
 
     func addNormalTask(taskSchedule: OCKSchedule) async {
 
         var task = OCKTask(id: TaskID.multistep, title: title, carePlanUUID: nil, schedule: taskSchedule)
         task.instructions = instructions
+        task.asset = assetName
 
         do {
             guard let appDelegate = AppDelegateKey.defaultValue else {
@@ -71,6 +73,7 @@ class NewGoalsViewModel: ObservableObject {
             schedule: taskSchedule,
             healthKitLinkage: healthKitLinkage)
         healthKitTask.instructions = instructions
+        healthKitTask.asset = assetName
 
         do {
             guard let appDelegate = AppDelegateKey.defaultValue else {
@@ -83,11 +86,15 @@ class NewGoalsViewModel: ObservableObject {
         }
     }
 
-    func addTask(freq: String = "Daily", taskType: String, healthTask: String? = nil) async {
+    func addTask(freq: String = "Daily", taskType: String, newAssetName: String, healthTask: String? = nil) async {
 
         if end <= start {
             self.error = AppError.errorString("Start date must before end Date")
             return
+        }
+
+        if assetName != newAssetName {
+            assetName = newAssetName
         }
 
         let date = Date()

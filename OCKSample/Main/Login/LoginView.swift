@@ -41,24 +41,24 @@ struct LoginView: View {
                     .resizable()
                     .clipShape(Circle())
                     .frame(width: dimensionStyler.splashIconSize,
-                           height: dimensionStyler.splashIconSize,
-                           alignment: .center)
+                    height: dimensionStyler.splashIconSize,
+                    alignment: .center)
                 Text("Track")
                     .font(.subheadline)
                     .foregroundColor(.black)
                     .frame(width: dimensionStyler.splashIconSize,
-                           height: dimensionStyler.sidePadding,
+                    height: dimensionStyler.sidePadding,
                     alignment: .center)
                     .padding(EdgeInsets(top: dimensionStyler.sidePadding / 2,
-                                        leading: 0,
-                                        bottom: 0,
-                                         trailing: 0))
+                    leading: 0,
+                    bottom: 0,
+                    trailing: 0))
 
             }.frame(width: dimensionStyler.screenWidth)
-             .padding(EdgeInsets(top: dimensionStyler.sidePadding * 1.05,
-                                 leading: 0,
-                                 bottom: dimensionStyler.sidePadding * 1.5,
-                                  trailing: 0))
+                .padding(EdgeInsets(top: dimensionStyler.sidePadding * 1.05,
+                leading: 0,
+                bottom: dimensionStyler.sidePadding * 1.5,
+                trailing: 0))
 
             VStack(alignment: .leading) {
                 TextField("Username", text: $username)
@@ -66,17 +66,17 @@ struct LoginView: View {
                     .background(.white)
                     .cornerRadius(appearanceStyler.cornerRadius1)
                     .padding(EdgeInsets(top: -40,
-                                   leading: dimensionStyler.sidePadding,
-                                    bottom: 0,
-                                    trailing: dimensionStyler.sidePadding))
+                    leading: dimensionStyler.sidePadding,
+                    bottom: 0,
+                    trailing: dimensionStyler.sidePadding))
                 SecureField("Password", text: $password)
                     .padding()
                     .background(.white)
                     .cornerRadius(appearanceStyler.cornerRadius1)
                     .padding(EdgeInsets(top: dimensionStyler.sidePadding / 7.5,
-                                   leading: dimensionStyler.sidePadding,
-                                    bottom: 0,
-                                    trailing: dimensionStyler.sidePadding))
+                    leading: dimensionStyler.sidePadding,
+                    bottom: 0,
+                    trailing: dimensionStyler.sidePadding))
 
                 switch signupLoginSegmentValue {
                 case 1:
@@ -86,25 +86,25 @@ struct LoginView: View {
                         .background(.white)
                         .cornerRadius(appearanceStyler.cornerRadius1)
                         .padding(EdgeInsets(top: dimensionStyler.sidePadding / 7.5,
-                                       leading: dimensionStyler.sidePadding,
-                                        bottom: 0,
-                                        trailing: dimensionStyler.sidePadding))
+                        leading: dimensionStyler.sidePadding,
+                        bottom: 0,
+                        trailing: dimensionStyler.sidePadding))
                     TextField("Last Name", text: $lastName)
                         .padding()
                         .background(.white)
                         .cornerRadius(appearanceStyler.cornerRadius1)
                         .padding(EdgeInsets(top: dimensionStyler.sidePadding / 7.5,
-                                       leading: dimensionStyler.sidePadding,
-                                        bottom: 0,
-                                        trailing: dimensionStyler.sidePadding))
+                        leading: dimensionStyler.sidePadding,
+                        bottom: 0,
+                        trailing: dimensionStyler.sidePadding))
                     TextField("Email (optional)", text: $email)
                         .padding()
                         .background(.white)
                         .cornerRadius(appearanceStyler.cornerRadius1)
                         .padding(EdgeInsets(top: dimensionStyler.sidePadding / 7.5,
-                                       leading: dimensionStyler.sidePadding,
-                                        bottom: 0,
-                                        trailing: dimensionStyler.sidePadding))
+                        leading: dimensionStyler.sidePadding,
+                        bottom: 0,
+                        trailing: dimensionStyler.sidePadding))
 
                 default:
                     EmptyView()
@@ -122,71 +122,71 @@ struct LoginView: View {
                     Task {
                         if email.isEmpty {
                             await viewModel.signup(.patient,
-                                                   username: username,
-                                                   password: password,
-                                                   firstName: firstName,
-                                                   lastName: lastName)
+                                username: username,
+                                password: password,
+                                firstName: firstName,
+                                lastName: lastName)
                         } else {
                             await viewModel.signup(.patient,
-                                                   username: username,
-                                                   password: password,
-                                                   firstName: firstName,
-                                                   lastName: lastName, email: email)
+                                username: username,
+                                password: password,
+                                firstName: firstName,
+                                lastName: lastName, email: email)
                         }
                     }
                 default:
                     Task {
                         await viewModel.login(username: username,
-                                              password: password)
+                            password: password)
                     }
                 }
             }, label: {
-                switch signupLoginSegmentValue {
-                case 1:
-                    Spacer()
-                    Text("Sign Up")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                    Spacer()
+                    switch signupLoginSegmentValue {
+                    case 1:
+                        Spacer()
+                        Text("Sign Up")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                        Spacer()
 
-                default:
-                    Spacer()
-                    Text("Login")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                    Spacer()
-                }
-            })
-            .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
-            .cornerRadius(appearanceStyler.cornerRadius1)
-            .padding(EdgeInsets(top: 0,
-                           leading: dimensionStyler.sidePadding + 17,
-                            bottom: 0,
-                            trailing: dimensionStyler.sidePadding + 17))
+                    default:
+                        Spacer()
+                        Text("Login")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                        Spacer()
+                    }
+                })
+                .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
+                .cornerRadius(appearanceStyler.cornerRadius1)
+                .padding(EdgeInsets(top: 0,
+                leading: dimensionStyler.sidePadding + 17,
+                bottom: 0,
+                trailing: dimensionStyler.sidePadding + 17))
 
             Button(action: {
                 Task {
                     await viewModel.loginAnonymously()
                 }
             }, label: {
-                switch signupLoginSegmentValue {
-                case 0:
-                    Text("Login Anonymously")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                default:
-                    EmptyView()
-                }
-            })
-            .background(colorStyler.convertToColor(color: colorStyler.iconYellow))
-            .cornerRadius(appearanceStyler.cornerRadius1)
-            .padding(EdgeInsets(top: dimensionStyler.sidePadding,
-                           leading: dimensionStyler.sidePadding + 17,
-                            bottom: 0,
-                            trailing: dimensionStyler.sidePadding + 17))
+                    switch signupLoginSegmentValue {
+                    case 0:
+                        Text("Login Anonymously")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                    default:
+                        EmptyView()
+                    }
+                })
+                .background(colorStyler.convertToColor(color: colorStyler.iconYellow))
+                .cornerRadius(appearanceStyler.cornerRadius1)
+                .padding(EdgeInsets(top: dimensionStyler.sidePadding,
+                leading: dimensionStyler.sidePadding + 17,
+                bottom: 0,
+                trailing: dimensionStyler.sidePadding + 17))
 
             // If an error occurs show it on the screen, also make it multilline
             if let error = viewModel.loginError {
@@ -195,9 +195,9 @@ struct LoginView: View {
                     .font(.system(size: 10))
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(EdgeInsets(top: 0,
-                                   leading: dimensionStyler.sidePadding,
-                                    bottom: 0,
-                                    trailing: dimensionStyler.sidePadding))
+                    leading: dimensionStyler.sidePadding,
+                    bottom: 0,
+                    trailing: dimensionStyler.sidePadding))
             }
             Spacer()
 
@@ -206,21 +206,21 @@ struct LoginView: View {
              https://www.swiftkickmobile.com/creating-a-segmented-control-in-swiftui/
              */
             Picker(selection: $signupLoginSegmentValue,
-                   label: Text("Login Picker")) {
+                label: Text("Login Picker")) {
                 Text("Login").tag(0).background(colorStyler.convertToColor(color: colorStyler.customBackground))
                 Text("Sign Up").tag(1).foregroundColor(colorStyler.convertToColor(color: colorStyler.iconYellow))
             }.pickerStyle(.segmented)
                 .foregroundColor(colorStyler.convertToColor(color: colorStyler.iconYellow))
-            .cornerRadius(appearanceStyler.cornerRadius1)
-            .padding(EdgeInsets(top: 0,
-                           leading: dimensionStyler.sidePadding,
-                            bottom: dimensionStyler.sidePadding,
-                            trailing: dimensionStyler.sidePadding))
+                .cornerRadius(appearanceStyler.cornerRadius1)
+                .padding(EdgeInsets(top: 0,
+                leading: dimensionStyler.sidePadding,
+                bottom: dimensionStyler.sidePadding,
+                trailing: dimensionStyler.sidePadding))
         }.padding(EdgeInsets(top: 0,
-                       leading: 0,
-                        bottom: 0,
-                        trailing: 0))
-        .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+            leading: 0,
+            bottom: 0,
+            trailing: 0))
+            .background(colorStyler.convertToColor(color: colorStyler.customBackground))
     }
 }
 
