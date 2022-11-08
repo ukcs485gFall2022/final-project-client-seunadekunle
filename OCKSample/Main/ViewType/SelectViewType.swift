@@ -8,14 +8,30 @@
 
 import SwiftUI
 
-struct ViewType: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+struct SelectViewType: View {
+    @Binding var viewType: ViewType
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-struct ViewType_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewType()
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(ViewType.allCases) { value in
+                    VStack {
+                        Text(value.id)
+                    }.onTapGesture {
+                        viewType = value
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }
+        }.navigationTitle(Text("Select View Type"))
+            .scrollDisabled(false)
+            .background(.white)
+            .scrollContentBackground(.hidden)
+            .padding(EdgeInsets(top: 0,
+            leading: 0,
+            bottom: 0,
+            trailing: 0))
+            .navigationBarTitleDisplayMode(.automatic)
     }
 }

@@ -172,9 +172,16 @@ class CareViewController: OCKDailyPageViewController {
 
     private func taskViewController(for task: OCKAnyTask, on date: Date) ->
     [UIViewController]? {
-        print(task.id)
-        switch task.id {
-        case TaskID.steps:
+        var type: String? = ViewType.labeledValueTaskView.rawValue
+
+        if let ockTask = task as? OCKTask, let userInfo = ockTask.userInfo {
+            type = userInfo["ViewType"]
+        } else if let healthTask = task as? OCKHealthKitTask, let userInfo = healthTask.userInfo {
+            type = userInfo["ViewType"]
+        }
+
+        switch type {
+        case ViewType.numericProgressTaskView.rawValue:
             let linkView = LinkView(title: .init(""), links: [.website("https://www.wsj.com/", title: "WSJ")])
             let view = NumericProgressTaskView(
                 task: task,
@@ -184,89 +191,83 @@ class CareViewController: OCKDailyPageViewController {
                 .careKitStyle(CustomStylerKey.defaultValue)
 
             return [linkView.formattedHostingController(), view.formattedHostingController()]
-        case TaskID.stretch:
+
+        case ViewType.instructionsTaskView.rawValue:
             return [OCKInstructionsTaskViewController(task: task,
                 eventQuery: .init(for: date),
                 storeManager: self.storeManager)]
 
-        case TaskID.kegels:
-            /*
-             Since the kegel task is only scheduled every other day, there will be cases
-             where it is not contained in the tasks array returned from the query.
-             */
+        case ViewType.simpleTaskView.rawValue:
             return [OCKSimpleTaskViewController(task: task,
                 eventQuery: .init(for: date),
                 storeManager: self.storeManager)]
 
-            // Create a card for the doxylamine task if there are events for it on this day.
-        case TaskID.doxylamine:
-
+        case ViewType.checklist.rawValue:
             return [OCKChecklistTaskViewController(
                 task: task,
                 eventQuery: .init(for: date),
                 storeManager: self.storeManager)]
 
-        case TaskID.nausea:
+        case ViewType.buttonLog.rawValue:
             var cards = [UIViewController]()
-            // dynamic gradient colors
-            let nauseaGradientStart = UIColor { _ in
-                return UIColor(Color(TintColorKey.defaultValue))
-            }
-            let nauseaGradientEnd = UIColor { _ in
-                return UIColor(Color(TintColorKey.defaultValue))
-            }
+            if task.id == TaskID.nausea {
+                    // dynamic gradient colors
+                    let nauseaGradientStart = UIColor { _ in
+                        return UIColor(Color(TintColorKey.defaultValue))
+                    }
+                    let nauseaGradientEnd = UIColor { _ in
+                        return UIColor(Color(TintColorKey.defaultValue))
+                    }
 
-            // Create a plot comparing nausea to medication adherence.
-            let nauseaDataSeries = OCKDataSeriesConfiguration(
-                taskID: "nausea",
-                legendTitle: "Nausea",
-                gradientStartColor: nauseaGradientStart,
-                gradientEndColor: nauseaGradientEnd,
-                markerSize: 10,
-                eventAggregator: OCKEventAggregator.countOutcomeValues)
+                    // Create a plot comparing nausea to medication adherence.
+                    let nauseaDataSeries = OCKDataSeriesConfiguration(
+                        taskID: "nausea",
+                        legendTitle: "Nausea",
+                        gradientStartColor: nauseaGradientStart,
+                        gradientEndColor: nauseaGradientEnd,
+                        markerSize: 10,
+                        eventAggregator: OCKEventAggregator.countOutcomeValues)
 
-            let doxylamineDataSeries = OCKDataSeriesConfiguration(
-                taskID: "doxylamine",
-                legendTitle: "Doxylamine",
-                gradientStartColor: .systemGray2,
-                gradientEndColor: .systemGray,
-                markerSize: 10,
-                eventAggregator: OCKEventAggregator.countOutcomeValues)
+                    let doxylamineDataSeries = OCKDataSeriesConfiguration(
+                        taskID: "doxylamine",
+                        legendTitle: "Doxylamine",
+                        gradientStartColor: .systemGray2,
+                        gradientEndColor: .systemGray,
+                        markerSize: 10,
+                        eventAggregator: OCKEventAggregator.countOutcomeValues)
 
-            let insightsCard = OCKCartesianChartViewController(
-                plotType: .bar,
-                selectedDate: date,
-                configurations: [nauseaDataSeries, doxylamineDataSeries],
-                storeManager: self.storeManager)
+                    let insightsCard = OCKCartesianChartViewController(
+                        plotType: .bar,
+                        selectedDate: date,
+                        configurations: [nauseaDataSeries, doxylamineDataSeries],
+                        storeManager: self.storeManager)
 
-            insightsCard.chartView.headerView.titleLabel.text = "Nausea & Doxylamine Intake"
-            insightsCard.chartView.headerView.detailLabel.text = "This Week"
-            insightsCard.chartView.headerView.accessibilityLabel = "Nausea & Doxylamine Intake, This Week"
-            cards.append(insightsCard)
+                    insightsCard.chartView.headerView.titleLabel.text = "Nausea & Doxylamine Intake"
+                    insightsCard.chartView.headerView.detailLabel.text = "This Week"
+                    insightsCard.chartView.headerView.accessibilityLabel = "Nausea & Doxylamine Intake, This Week"
+                    cards.append(insightsCard)
+                }
 
             /*
              Also create a card that displays a single event.
              The event query passed into the initializer specifies that only
              today's log entries should be displayed by this log task view controller.
              */
-            let nauseaCard = OCKButtonLogTaskViewController(task: task,
+            let buttonLogCard = OCKButtonLogTaskViewController(task: task,
                 eventQuery: .init(for: date),
                 storeManager: self.storeManager)
-            cards.append(nauseaCard)
+            cards.append(buttonLogCard)
             return cards
 
-        case TaskID.multistep:
+        case ViewType.gridTaskView.rawValue:
             return [OCKGridTaskViewController(task: task, eventQuery: .init(for: date), storeManager: storeManager)]
 
-        case TaskID.healthSugar:
+        default:
             let taskView = LabeledValueTaskView(title: Text(task.title ?? "")) {
                 Text(task.instructions ?? "")
             }.careKitStyle(CustomStylerKey.defaultValue)
 
             return [taskView.formattedHostingController()]
-
-        default:
-            return nil
         }
     }
 
@@ -281,7 +282,7 @@ class CareViewController: OCKDailyPageViewController {
 //            let orderedTasks = TaskID.ordered.compactMap { orderedTaskID in
 //                tasks.first(where: { $0.id == orderedTaskID }) }
 //            for task in orderedTasks {
-//                print(task.title)
+//                Logger.feed.info(task.title)
 //            }
             return tasks
         } catch {
