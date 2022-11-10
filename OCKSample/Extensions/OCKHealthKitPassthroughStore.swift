@@ -58,6 +58,7 @@ extension OCKHealthKitPassthroughStore {
                 quantityType: .cumulative,
                 unit: .count()))
         steps.asset = "figure.walk"
+        steps.userInfo = ["ViewType": ViewType.numericProgressTaskView.rawValue]
         try await addTasksIfNotPresent([steps])
     }
 }

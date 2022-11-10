@@ -91,6 +91,7 @@ extension OCKStore {
             carePlanUUID: nil, schedule: schedule)
         doxylamine.instructions = "Take 25mg of doxylamine when you experience nausea."
         doxylamine.asset = "pills.fill"
+        doxylamine.userInfo = ["ViewType": ViewType.checklist.rawValue]
 
         let nauseaSchedule = OCKSchedule(composing: [
             OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1),
@@ -102,18 +103,21 @@ extension OCKStore {
         nausea.impactsAdherence = false
         nausea.instructions = "Tap the button below anytime you experience nausea."
         nausea.asset = "bed.double"
+        nausea.userInfo = ["ViewType": ViewType.buttonLog.rawValue]
 
         let kegelElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 2))
         let kegelSchedule = OCKSchedule(composing: [kegelElement])
         var kegels = OCKTask(id: TaskID.kegels, title: "Kegel Exercises", carePlanUUID: nil, schedule: kegelSchedule)
         kegels.impactsAdherence = true
         kegels.instructions = "Perform kegel exercies"
+        kegels.userInfo = ["ViewType": ViewType.simpleTaskView.rawValue]
 
         let stretchElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
         let stretchSchedule = OCKSchedule(composing: [stretchElement])
         var stretch = OCKTask(id: "stretch", title: "Stretch", carePlanUUID: nil, schedule: stretchSchedule)
         stretch.impactsAdherence = true
         stretch.asset = "figure.walk"
+        stretch.userInfo = ["ViewType": ViewType.instructionsTaskView.rawValue]
 
         try await addTasksIfNotPresent([nausea, doxylamine, kegels, stretch])
 

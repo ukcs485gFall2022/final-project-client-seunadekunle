@@ -10,6 +10,9 @@
 		4417BFF628F60A8800B9956C /* DimensionStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417BFF528F60A8800B9956C /* DimensionStyler.swift */; };
 		441AA6262909DC3F0052F6DA /* NewGoalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441AA6252909DC3F0052F6DA /* NewGoalsViewModel.swift */; };
 		449AF33A290AE3860010F107 /* NewGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF339290AE3860010F107 /* NewGoalsView.swift */; };
+		44CA908D2911B52D0077917F /* NewPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA908C2911B52D0077917F /* NewPlanViewModel.swift */; };
+		44CA9096291ACDB10077917F /* SelectViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA9095291ACDB10077917F /* SelectViewType.swift */; };
+		44CA9098291AF9800077917F /* CustomContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA9097291AF9800077917F /* CustomContactViewController.swift */; };
 		44D56B7728F8A1C800FD0AAB /* AppearanceStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D56B7628F8A1C800FD0AAB /* AppearanceStyler.swift */; };
 		44D56B7928F8A2A200FD0AAB /* AnimationStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D56B7828F8A2A200FD0AAB /* AnimationStyler.swift */; };
 		44D56B7A28F8A9EC00FD0AAB /* DimensionStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417BFF528F60A8800B9956C /* DimensionStyler.swift */; };
@@ -160,6 +163,9 @@
 		4417BFF528F60A8800B9956C /* DimensionStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionStyler.swift; sourceTree = "<group>"; };
 		441AA6252909DC3F0052F6DA /* NewGoalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalsViewModel.swift; sourceTree = "<group>"; };
 		449AF339290AE3860010F107 /* NewGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalsView.swift; sourceTree = "<group>"; };
+		44CA908C2911B52D0077917F /* NewPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlanViewModel.swift; sourceTree = "<group>"; };
+		44CA9095291ACDB10077917F /* SelectViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewType.swift; sourceTree = "<group>"; };
+		44CA9097291AF9800077917F /* CustomContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContactViewController.swift; sourceTree = "<group>"; };
 		44D56B7628F8A1C800FD0AAB /* AppearanceStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceStyler.swift; sourceTree = "<group>"; };
 		44D56B7828F8A2A200FD0AAB /* AnimationStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationStyler.swift; sourceTree = "<group>"; };
 		5173CB8723C3A846007655A0 /* OCKSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OCKSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,6 +282,14 @@
 			path = NewGoals;
 			sourceTree = "<group>";
 		};
+		44CA908B2911B4F50077917F /* ViewType */ = {
+			isa = PBXGroup;
+			children = (
+				44CA9095291ACDB10077917F /* SelectViewType.swift */,
+			);
+			path = ViewType;
+			sourceTree = "<group>";
+		};
 		51431F9723D166AE006A7CFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +336,8 @@
 		703088772582727500FFABB6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				44CA908C2911B52D0077917F /* NewPlanViewModel.swift */,
+				44CA908B2911B4F50077917F /* ViewType */,
 				441AA6212909DBD80052F6DA /* NewGoals */,
 				70221F2728D7809800971195 /* MainTabView.swift */,
 				7036E4D2256EBE35006E9A3C /* MainView.swift */,
@@ -357,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				7036E4CD256E9A0C006E9A3C /* ContactView.swift */,
+				44CA9097291AF9800077917F /* CustomContactViewController.swift */,
 			);
 			path = Contact;
 			sourceTree = "<group>";
@@ -826,6 +843,8 @@
 				E72B2C0A226939E3009A9438 /* AppDelegate.swift in Sources */,
 				7036E4C4256E0A48006E9A3C /* CareView.swift in Sources */,
 				70F921B027CABED600368CEC /* LocalSyncSessionDelegate.swift in Sources */,
+				44CA908D2911B52D0077917F /* NewPlanViewModel.swift in Sources */,
+				44CA9096291ACDB10077917F /* SelectViewType.swift in Sources */,
 				70F03A932786087800E5AFB4 /* OCKAnyEvent+CustomStringConvertable.swift in Sources */,
 				70221F2828D7809800971195 /* MainTabView.swift in Sources */,
 				918FDEC3271B4E950045A0EF /* TintColorKey.swift in Sources */,
@@ -842,6 +861,7 @@
 				E7C37849228F887800E982D8 /* TipView.swift in Sources */,
 				70077597252228E900EC0EDA /* User.swift in Sources */,
 				70F03A9927860A0800E5AFB4 /* OCKSynchronizedStoreManager+Publishers.swift in Sources */,
+				44CA9098291AF9800077917F /* CustomContactViewController.swift in Sources */,
 				7036E4C9256E1A6F006E9A3C /* ProfileView.swift in Sources */,
 				44D56B7728F8A1C800FD0AAB /* AppearanceStyler.swift in Sources */,
 				7083A856279CA40A00B3832E /* PCKUtility.swift in Sources */,

@@ -25,4 +25,6 @@ extension Logger {
     static let ockStore = Logger(subsystem: subsystem, category: "OCKStore+Extension")
     static let ockHealthKitPassthroughStore = Logger(subsystem: subsystem,
                                                      category: "OCKHealthKitPassthroughStore+Extension")
+    static let task = Logger(subsystem: subsystem, category: "Task")
+
 }

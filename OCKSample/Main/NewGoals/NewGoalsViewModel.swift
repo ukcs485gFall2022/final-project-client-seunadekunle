@@ -23,13 +23,16 @@ class NewGoalsViewModel: ObservableObject {
     @Published public var instructions = ""
     @Published public var start = Date()
     @Published public var end = Date()
+    @Published public var viewType = ViewType.labeledValueTaskView
+
     var assetName = "figure.stairs"
 
     func addNormalTask(taskSchedule: OCKSchedule) async {
 
-        var task = OCKTask(id: TaskID.multistep, title: title, carePlanUUID: nil, schedule: taskSchedule)
+        var task = OCKTask(id: UUID().uuidString, title: title, carePlanUUID: nil, schedule: taskSchedule)
         task.instructions = instructions
         task.asset = assetName
+        task.userInfo = ["ViewType": viewType.rawValue]
 
         do {
             guard let appDelegate = AppDelegateKey.defaultValue else {
@@ -67,13 +70,16 @@ class NewGoalsViewModel: ObservableObject {
         }
 
         var healthKitTask = OCKHealthKitTask(
-            id: TaskID.healthSugar,
+            id: UUID().uuidString,
             title: title,
             carePlanUUID: nil,
             schedule: taskSchedule,
             healthKitLinkage: healthKitLinkage)
         healthKitTask.instructions = instructions
         healthKitTask.asset = assetName
+        healthKitTask.userInfo = ["ViewType": viewType.rawValue]
+
+        Utility.requestHealthKitPermissions()
 
         do {
             guard let appDelegate = AppDelegateKey.defaultValue else {

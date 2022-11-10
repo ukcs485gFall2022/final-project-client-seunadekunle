@@ -16,6 +16,7 @@ struct NewGoalsView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @State private var showSheet = false
+
     @StateObject var viewModel: NewGoalsViewModel
     let colorStyler = ColorStyler()
     let appearanceStyler = AppearanceStyler()
@@ -31,171 +32,148 @@ struct NewGoalsView: View {
     let healthTaskList = ["Counting Sugar", "Water intake", "Protein", "Flights Climbed"]
 
     @State private var taskAsset = "figure.stairs"
-    let assets = ["drop.fill", "fork.knife", "heart.fill", "figure.stairs"]
+
+    let assets = ["drop.fill", "fork.knife", "heart.fill", "figure.stairs",
+        "figure.gymnastics", "figure.american.football", "figure.basketball"]
 
     var body: some View {
-
         VStack(alignment: .leading) {
 
-            HStack {
-                Text("Add Task")
-                    .font(.largeTitle)
-                    .foregroundColor(.black)
-                    .fontWeight(.semibold)
-                    .padding(EdgeInsets(top: 0,
-                    leading: dimensionStyler.sidePadding,
-                    bottom: dimensionStyler.sidePadding * 2,
-                    trailing: dimensionStyler.sidePadding + 17))
-
-                Picker("Select the type", selection: $taskType) {
-                    ForEach(ockTaskTypes, id: \.self) {
-                        Text($0)
-                    }
-                }
-
-                    .foregroundColor(colorStyler.convertToColor(color: colorStyler.iconYellow))
-                    .pickerStyle(.menu)
-                    .padding(EdgeInsets(top: 0,
-                    leading: dimensionStyler.sidePadding,
-                    bottom: dimensionStyler.sidePadding * 2,
-                    trailing: dimensionStyler.sidePadding))
-
-            }
-
-            TextField("Title", text: $viewModel.title)
-                .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
-                .cornerRadius(appearanceStyler.cornerRadius1)
-                .padding(EdgeInsets(top: -40,
-                leading: dimensionStyler.sidePadding,
-                bottom: dimensionStyler.sidePadding * 2,
-                trailing: dimensionStyler.sidePadding))
-
-            TextField("Instructions", text: $viewModel.instructions)
-                .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
-                .cornerRadius(appearanceStyler.cornerRadius1)
-                .padding(EdgeInsets(top: -40,
-                leading: dimensionStyler.sidePadding,
-                bottom: dimensionStyler.sidePadding * 2,
-                trailing: dimensionStyler.sidePadding))
-
-            HStack {
-                Picker("Select the frequency", selection: $freq) {
-                    ForEach(freqTypes, id: \.self) {
-                        Text($0)
-                    }
-                }
-                    .foregroundColor(.black)
-                    .pickerStyle(.menu)
-                    .padding(EdgeInsets(top: -40,
-                    leading: dimensionStyler.sidePadding,
-                    bottom: dimensionStyler.sidePadding,
-                    trailing: dimensionStyler.sidePadding))
-
-                switch taskType {
-                case "Health":
-                    Picker("Select the Health Task", selection: $healthTask) {
-                        ForEach(healthTaskList, id: \.self) {
+            NavigationView {
+                Form {
+                    Picker("Select the type", selection: $taskType) {
+                        ForEach(ockTaskTypes, id: \.self) {
                             Text($0)
                         }
                     }
-                        .foregroundColor(colorStyler.convertToColor(color: .quaternarySystemFill))
-                        .pickerStyle(.menu)
-                        .padding(EdgeInsets(top: -40,
-                        leading: dimensionStyler.sidePadding,
-                        bottom: dimensionStyler.sidePadding,
-                        trailing: dimensionStyler.sidePadding))
-                default:
-                    EmptyView()
-                }
-            }
+                    .foregroundColor(colorStyler.convertToColor(color: colorStyler.iconYellow))
+                    .pickerStyle(.menu)
 
-            Text("Schedule")
-                .font(.headline)
-                .foregroundColor(.black)
-                .fontWeight(.medium)
-                .padding(EdgeInsets(top: 0,
-                leading: dimensionStyler.sidePadding * 1.5,
-                bottom: 0,
-                trailing: dimensionStyler.sidePadding))
+                    TextField("Title", text: $viewModel.title)
+                        .padding()
+                        .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                        .cornerRadius(appearanceStyler.cornerRadius1)
+                        .listRowSeparator(.hidden)
 
-            DatePicker("Start date", selection: $viewModel.start, displayedComponents: [DatePickerComponents.date])
-                .padding()
-                .cornerRadius(appearanceStyler.cornerRadius1)
-                .padding(EdgeInsets(top: 0,
-                leading: dimensionStyler.sidePadding,
-                bottom: 0,
-                trailing: dimensionStyler.sidePadding))
+                    TextField("Instructions", text: $viewModel.instructions)
+                        .padding()
+                        .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                        .cornerRadius(appearanceStyler.cornerRadius1)
+                        .listRowSeparator(.hidden)
 
-            DatePicker("End date ", selection: $viewModel.end, displayedComponents: [DatePickerComponents.date])
-                .padding()
-                .cornerRadius(appearanceStyler.cornerRadius1)
-                .padding(EdgeInsets(top: 0,
-                leading: dimensionStyler.sidePadding,
-                bottom: 0,
-                trailing: dimensionStyler.sidePadding * 1.5))
-
-            HStack {
-                Text("Select Icon")
-                    .font(.headline)
-                    .foregroundColor(.black)
-                    .fontWeight(.medium)
-                    .padding(EdgeInsets(top: 0,
-                    leading: dimensionStyler.sidePadding * 1.5,
-                    bottom: 0,
-                    trailing: dimensionStyler.sidePadding))
-
-                Text(taskAsset)
-                    .font(.headline)
-                    .foregroundColor(.black)
-                    .fontWeight(.light)
-                    .padding(EdgeInsets(top: 0,
-                    leading: dimensionStyler.sidePadding * 1.5,
-                    bottom: 0,
-                    trailing: dimensionStyler.sidePadding))
-            }
-                .padding(EdgeInsets(top: 0,
-                leading: 0,
-                bottom: dimensionStyler.sidePadding,
-                trailing: 0))
-
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(0..<assets.count) { ind in
-                        Image(systemName: assets[ind])
-                            .renderingMode(.template)
-                            .resizable()
-                            .frame(width: dimensionStyler.splashIconSize / 4,
-                            height: dimensionStyler.splashIconSize / 4,
-                            alignment: .center) .onTapGesture {
-                            taskAsset = assets[ind]
+                    VStack {
+                        Picker("Select the frequency", selection: $freq) {
+                            ForEach(freqTypes, id: \.self) {
+                                Text($0)
+                            }
                         }
-                        Spacer(minLength: dimensionStyler.sidePadding)
+                        .foregroundColor(.black)
+                        .pickerStyle(.menu)
+                        .listRowSeparator(.hidden)
+                        .padding(EdgeInsets(top: 0,
+                                            leading: 0,
+                                            bottom: dimensionStyler.sidePadding / 5,
+                                            trailing: dimensionStyler.sidePadding))
+
+                        switch taskType {
+                        case "Health":
+                            Picker("Select the Health Type", selection: $healthTask) {
+                                ForEach(healthTaskList, id: \.self) {
+                                    Text($0)
+                                }
+                            }
+                            .foregroundColor(colorStyler.convertToColor(color: .black))
+                            .pickerStyle(.menu)
+                            .listRowSeparator(.hidden)
+                            .padding(EdgeInsets(top: 0,
+                                                leading: 0,
+                                                bottom: dimensionStyler.sidePadding,
+                                                trailing: dimensionStyler.sidePadding))
+                        default:
+                            EmptyView()
+                        }
                     }
+
+
+                    // swiftlint:disable:next line_length
+                    DatePicker("Start date", selection: $viewModel.start, displayedComponents: [DatePickerComponents.date])
+                        .cornerRadius(appearanceStyler.cornerRadius1)
+                        .listRowSeparator(.hidden)
+
+                    DatePicker("End date", selection: $viewModel.end, displayedComponents: [DatePickerComponents.date])
+                        .cornerRadius(appearanceStyler.cornerRadius1)
+                        .listRowSeparator(.hidden)
+
+                    HStack {
+                        Text("Select Icon")
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .fontWeight(.medium)
+                            .padding(EdgeInsets(top: 0,
+                                                leading: 0,
+                                                bottom: 0,
+                                                trailing: dimensionStyler.sidePadding))
+
+                        Text(taskAsset)
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .fontWeight(.light)
+                            .padding(EdgeInsets(top: 0,
+                                                leading: 0,
+                                                bottom: 0,
+                                                trailing: dimensionStyler.sidePadding))
+                    }.padding(EdgeInsets(top: dimensionStyler.sidePadding / 1.5,
+                                         leading: 0,
+                                         bottom: 0,
+                                         trailing: dimensionStyler.sidePadding))
+                    .listRowSeparator(.hidden)
+
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(0..<assets.count) { ind in
+                                Image(systemName: assets[ind])
+                                    .renderingMode(.template)
+                                    .resizable()
+                                    .frame(width: dimensionStyler.splashIconSize / 4,
+                                           height: dimensionStyler.splashIconSize / 4,
+                                           alignment: .center) .onTapGesture {
+                                        taskAsset = assets[ind]
+                                    }
+                                Spacer(minLength: dimensionStyler.sidePadding)
+                            }
+                        }
+                    }
+                    .listRowSeparator(.hidden)
+
+                    NavigationLink(destination: SelectViewType(viewType: $viewModel.viewType)) {
+                        Label(viewModel.viewType.id, systemImage: "timer")
+                            .font(.headline)
+                            .foregroundColor(.accentColor)
+                    } .listRowSeparator(.hidden)
+
+
                 }
+                    .scrollDisabled(false)
+                    .background(.white)
+                    .scrollContentBackground(.hidden)
             }
-                .padding(EdgeInsets(top: 0,
-                leading: dimensionStyler.sidePadding * 1.5,
-                bottom: dimensionStyler.sidePadding,
-                trailing: dimensionStyler.sidePadding * 1.5))
 
-            Button(action: {
-                Task {
-                    switch taskType {
-                    case "Health":
-                        viewModel.taskID = TaskID.healthSugar
-                        await viewModel.addTask(freq: freq, taskType: taskType,
-                                                newAssetName: taskAsset, healthTask: healthTask)
-                    default:
-                        viewModel.taskID = TaskID.defaultTask
-                        await viewModel.addTask(freq: freq, taskType: taskType, newAssetName: taskAsset)
+                Button(action: {
+                    Task {
+                        switch taskType {
+                        case "Health":
+                            viewModel.taskID = TaskID.healthSugar
+                            await viewModel.addTask(freq: freq, taskType: taskType,
+                                                    newAssetName: taskAsset, healthTask: healthTask)
+                        default:
+                            viewModel.taskID = TaskID.defaultTask
+                            await viewModel.addTask(freq: freq, taskType: taskType, newAssetName: taskAsset)
+                        }
+
+                        self.presentationMode.wrappedValue.dismiss()
                     }
 
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-
-            }, label: {
+                }, label: {
                     Spacer()
                     Text("Add task")
                         .font(.subheadline)
@@ -206,12 +184,11 @@ struct NewGoalsView: View {
                 .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .padding(EdgeInsets(top: 0,
-                leading: dimensionStyler.sidePadding + 17,
-                bottom: dimensionStyler.sidePadding,
-                trailing: dimensionStyler.sidePadding + 17))
-        }.onReceive(viewModel.$error, perform: { error in
-            print(error)
-        })
+                                    leading: dimensionStyler.sidePadding + 17,
+                                    bottom: 0,
+                                    trailing: dimensionStyler.sidePadding + 17))
+            }.navigationTitle(Text("Add Task"))
+
     }
 }
 

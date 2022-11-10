@@ -99,6 +99,47 @@ enum TaskID {
     }
 }
 
+enum ViewType: String, CaseIterable, Identifiable {
+
+    case instructionsTaskView
+    case simpleTaskView
+    case checklist
+    case buttonLog
+    case gridTaskView
+    case numericProgressTaskView
+    case labeledValueTaskView
+    case linkView
+    case featuredContentView
+
+    func getName(value: ViewType) -> String {
+
+        switch value {
+        case .instructionsTaskView:
+                return "Instructions Task View"
+        case .simpleTaskView:
+                return "Simple Task View"
+        case .checklist:
+                return "Checklist"
+        case .buttonLog:
+                return "Button Log"
+        case .gridTaskView:
+                return "Grid Task View"
+        case .numericProgressTaskView:
+                return "Numeric Progress Task View"
+        case .labeledValueTaskView:
+                return "Labeled Task View"
+        case .linkView:
+                return "Link View"
+        case .featuredContentView:
+                return "Featured Content"
+            }
+    }
+
+    var id: String {
+        getName(value: self)
+    }
+}
+
 enum UserType: String, Codable {
     case patient = "Patient"
     case none = "None"
