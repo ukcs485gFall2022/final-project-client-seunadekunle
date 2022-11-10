@@ -32,6 +32,7 @@ struct NewGoalsView: View {
     let healthTaskList = ["Counting Sugar", "Water intake", "Protein", "Flights Climbed"]
 
     @State private var taskAsset = "figure.stairs"
+
     let assets = ["drop.fill", "fork.knife", "heart.fill", "figure.stairs",
         "figure.gymnastics", "figure.american.football", "figure.basketball"]
 
@@ -93,6 +94,7 @@ struct NewGoalsView: View {
                         }
                     }
 
+
                     // swiftlint:disable:next line_length
                     DatePicker("Start date", selection: $viewModel.start, displayedComponents: [DatePickerComponents.date])
                         .cornerRadius(appearanceStyler.cornerRadius1)
@@ -148,6 +150,7 @@ struct NewGoalsView: View {
                             .font(.headline)
                             .foregroundColor(.accentColor)
                     } .listRowSeparator(.hidden)
+
 
                 }
                     .scrollDisabled(false)
