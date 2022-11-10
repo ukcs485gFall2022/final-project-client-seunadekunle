@@ -127,6 +127,8 @@
 		E7C4CA0B22809AD500ECC3D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C4CA0A22809AD500ECC3D7 /* Assets.xcassets */; };
 		F9EFA415291DA39A00B3A74E /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EFA412291DA32C00B3A74E /* ResearchKit.framework */; };
 		F9EFA416291DA39A00B3A74E /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9EFA412291DA32C00B3A74E /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F9EFA418291DA86700B3A74E /* Surveys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFA417291DA86700B3A74E /* Surveys.swift */; };
+		F9EFA419291DA86700B3A74E /* Surveys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFA417291DA86700B3A74E /* Surveys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -277,6 +279,7 @@
 		E7C37848228F887800E982D8 /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		E7C4CA0A22809AD500ECC3D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9EFA40B291DA32B00B3A74E /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
+		F9EFA417291DA86700B3A74E /* Surveys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surveys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,6 +417,7 @@
 				7036E4C3256E0A48006E9A3C /* CareView.swift */,
 				E7440E4E229477F7007AD30A /* CareViewController.swift */,
 				70221F2B28D7C7C600971195 /* CustomCards */,
+				F9EFA417291DA86700B3A74E /* Surveys.swift */,
 			);
 			path = Care;
 			sourceTree = "<group>";
@@ -909,6 +913,7 @@
 				70F03AA527860B2500E5AFB4 /* OCKOutcomeValue+Identifiable.swift in Sources */,
 				91AD923F24A4C42D00925D4D /* NotificationController.swift in Sources */,
 				70CF66E528E1E74C00FAE977 /* TintColorFlipKey.swift in Sources */,
+				F9EFA419291DA86700B3A74E /* Surveys.swift in Sources */,
 				70F03A9C27860A2000E5AFB4 /* OCKStore.swift in Sources */,
 				70C0D474279BA492003DA141 /* Utility.swift in Sources */,
 				91AD923D24A4C42D00925D4D /* AppDelegate.swift in Sources */,
@@ -946,6 +951,7 @@
 				449AF33A290AE3860010F107 /* NewGoalsView.swift in Sources */,
 				E72B2C0A226939E3009A9438 /* AppDelegate.swift in Sources */,
 				7036E4C4256E0A48006E9A3C /* CareView.swift in Sources */,
+				F9EFA418291DA86700B3A74E /* Surveys.swift in Sources */,
 				70F921B027CABED600368CEC /* LocalSyncSessionDelegate.swift in Sources */,
 				44CA908D2911B52D0077917F /* NewPlanViewModel.swift in Sources */,
 				44CA9096291ACDB10077917F /* SelectViewType.swift in Sources */,

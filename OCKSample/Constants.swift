@@ -98,10 +98,9 @@ enum TaskID {
     static let multistep = "multi-step"
     static let healthSugar = "healthSugar"
     static let defaultTask = "default"
-
-    static var ordered: [String] {
-        [Self.steps, Self.doxylamine, Self.kegels, Self.stretch, Self.nausea]
-    }
+    static let onboarding = "onboarding"
+    
+    
 }
 
 enum ViewType: String, CaseIterable, Identifiable {
