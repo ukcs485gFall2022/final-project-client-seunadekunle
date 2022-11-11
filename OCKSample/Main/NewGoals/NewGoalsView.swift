@@ -94,7 +94,6 @@ struct NewGoalsView: View {
                         }
                     }
 
-
                     // swiftlint:disable:next line_length
                     DatePicker("Start date", selection: $viewModel.start, displayedComponents: [DatePickerComponents.date])
                         .cornerRadius(appearanceStyler.cornerRadius1)
@@ -146,49 +145,48 @@ struct NewGoalsView: View {
                     .listRowSeparator(.hidden)
 
                     NavigationLink(destination: SelectViewType(viewType: $viewModel.viewType)) {
-                        Label(viewModel.viewType.id, systemImage: "timer")
+                        Label(viewModel.viewType.id, systemImage: "viewfinder")
                             .font(.headline)
                             .foregroundColor(.accentColor)
                     } .listRowSeparator(.hidden)
 
-
                 }
+                .navigationBarTitle("Add Task")
                     .scrollDisabled(false)
                     .background(.white)
                     .scrollContentBackground(.hidden)
             }
 
-                Button(action: {
-                    Task {
-                        switch taskType {
-                        case "Health":
-                            viewModel.taskID = TaskID.healthSugar
-                            await viewModel.addTask(freq: freq, taskType: taskType,
-                                                    newAssetName: taskAsset, healthTask: healthTask)
-                        default:
-                            viewModel.taskID = TaskID.defaultTask
-                            await viewModel.addTask(freq: freq, taskType: taskType, newAssetName: taskAsset)
-                        }
+    }
+        Button(action: {
+            Task {
+                switch taskType {
+                case "Health":
+                    viewModel.taskID = TaskID.healthSugar
+                    await viewModel.addTask(freq: freq, taskType: taskType,
+                                            newAssetName: taskAsset, healthTask: healthTask)
+                default:
+                    viewModel.taskID = TaskID.defaultTask
+                    await viewModel.addTask(freq: freq, taskType: taskType, newAssetName: taskAsset)
+                }
 
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
+                self.presentationMode.wrappedValue.dismiss()
+            }
 
-                }, label: {
-                    Spacer()
-                    Text("Add task")
-                        .font(.subheadline)
-                        .foregroundColor(.white)
-                        .padding()
-                    Spacer()
-                })
-                .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
-                .cornerRadius(appearanceStyler.cornerRadius1)
-                .padding(EdgeInsets(top: 0,
-                                    leading: dimensionStyler.sidePadding + 17,
-                                    bottom: 0,
-                                    trailing: dimensionStyler.sidePadding + 17))
-            }.navigationTitle(Text("Add Task"))
-
+        }, label: {
+            Spacer()
+            Text("Add task")
+                .font(.subheadline)
+                .foregroundColor(.white)
+                .padding()
+            Spacer()
+        })
+        .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
+        .cornerRadius(appearanceStyler.cornerRadius1)
+        .padding(EdgeInsets(top: 0,
+                            leading: dimensionStyler.sidePadding + 17,
+                            bottom: 0,
+                            trailing: dimensionStyler.sidePadding + 17))
     }
 }
 
