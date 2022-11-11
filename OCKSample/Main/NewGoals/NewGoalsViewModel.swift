@@ -27,6 +27,7 @@ class NewGoalsViewModel: ObservableObject {
 
     var assetName = "figure.stairs"
 
+    // Adds a normal task
     func addNormalTask(taskSchedule: OCKSchedule) async {
 
         var task = OCKTask(id: UUID().uuidString, title: title, carePlanUUID: nil, schedule: taskSchedule)
@@ -40,18 +41,22 @@ class NewGoalsViewModel: ObservableObject {
                 return
             }
             try await appDelegate.store?.addTasksIfNotPresent([task])
+
+            // Automatically refresh view
+            NotificationCenter.default.post(.init(name: Notification.Name(rawValue: Constants.shouldRefreshView)))
         } catch {
             self.error = AppError.errorString("Could not add new task \(error.localizedDescription)")
         }
     }
 
-    func addHealthTask(taskSchedule: OCKSchedule, healthTask: String) async {
+    // Adds an HealthKit Task
+    func addHealthKitTask(taskSchedule: OCKSchedule, healthTask: String) async {
 
         var healthKitLinkage: OCKHealthKitLinkage = OCKHealthKitLinkage(
             quantityIdentifier: .dietaryWater,
             quantityType: .cumulative,
             unit: .cupUS())
-        if healthTask == "Counting Calories" {
+        if healthTask == "Counting Sugar" {
             healthKitLinkage = OCKHealthKitLinkage(quantityIdentifier: .dietarySugar,
                 quantityType: .cumulative,
                 unit: .gram())
@@ -79,19 +84,24 @@ class NewGoalsViewModel: ObservableObject {
         healthKitTask.asset = assetName
         healthKitTask.userInfo = ["ViewType": viewType.rawValue]
 
-        Utility.requestHealthKitPermissions()
-
         do {
             guard let appDelegate = AppDelegateKey.defaultValue else {
                 self.error = AppError.couldntBeUnwrapped
                 return
             }
             try await appDelegate.healthKitStore.addTasksIfNotPresent([healthKitTask])
+
+            // HealthKit Store permissions
+            Utility.requestHealthKitPermissions()
+
+            // Automatically refresh view
+            NotificationCenter.default.post(.init(name: Notification.Name(rawValue: Constants.shouldRefreshView)))
         } catch {
             self.error = AppError.errorString("Could not add new task \(error.localizedDescription)")
         }
     }
 
+    // General function for all tasks called by button
     func addTask(freq: String = "Daily", taskType: String, newAssetName: String, healthTask: String? = nil) async {
 
         if end <= start {
@@ -124,7 +134,7 @@ class NewGoalsViewModel: ObservableObject {
             await addNormalTask(taskSchedule: taskSchedule)
         } else if taskType == "Health" {
             if let healthTaskString = healthTask {
-                await addHealthTask(taskSchedule: taskSchedule, healthTask: healthTaskString)
+                await addHealthKitTask(taskSchedule: taskSchedule, healthTask: healthTaskString)
             } else {
                 return
             }

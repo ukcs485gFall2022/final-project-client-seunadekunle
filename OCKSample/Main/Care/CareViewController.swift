@@ -60,7 +60,7 @@ class CareViewController: OCKDailyPageViewController {
             object: nil)
         NotificationCenter.default.addObserver(self,
             selector: #selector(reloadView(_:)),
-            name: Notification.Name(rawValue: Constants.completedFirstSyncAfterLogin),
+            name: Notification.Name(rawValue: Constants.shouldRefreshView),
             object: nil)
     }
 

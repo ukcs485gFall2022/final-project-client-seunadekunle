@@ -27,11 +27,9 @@ class ProfileViewModel: ObservableObject {
         reloadViewModel()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(reloadViewModel(_:)),
-                                               // swiftlint:disable:next line_length
-                                               name: Notification.Name(rawValue: Constants.completedFirstSyncAfterLogin),
+                                               name: Notification.Name(rawValue: Constants.shouldRefreshView),
                                                object: nil)
     }
-
     // MARK: Helpers (private)
     private func clearSubscriptions() {
         cancellables = []
