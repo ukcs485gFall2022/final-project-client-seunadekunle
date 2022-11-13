@@ -13,11 +13,12 @@ import CareKit
 import os.log
 
 struct ProfileView: View {
+    @Environment(\.tintColor) private var tintColor
     @StateObject var viewModel = ProfileViewModel()
     @ObservedObject var loginViewModel: LoginViewModel
-    @State var firstName = ""
-    @State var lastName = ""
-    @State var birthday = Date()
+//    @State var firstName = ""
+//    @State var lastName = ""
+//    @State var birthday = Date()
     @State private var showSheet = false
 
     let colorStyler = ColorStyler()
@@ -25,17 +26,17 @@ struct ProfileView: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                TextField("First Name", text: $firstName)
+                TextField("First Name", text: $viewModel.firstName)
                     .padding()
                     .cornerRadius(20.0)
                     .shadow(radius: 10.0, x: 20, y: 10)
 
-                TextField("Last Name", text: $lastName)
+                TextField("Last Name", text: $viewModel.lastName)
                     .padding()
                     .cornerRadius(20.0)
                     .shadow(radius: 10.0, x: 20, y: 10)
 
-                DatePicker("Birthday", selection: $birthday, displayedComponents: [DatePickerComponents.date])
+                DatePicker("Birthday", selection: $viewModel.birthday, displayedComponents: [DatePickerComponents.date])
                     .padding()
                     .cornerRadius(20.0)
                     .shadow(radius: 10.0, x: 20, y: 10)
@@ -43,13 +44,7 @@ struct ProfileView: View {
 
             Button(action: {
                 Task {
-                    do {
-                        try await viewModel.saveProfile(firstName,
-                                                        last: lastName,
-                                                        birth: birthday)
-                    } catch {
-                        Logger.profile.error("Error saving profile: \(error.localizedDescription)")
-                    }
+                    await viewModel.saveProfile()
                 }
             }, label: {
                 Text("Save Profile")
@@ -98,17 +93,18 @@ struct ProfileView: View {
 
             }
             Spacer()
-        }.onReceive(viewModel.$patient, perform: { patient in
-            if let currentFirstName = patient?.name.givenName {
-                firstName = currentFirstName
-            }
-            if let currentLastName = patient?.name.familyName {
-                lastName = currentLastName
-            }
-            if let currentBirthday = patient?.birthday {
-                birthday = currentBirthday
-            }
-        })
+        }
+//        .onReceive(viewModel.$patient, perform: { patient in
+//            if let currentFirstName = patient?.name.givenName {
+//                firstName = currentFirstName
+//            }
+//            if let currentLastName = patient?.name.familyName {
+//                lastName = currentLastName
+//            }
+//            if let currentBirthday = patient?.birthday {
+//                birthday = currentBirthday
+//            }
+//        })
     }
 }
 
