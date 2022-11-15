@@ -43,15 +43,15 @@ extension OCKStore {
     }
 
     func populateCarePlans(patientUUID: UUID? = nil) async throws {
-            let checkInCarePlan = OCKCarePlan(id: CarePlanID.checkIn.rawValue,
-                                              title: "Check in Care Plan",
-                                              patientUUID: patientUUID)
-            try await AppDelegateKey
+        let checkInCarePlan = OCKCarePlan(id: CarePlanID.checkIn.rawValue,
+            title: "Check in Care Plan",
+            patientUUID: patientUUID)
+        try await AppDelegateKey
             .defaultValue?
             .storeManager
             .addCarePlansIfNotPresent([checkInCarePlan],
-                                      patientUUID: patientUUID)
-       }
+            patientUUID: patientUUID)
+    }
 
     func addContactsIfNotPresent(_ contacts: [OCKContact]) async throws {
         let contactIdsToAdd = contacts.compactMap { $0.id }
@@ -133,7 +133,7 @@ extension OCKStore {
         try await addTasksIfNotPresent([nausea, doxylamine, kegels, stretch])
 
         guard User.current != nil,
-              let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
+            let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
             Logger.myContact.error("User not logged in")
             return
         }

@@ -25,11 +25,10 @@ class NewGoalsViewModel: ObservableObject {
     @Published public var end = Date()
     @Published public var viewType = ViewType.labeledValueTaskView
     @Published public var plan = OCKCarePlan(id: UUID().uuidString,
-                                                                   title: "Check in Care Plan",
-                                                                   patientUUID: nil)
+        title: "Check in Care Plan", patientUUID: nil)
     @Published public var plans = [OCKCarePlan(id: UUID().uuidString,
-                                               title: "Check in Care Plan",
-                                               patientUUID: nil)]
+        title: "Check in Care Plan",
+        patientUUID: nil)]
 
     var assetName = "figure.stairs"
 
@@ -183,5 +182,6 @@ class NewGoalsViewModel: ObservableObject {
         }
 
         self.plans = fetchedPlans
+        self.plan = self.plans[0]
     }
 }

@@ -44,8 +44,8 @@ struct NewGoalsView: View {
                             Text($0)
                         }
                     }
-                    .foregroundColor(colorStyler.convertToColor(color: colorStyler.iconYellow))
-                    .pickerStyle(.menu)
+                        .foregroundColor(colorStyler.convertToColor(color: colorStyler.iconYellow))
+                        .pickerStyle(.menu)
 
                     TextField("Title", text: $viewModel.title)
                         .padding()
@@ -71,13 +71,13 @@ struct NewGoalsView: View {
                                 Text($0)
                             }
                         }
-                        .foregroundColor(.black)
-                        .pickerStyle(.menu)
-                        .listRowSeparator(.hidden)
-                        .padding(EdgeInsets(top: 0,
-                                            leading: 0,
-                                            bottom: dimensionStyler.sidePadding / 5,
-                                            trailing: dimensionStyler.sidePadding))
+                            .foregroundColor(.black)
+                            .pickerStyle(.menu)
+                            .listRowSeparator(.hidden)
+                            .padding(EdgeInsets(top: 0,
+                            leading: 0,
+                            bottom: dimensionStyler.sidePadding / 5,
+                            trailing: dimensionStyler.sidePadding))
 
                         switch taskType {
                         case "Health":
@@ -86,13 +86,13 @@ struct NewGoalsView: View {
                                     Text($0)
                                 }
                             }
-                            .foregroundColor(colorStyler.convertToColor(color: .black))
-                            .pickerStyle(.menu)
-                            .listRowSeparator(.hidden)
-                            .padding(EdgeInsets(top: 0,
-                                                leading: 0,
-                                                bottom: dimensionStyler.sidePadding,
-                                                trailing: dimensionStyler.sidePadding))
+                                .foregroundColor(colorStyler.convertToColor(color: .black))
+                                .pickerStyle(.menu)
+                                .listRowSeparator(.hidden)
+                                .padding(EdgeInsets(top: 0,
+                                leading: 0,
+                                bottom: dimensionStyler.sidePadding,
+                                trailing: dimensionStyler.sidePadding))
                         default:
                             EmptyView()
                         }
@@ -113,23 +113,23 @@ struct NewGoalsView: View {
                             .foregroundColor(.black)
                             .fontWeight(.medium)
                             .padding(EdgeInsets(top: 0,
-                                                leading: 0,
-                                                bottom: 0,
-                                                trailing: dimensionStyler.sidePadding))
+                            leading: 0,
+                            bottom: 0,
+                            trailing: dimensionStyler.sidePadding))
 
                         Text(taskAsset)
                             .font(.headline)
                             .foregroundColor(.black)
                             .fontWeight(.light)
                             .padding(EdgeInsets(top: 0,
-                                                leading: 0,
-                                                bottom: 0,
-                                                trailing: dimensionStyler.sidePadding))
+                            leading: 0,
+                            bottom: 0,
+                            trailing: dimensionStyler.sidePadding))
                     }.padding(EdgeInsets(top: dimensionStyler.sidePadding / 1.5,
-                                         leading: 0,
-                                         bottom: 0,
-                                         trailing: dimensionStyler.sidePadding))
-                    .listRowSeparator(.hidden)
+                        leading: 0,
+                        bottom: 0,
+                        trailing: dimensionStyler.sidePadding))
+                        .listRowSeparator(.hidden)
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
@@ -138,15 +138,15 @@ struct NewGoalsView: View {
                                     .renderingMode(.template)
                                     .resizable()
                                     .frame(width: dimensionStyler.splashIconSize / 4,
-                                           height: dimensionStyler.splashIconSize / 4,
-                                           alignment: .center) .onTapGesture {
-                                        taskAsset = assets[ind]
-                                    }
+                                    height: dimensionStyler.splashIconSize / 4,
+                                    alignment: .center) .onTapGesture {
+                                    taskAsset = assets[ind]
+                                }
                                 Spacer(minLength: dimensionStyler.sidePadding)
                             }
                         }
                     }
-                    .listRowSeparator(.hidden)
+                        .listRowSeparator(.hidden)
 
                     NavigationLink(destination: SelectViewType(viewType: $viewModel.viewType)) {
                         Label(viewModel.viewType.id, systemImage: "viewfinder")
@@ -155,20 +155,20 @@ struct NewGoalsView: View {
                     } .listRowSeparator(.hidden)
 
                 }
-                .navigationBarTitle("Add Task")
+                    .navigationBarTitle("Add Task")
                     .scrollDisabled(false)
                     .background(.white)
                     .scrollContentBackground(.hidden)
             }
 
-    }
+        }
         Button(action: {
             Task {
                 switch taskType {
                 case "Health":
                     viewModel.taskID = TaskID.healthSugar
                     await viewModel.addTask(freq: freq, taskType: taskType,
-                                            newAssetName: taskAsset, healthTask: healthTask)
+                        newAssetName: taskAsset, healthTask: healthTask)
                 default:
                     viewModel.taskID = TaskID.defaultTask
                     await viewModel.addTask(freq: freq, taskType: taskType, newAssetName: taskAsset)
@@ -178,19 +178,19 @@ struct NewGoalsView: View {
             }
 
         }, label: {
-            Spacer()
-            Text("Add task")
-                .font(.subheadline)
-                .foregroundColor(.white)
-                .padding()
-            Spacer()
-        })
-        .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
-        .cornerRadius(appearanceStyler.cornerRadius1)
-        .padding(EdgeInsets(top: 0,
-                            leading: dimensionStyler.sidePadding + 17,
-                            bottom: 0,
-                            trailing: dimensionStyler.sidePadding + 17))
+                Spacer()
+                Text("Add task")
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+                    .padding()
+                Spacer()
+            })
+            .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
+            .cornerRadius(appearanceStyler.cornerRadius1)
+            .padding(EdgeInsets(top: 0,
+            leading: dimensionStyler.sidePadding + 17,
+            bottom: 0,
+            trailing: dimensionStyler.sidePadding + 17))
     }
 }
 

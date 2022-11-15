@@ -64,7 +64,7 @@ class MyContactViewController: OCKListViewController {
     func fetchContacts() async throws {
 
         guard User.current != nil,
-              let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
+            let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
             Logger.myContact.error("User not logged in")
             self.contacts.removeAll()
             return
@@ -88,7 +88,7 @@ class MyContactViewController: OCKListViewController {
         query.sortDescriptors.append(.givenName(ascending: true))
 
         self.contacts = try await storeManager.store.fetchAnyContacts(query: query)
-        self.contacts = self.contacts.filter({$0.remoteID == personUUIDString || $0.remoteID == nil})
+        self.contacts = self.contacts.filter({ $0.remoteID == personUUIDString || $0.remoteID == nil })
         self.displayContacts()
     }
 
@@ -97,7 +97,7 @@ class MyContactViewController: OCKListViewController {
         self.clear()
         for contact in self.contacts {
             let contactViewController = OCKDetailedContactViewController(contact: contact,
-                                                                         storeManager: storeManager)
+                storeManager: storeManager)
             contactViewController.delegate = self.contactDelegate
             self.appendViewController(contactViewController, animated: false)
         }
