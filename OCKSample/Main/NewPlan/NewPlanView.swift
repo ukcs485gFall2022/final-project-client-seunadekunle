@@ -27,13 +27,13 @@ struct NewPlanView: View {
                         .cornerRadius(appearanceStyler.cornerRadius1)
                         .listRowSeparator(.hidden)
                 }
-                .navigationBarTitle("Add Plan")
+                    .navigationBarTitle("Add Plan")
                     .scrollDisabled(false)
                     .background(.white)
                     .scrollContentBackground(.hidden)
             }
 
-    }
+        }
         Button(action: {
             Task {
                 try await viewModel.addCarePlan()
@@ -41,19 +41,19 @@ struct NewPlanView: View {
             }
 
         }, label: {
-            Spacer()
-            Text("Add Plan")
-                .font(.subheadline)
-                .foregroundColor(.white)
-                .padding()
-            Spacer()
-        })
-        .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
-        .cornerRadius(appearanceStyler.cornerRadius1)
-        .padding(EdgeInsets(top: 0,
-                            leading: dimensionStyler.sidePadding + 17,
-                            bottom: 0,
-                            trailing: dimensionStyler.sidePadding + 17))
+                Spacer()
+                Text("Add Plan")
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+                    .padding()
+                Spacer()
+            })
+            .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
+            .cornerRadius(appearanceStyler.cornerRadius1)
+            .padding(EdgeInsets(top: 0,
+            leading: dimensionStyler.sidePadding + 17,
+            bottom: 0,
+            trailing: dimensionStyler.sidePadding + 17))
     }
 }
 
