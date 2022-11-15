@@ -132,43 +132,45 @@ class CareViewController: OCKDailyPageViewController {
      Use this as an opportunity to rebuild the content shown to the user.
      */ // swiftlint:disable:next line_length
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) async {
-        
-        guard await checkIfOnboardingIsComplete() else {
-
-                        let onboardCard = OCKSurveyTaskViewController(
-                                            taskID: TaskID.onboarding,
-                                            eventQuery: OCKEventQuery(for: date),
-                                            storeManager: self.storeManager,
-                                            survey: Surveys.onboardingSurvey(),
-                                            extractOutcome: { _ in [OCKOutcomeValue(Date())] }
-                                        )
-                        onboardCard.surveyDelegate = self
-
-                        listViewController.appendViewController(
-                            onboardCard,
-                            animated: false
-                        )
-                        return
-                    }
-        
-        let isCurrentDay = Calendar.current.isDate(date, inSameDayAs: Date())
-
-        // Only show the tip view on the current date
-        if isCurrentDay {
-            if Calendar.current.isDate(date, inSameDayAs: Date()) {
-                // Add a non-CareKit view into the list
-                let tipTitle = "The science of habits"
-                let tipText = "knowablemagazine.org"
-                let tipView = TipView()
-                tipView.headerView.titleLabel.text = tipTitle
-                tipView.headerView.detailLabel.text = tipText
-                tipView.imageView.image = UIImage(named: "article_icon")
-                tipView.customStyle = CustomStylerKey.defaultValue
-                listViewController.appendView(tipView, animated: false)
-            }
-        }
+       
 
         Task {
+            guard await checkIfOnboardingIsComplete() else {
+
+                            let onboardSurvey = Onboard()
+                            let onboardCard = OCKSurveyTaskViewController(
+                                                taskID: TaskID.onboarding,
+                                                eventQuery: OCKEventQuery(for: date),
+                                                storeManager: self.storeManager,
+                                                survey: Surveys.onboardingSurvey(),
+                                                extractOutcome: { _ in [OCKOutcomeValue(Date())] }
+                                            )
+                            onboardCard.surveyDelegate = self
+
+                            listViewController.appendViewController(
+                                onboardCard,
+                                animated: false
+                            )
+                            return
+                        }
+            
+            let isCurrentDay = Calendar.current.isDate(date, inSameDayAs: Date())
+
+            // Only show the tip view on the current date
+            if isCurrentDay {
+                if Calendar.current.isDate(date, inSameDayAs: Date()) {
+                    // Add a non-CareKit view into the list
+                    let tipTitle = "The science of habits"
+                    let tipText = "knowablemagazine.org"
+                    let tipView = TipView()
+                    tipView.headerView.titleLabel.text = tipTitle
+                    tipView.headerView.detailLabel.text = tipText
+                    tipView.imageView.image = UIImage(named: "article_icon")
+                    tipView.customStyle = CustomStylerKey.defaultValue
+                    listViewController.appendView(tipView, animated: false)
+                }
+            }
+            
             let tasks = await self.fetchTasks(on: date)
 
             tasks.compactMap {
