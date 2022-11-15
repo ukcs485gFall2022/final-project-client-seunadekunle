@@ -15,6 +15,8 @@
 		4479F94C2920E28000239891 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479F94B2920E28000239891 /* ImagePicker.swift */; };
 		449AF33A290AE3860010F107 /* NewGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF339290AE3860010F107 /* NewGoalsView.swift */; };
 		44B3D4322923271700B8C284 /* ProfileInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D4312923271700B8C284 /* ProfileInputView.swift */; };
+		44B3D43529233C7200B8C284 /* MyContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D43429233C7100B8C284 /* MyContactView.swift */; };
+		44B3D43729233CDC00B8C284 /* MyContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D43629233CDC00B8C284 /* MyContactViewController.swift */; };
 		44CA908D2911B52D0077917F /* NewPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA908C2911B52D0077917F /* NewPlanViewModel.swift */; };
 		44CA9096291ACDB10077917F /* SelectViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA9095291ACDB10077917F /* SelectViewType.swift */; };
 		44CA9098291AF9800077917F /* CustomContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA9097291AF9800077917F /* CustomContactViewController.swift */; };
@@ -172,6 +174,8 @@
 		4479F94B2920E28000239891 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		449AF339290AE3860010F107 /* NewGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalsView.swift; sourceTree = "<group>"; };
 		44B3D4312923271700B8C284 /* ProfileInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputView.swift; sourceTree = "<group>"; };
+		44B3D43429233C7100B8C284 /* MyContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactView.swift; sourceTree = "<group>"; };
+		44B3D43629233CDC00B8C284 /* MyContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactViewController.swift; sourceTree = "<group>"; };
 		44CA908C2911B52D0077917F /* NewPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlanViewModel.swift; sourceTree = "<group>"; };
 		44CA9095291ACDB10077917F /* SelectViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewType.swift; sourceTree = "<group>"; };
 		44CA9097291AF9800077917F /* CustomContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContactViewController.swift; sourceTree = "<group>"; };
@@ -291,6 +295,15 @@
 			path = NewGoals;
 			sourceTree = "<group>";
 		};
+		44B3D43329233C1600B8C284 /* MyContact */ = {
+			isa = PBXGroup;
+			children = (
+				44B3D43429233C7100B8C284 /* MyContactView.swift */,
+				44B3D43629233CDC00B8C284 /* MyContactViewController.swift */,
+			);
+			path = MyContact;
+			sourceTree = "<group>";
+		};
 		44CA908B2911B4F50077917F /* ViewType */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +358,7 @@
 		703088772582727500FFABB6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				44B3D43329233C1600B8C284 /* MyContact */,
 				44CA908C2911B52D0077917F /* NewPlanViewModel.swift */,
 				44CA908B2911B4F50077917F /* ViewType */,
 				441AA6212909DBD80052F6DA /* NewGoals */,
@@ -846,6 +860,7 @@
 				7036E64025717F85006E9A3C /* Constants.swift in Sources */,
 				4417BFF628F60A8800B9956C /* DimensionStyler.swift in Sources */,
 				918FDEBC271B4E4A0045A0EF /* Calendar+Dates.swift in Sources */,
+				44B3D43729233CDC00B8C284 /* MyContactViewController.swift in Sources */,
 				70F03AA127860AB700E5AFB4 /* OCKOutcome.swift in Sources */,
 				7036E4CE256E9A0C006E9A3C /* ContactView.swift in Sources */,
 				70F03A972786098F00E5AFB4 /* OCKStore.swift in Sources */,
@@ -875,6 +890,7 @@
 				7036E4D3256EBE35006E9A3C /* MainView.swift in Sources */,
 				918FDEC5271B4EA70045A0EF /* StoreManagerKey.swift in Sources */,
 				91693822271B897200A634ED /* Utility.swift in Sources */,
+				44B3D43529233C7200B8C284 /* MyContactView.swift in Sources */,
 				707CC718254DA91900116728 /* OCKLocalization.swift in Sources */,
 				E7C37849228F887800E982D8 /* TipView.swift in Sources */,
 				70077597252228E900EC0EDA /* User.swift in Sources */,

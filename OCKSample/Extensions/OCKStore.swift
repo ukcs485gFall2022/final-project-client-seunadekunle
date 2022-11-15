@@ -14,7 +14,6 @@ import ParseSwift
 import ParseCareKit
 
 extension OCKStore {
-
     func addTasksIfNotPresent(_ tasks: [OCKTask]) async throws {
         let taskIdsToAdd = tasks.compactMap { $0.id }
 
@@ -42,6 +41,18 @@ extension OCKStore {
             }
         }
     }
+
+//    func populateCarePlans(patientUUID: UUID? = nil) async throws {
+//            let checkInCarePlan = OCKCarePlan(id: CarePlanID.checkIn.rawValue,
+//                                              title: "Check in Care Plan",
+//                                              patientUUID: patientUUID)
+//            try await AppDelegateKey
+//                .defaultValue?
+//                .storeManager
+//                .addCarePlansIfNotPresent([checkInCarePlan],
+//                                          patientUUID: patientUUID)
+//       }
+//
 
     func addContactsIfNotPresent(_ contacts: [OCKContact]) async throws {
         let contactIdsToAdd = contacts.compactMap { $0.id }
@@ -73,6 +84,8 @@ extension OCKStore {
 
     // Adds tasks and contacts into the store
     func populateSampleData() async throws {
+
+//        try await populateCarePlans(patientUUID: patientUUID)
 
         let thisMorning = Calendar.current.startOfDay(for: Date())
         let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -4, to: thisMorning)!

@@ -67,41 +67,46 @@ struct ProfileView: View {
                         .frame(width: dimensionStyler.screenWidth / 1.25)
                         .background(colorStyler.convertToColor(color: colorStyler.iconRed))
                         .cornerRadius(appearanceStyler.cornerRadius1)
-                } .background(.white)
-                    .scrollContentBackground(.hidden)
+                }
+                .background(.white)
+                .scrollContentBackground(.hidden)
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("MyContact") {
+                        viewModel.isPresentingContact = true
+                    }
+                }
 
-        } .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("MyContact") {
-                    print("Pressed")
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        viewModel.isPresentingAddTask = true
+                    }, label: {
+                            Text("Add Task")
+                        })
+                        .sheet(isPresented: $viewModel.isPresentingAddTask) {
+                        NewGoalsView(viewModel: .init())
+                            .presentationDetents([.fraction(0.925)])
+                            .presentationDragIndicator(.hidden)
+                    }
                 }
             }
-
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    viewModel.isPresentingAddTask = true
-                }, label: {
-                        Text("Add Task")
-                    })
-                    .sheet(isPresented: $viewModel.isPresentingAddTask) {
-                    NewGoalsView(viewModel: .init())
-                        .presentationDetents([.fraction(0.925)])
-                        .presentationDragIndicator(.hidden)
-                }
+            .sheet(isPresented: $viewModel.isPresentingContact) {
+                MyContactView().presentationDetents([.fraction(0.925)])
             }
-        }
-
             .sheet(isPresented: $viewModel.isPresentingImagePicker) {
-            ImagePicker(image: $viewModel.profileUIImage)
-        }
+                ImagePicker(image: $viewModel.profileUIImage)
+            }
             .alert(isPresented: $viewModel.isShowingSaveAlert) {
             return Alert(title: Text("Update"),
                 message: Text(viewModel.alertMessage),
                 dismissButton: .default(Text("Ok"), action: {
                         viewModel.isShowingSaveAlert = false
                     }))
+            }
+
         }
+
     }
 }
 
