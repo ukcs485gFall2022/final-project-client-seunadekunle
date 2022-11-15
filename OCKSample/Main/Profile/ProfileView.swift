@@ -22,6 +22,7 @@ struct ProfileView: View {
     let dimensionStyler = DimensionStyler()
 
     var body: some View {
+
         NavigationView {
             VStack {
                 ProfileImageView(viewModel: viewModel)
@@ -85,7 +86,7 @@ struct ProfileView: View {
                             Text("Add Task")
                         })
                         .sheet(isPresented: $viewModel.isPresentingAddTask) {
-                        NewGoalsView(viewModel: .init())
+                            NewGoalsView(viewModel: .init())
                             .presentationDetents([.fraction(0.925)])
                             .presentationDragIndicator(.hidden)
                     }

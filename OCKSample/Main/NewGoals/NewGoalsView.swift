@@ -59,11 +59,11 @@ struct NewGoalsView: View {
                         .cornerRadius(appearanceStyler.cornerRadius1)
                         .listRowSeparator(.hidden)
 
-//                    Picker("Select the Plan", selection: $viewModel.plan) {
-//                        ForEach(viewModel.getCarePlans(), id: \.self) {
-//                            Text($0.title)
-//                        }
-//                    }
+                    Picker("Select the Plan", selection: $viewModel.plan) {
+                        ForEach(viewModel.plans, id: \.self) {
+                            Text($0.title).tag($0.uuid)
+                        }
+                    }.listRowSeparator(.hidden)
 
                     VStack {
                         Picker("Select the frequency", selection: $freq) {

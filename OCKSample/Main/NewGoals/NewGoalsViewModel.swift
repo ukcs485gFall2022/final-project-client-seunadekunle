@@ -24,22 +24,30 @@ class NewGoalsViewModel: ObservableObject {
     @Published public var start = Date()
     @Published public var end = Date()
     @Published public var viewType = ViewType.labeledValueTaskView
-    @Published public var plan = OCKCarePlan(id: CarePlanID.checkIn.rawValue,
+    @Published public var plan = OCKCarePlan(id: UUID().uuidString,
                                                                    title: "Check in Care Plan",
                                                                    patientUUID: nil)
-    @Published public var plans = [OCKCarePlan(id: CarePlanID.checkIn.rawValue,
+    @Published public var plans = [OCKCarePlan(id: UUID().uuidString,
                                                title: "Check in Care Plan",
                                                patientUUID: nil)]
 
     var assetName = "figure.stairs"
 
+    init() {
+        getCarePlans()
+    }
+
     // Adds a normal task
     func addNormalTask(taskSchedule: OCKSchedule) async {
+
+        print(self.plan.id)
+        print(self.plan.uuid)
 
         var task = OCKTask(id: UUID().uuidString, title: title, carePlanUUID: nil, schedule: taskSchedule)
         task.instructions = instructions
         task.asset = assetName
         task.userInfo = ["ViewType": viewType.rawValue]
+        task.carePlanUUID = self.plan.uuid
 
         do {
             guard let appDelegate = AppDelegateKey.defaultValue else {
@@ -89,6 +97,7 @@ class NewGoalsViewModel: ObservableObject {
         healthKitTask.instructions = instructions
         healthKitTask.asset = assetName
         healthKitTask.userInfo = ["ViewType": viewType.rawValue]
+        healthKitTask.carePlanUUID = self.plan.uuid
 
         do {
             guard let appDelegate = AppDelegateKey.defaultValue else {
@@ -155,7 +164,7 @@ class NewGoalsViewModel: ObservableObject {
 
     func queryCarePlans() async {
 
-        var plans: [OCKCarePlan] = []
+        var fetchedPlans: [OCKCarePlan] = []
 
         do {
             guard let appDelegate = AppDelegateKey.defaultValue else {
@@ -164,20 +173,15 @@ class NewGoalsViewModel: ObservableObject {
                 return
             }
 
-            let query = OCKCarePlanQuery(for: Date())
-            try await appDelegate.store?.fetchCarePlans(completion: { result in
-                switch result {
-                case .success(let fetchedPlans):
-                    plans = fetchedPlans
-                case .failure(let error):
-                    Logger.task.error("Error \(error)")
-                }
-            })
+            let query = OCKCarePlanQuery()
+            if let queriedPlans = try await appDelegate.store?.fetchCarePlans(query: query) {
+                fetchedPlans = queriedPlans
+            }
 
+        } catch {
+            return
         }
 
-        print(plans)
-        self.plans = plans
-
+        self.plans = fetchedPlans
     }
 }
