@@ -16,102 +16,99 @@ struct ProfileView: View {
     @Environment(\.tintColor) private var tintColor
     @StateObject var viewModel = ProfileViewModel()
     @ObservedObject var loginViewModel: LoginViewModel
-//    @State var firstName = ""
-//    @State var lastName = ""
-//    @State var birthday = Date()
-    @State private var showSheet = false
 
     let colorStyler = ColorStyler()
+    let appearanceStyler = AppearanceStyler()
+    let dimensionStyler = DimensionStyler()
 
     var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
-                TextField("First Name", text: $viewModel.firstName)
-                    .padding()
-                    .cornerRadius(20.0)
-                    .shadow(radius: 10.0, x: 20, y: 10)
+        NavigationView {
+            VStack {
+                ProfileImageView(viewModel: viewModel)
 
-                TextField("Last Name", text: $viewModel.lastName)
-                    .padding()
-                    .cornerRadius(20.0)
-                    .shadow(radius: 10.0, x: 20, y: 10)
+                if let username = viewModel.username {
+                    Text(username)
+                }
 
-                DatePicker("Birthday", selection: $viewModel.birthday, displayedComponents: [DatePickerComponents.date])
-                    .padding()
-                    .cornerRadius(20.0)
-                    .shadow(radius: 10.0, x: 20, y: 10)
+                Form {
+                    ProfileInputView(viewModel: viewModel)
+
+                    Button(action: {
+                        Task {
+                            await viewModel.saveProfile()
+                            try await viewModel.saveContact()
+                        }
+                    }, label: {
+                            Text("Save Profile")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+
+                        })
+                        .frame(width: dimensionStyler.screenWidth / 1.25)
+                        .background(colorStyler.convertToColor(color: colorStyler.iconYellow))
+                        .cornerRadius(appearanceStyler.cornerRadius1)
+                        .listRowSeparator(.hidden)
+
+                    // Notice that "action" is a closure (which is essentially
+                    // a function as argument like we discussed in class)
+                    Button(action: {
+                        Task {
+                            await loginViewModel.logout()
+                        }
+                    }, label: {
+                            Text("Log Out")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(width: dimensionStyler.screenWidth)
+                        })
+                        .listRowSeparator(.hidden)
+                        .frame(width: dimensionStyler.screenWidth / 1.25)
+                        .background(colorStyler.convertToColor(color: colorStyler.iconRed))
+                        .cornerRadius(appearanceStyler.cornerRadius1)
+                } .background(.white)
+                    .scrollContentBackground(.hidden)
             }
 
-            Button(action: {
-                Task {
-                    await viewModel.saveProfile()
+        } .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("MyContact") {
+                    print("Pressed")
                 }
-            }, label: {
-                Text("Save Profile")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 300, height: 50)
-            })
-            .background(Color(.green))
-            .cornerRadius(15)
-
-            // Notice that "action" is a closure (which is essentially
-            // a function as argument like we discussed in class)
-            Button(action: {
-                Task {
-                    await loginViewModel.logout()
-                }
-            }, label: {
-                Text("Log Out")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 300, height: 50)
-            })
-            .background(Color(.red))
-            .cornerRadius(15)
-
-            // Notice that "action" is a closure (which is essentially
-            // a function as argument like we discussed in class)
-            Button(action: {
-                showSheet.toggle()
-            }, label: {
-                Text("Add Task")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 300, height: 50)
-            })
-            .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
-            .cornerRadius(15)
-            .sheet(isPresented: $showSheet) {
-                NewGoalsView(viewModel: .init())
-                .presentationDetents([.fraction(0.925)])
-                .presentationDragIndicator(.hidden)
-                .cornerRadius(15)
-
             }
-            Spacer()
+
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    viewModel.isPresentingAddTask = true
+                }, label: {
+                        Text("Add Task")
+                    })
+                    .sheet(isPresented: $viewModel.isPresentingAddTask) {
+                    NewGoalsView(viewModel: .init())
+                        .presentationDetents([.fraction(0.925)])
+                        .presentationDragIndicator(.hidden)
+                }
+            }
         }
-//        .onReceive(viewModel.$patient, perform: { patient in
-//            if let currentFirstName = patient?.name.givenName {
-//                firstName = currentFirstName
-//            }
-//            if let currentLastName = patient?.name.familyName {
-//                lastName = currentLastName
-//            }
-//            if let currentBirthday = patient?.birthday {
-//                birthday = currentBirthday
-//            }
-//        })
+
+            .sheet(isPresented: $viewModel.isPresentingImagePicker) {
+            ImagePicker(image: $viewModel.profileUIImage)
+        }
+            .alert(isPresented: $viewModel.isShowingSaveAlert) {
+            return Alert(title: Text("Update"),
+                message: Text(viewModel.alertMessage),
+                dismissButton: .default(Text("Ok"), action: {
+                        viewModel.isShowingSaveAlert = false
+                    }))
+        }
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(viewModel: .init(storeManager: Utility.createPreviewStoreManager()),
-                    loginViewModel: .init())
+            loginViewModel: .init())
             .accentColor(Color(TintColorKey.defaultValue))
     }
 }

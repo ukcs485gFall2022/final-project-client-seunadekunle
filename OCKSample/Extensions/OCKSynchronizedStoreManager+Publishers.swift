@@ -81,7 +81,7 @@ extension OCKSynchronizedStoreManager {
          // swiftlint:disable:next line_length
          return fetchImmediately ? AnyPublisher(changePublisher.prepend(presentValuePublisher)) : AnyPublisher(changePublisher)
     }
-    
+
     // MARK: Tasks
 
     func publisherForTasks(categories: [OCKStoreNotificationCategory]) -> AnyPublisher<OCKTaskNotification, Never> {

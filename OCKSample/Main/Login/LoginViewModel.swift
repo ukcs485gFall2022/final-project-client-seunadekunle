@@ -149,7 +149,7 @@ class LoginViewModel: ObservableObject {
                 return
             }
             var newUser = User()
-            // Set any properties you want saved on the user befor logging in.
+            // Set any properties you want saved on the user before logging in.
             newUser.username = username.lowercased()
             newUser.password = password
 

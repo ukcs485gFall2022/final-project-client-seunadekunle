@@ -53,14 +53,14 @@ extension OCKStore {
         let foundContacts = try await fetchContacts(query: query)
         var contactsNotInStore = [OCKContact]()
 
-        // Check results to see if there's a missing task
+        // Check results to see if there's a missing contact
         contacts.forEach { potential in
             if foundContacts.first(where: { $0.id == potential.id }) == nil {
                 contactsNotInStore.append(potential)
             }
         }
 
-        // Only add if there's a new task
+        // Only add if there's a new contact
         if contactsNotInStore.count > 0 {
             do {
                 _ = try await addContacts(contactsNotInStore)

@@ -19,19 +19,15 @@ struct ProfileImageView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 100, height: 100, alignment: .center)
                 .clipShape(Circle())
-                .shadow(radius: 10)
-                .overlay(Circle().stroke(Color(tintColor), lineWidth: 5))
                 .onTapGesture {
                     self.viewModel.isPresentingImagePicker = true
                 }
         } else {
-            Image(systemName: "person.fill")
+            Image(systemName: "person")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 100, height: 100, alignment: .center)
                 .clipShape(Circle())
-                .shadow(radius: 10)
-                .overlay(Circle().stroke(Color(tintColor), lineWidth: 5))
                 .onTapGesture {
                     self.viewModel.isPresentingImagePicker = true
                 }

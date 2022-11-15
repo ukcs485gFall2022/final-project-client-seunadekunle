@@ -14,7 +14,6 @@ import os.log
 
 struct NewGoalsView: View {
     @Environment(\.presentationMode) var presentationMode
-
     @State private var showSheet = false
 
     @StateObject var viewModel: NewGoalsViewModel
