@@ -42,17 +42,14 @@ extension OCKStore {
         }
     }
 
-//    func populateCarePlans(patientUUID: UUID? = nil) async throws {
-//            let checkInCarePlan = OCKCarePlan(id: CarePlanID.checkIn.rawValue,
-//                                              title: "Check in Care Plan",
-//                                              patientUUID: patientUUID)
-//            try await AppDelegateKey
-//                .defaultValue?
-//                .storeManager
-//                .addCarePlansIfNotPresent([checkInCarePlan],
-//                                          patientUUID: patientUUID)
-//       }
-//
+    func populateCarePlans(patientUUID: UUID? = nil) async throws {
+            let checkInCarePlan = OCKCarePlan(id: CarePlanID.checkIn.rawValue,
+                                              title: "Check in Care Plan",
+                                              patientUUID: patientUUID)
+            try await AppDelegateKey
+                .defaultValue?
+                .storeManager.addCarePlansIfNotPresent([checkInCarePlan], patientUUID: patientUUID)
+       }
 
     func addContactsIfNotPresent(_ contacts: [OCKContact]) async throws {
         let contactIdsToAdd = contacts.compactMap { $0.id }
@@ -64,14 +61,14 @@ extension OCKStore {
         let foundContacts = try await fetchContacts(query: query)
         var contactsNotInStore = [OCKContact]()
 
-        // Check results to see if there's a missing contact
+        // Check results to see if there's a missing task
         contacts.forEach { potential in
             if foundContacts.first(where: { $0.id == potential.id }) == nil {
                 contactsNotInStore.append(potential)
             }
         }
 
-        // Only add if there's a new contact
+        // Only add if there's a new task
         if contactsNotInStore.count > 0 {
             do {
                 _ = try await addContacts(contactsNotInStore)
@@ -83,9 +80,8 @@ extension OCKStore {
     }
 
     // Adds tasks and contacts into the store
-    func populateSampleData() async throws {
-
-//        try await populateCarePlans(patientUUID: patientUUID)
+    func populateSampleData(_ patientUUID: UUID? = nil) async throws {
+        try await populateCarePlans(patientUUID: patientUUID)
 
         let thisMorning = Calendar.current.startOfDay(for: Date())
         let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -4, to: thisMorning)!

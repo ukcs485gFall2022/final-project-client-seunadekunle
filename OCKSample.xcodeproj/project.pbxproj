@@ -17,6 +17,8 @@
 		44B3D4322923271700B8C284 /* ProfileInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D4312923271700B8C284 /* ProfileInputView.swift */; };
 		44B3D43529233C7200B8C284 /* MyContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D43429233C7100B8C284 /* MyContactView.swift */; };
 		44B3D43729233CDC00B8C284 /* MyContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D43629233CDC00B8C284 /* MyContactViewController.swift */; };
+		44B3D4392923593800B8C284 /* OCKSynchronizedStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D4382923593800B8C284 /* OCKSynchronizedStoreManager.swift */; };
+		44B3D43A29236B6F00B8C284 /* OCKSynchronizedStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D4382923593800B8C284 /* OCKSynchronizedStoreManager.swift */; };
 		44CA908D2911B52D0077917F /* NewPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA908C2911B52D0077917F /* NewPlanViewModel.swift */; };
 		44CA9096291ACDB10077917F /* SelectViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA9095291ACDB10077917F /* SelectViewType.swift */; };
 		44CA9098291AF9800077917F /* CustomContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA9097291AF9800077917F /* CustomContactViewController.swift */; };
@@ -176,6 +178,7 @@
 		44B3D4312923271700B8C284 /* ProfileInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputView.swift; sourceTree = "<group>"; };
 		44B3D43429233C7100B8C284 /* MyContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactView.swift; sourceTree = "<group>"; };
 		44B3D43629233CDC00B8C284 /* MyContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactViewController.swift; sourceTree = "<group>"; };
+		44B3D4382923593800B8C284 /* OCKSynchronizedStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKSynchronizedStoreManager.swift; sourceTree = "<group>"; };
 		44CA908C2911B52D0077917F /* NewPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlanViewModel.swift; sourceTree = "<group>"; };
 		44CA9095291ACDB10077917F /* SelectViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewType.swift; sourceTree = "<group>"; };
 		44CA9097291AF9800077917F /* CustomContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContactViewController.swift; sourceTree = "<group>"; };
@@ -510,6 +513,7 @@
 				70F03A9827860A0800E5AFB4 /* OCKSynchronizedStoreManager+Publishers.swift */,
 				7083A855279CA40A00B3832E /* PCKUtility.swift */,
 				440E8C192922D41A000825F3 /* OCKBiologicalSex+Hashable.swift */,
+				44B3D4382923593800B8C284 /* OCKSynchronizedStoreManager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -806,6 +810,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44B3D43A29236B6F00B8C284 /* OCKSynchronizedStoreManager.swift in Sources */,
 				70F921B327CAC16E00368CEC /* LocalSyncSessionDelegate.swift in Sources */,
 				70221F3928D8C10800971195 /* StoreManagerKey.swift in Sources */,
 				70A98D63278A268B009B58F2 /* ColorStyler.swift in Sources */,
@@ -858,6 +863,7 @@
 				70F921AC27CABE3000368CEC /* SessionDelegate.swift in Sources */,
 				70F0EFEA28C2EE6C0005B5A2 /* AppDelegateKey.swift in Sources */,
 				7036E64025717F85006E9A3C /* Constants.swift in Sources */,
+				44B3D4392923593800B8C284 /* OCKSynchronizedStoreManager.swift in Sources */,
 				4417BFF628F60A8800B9956C /* DimensionStyler.swift in Sources */,
 				918FDEBC271B4E4A0045A0EF /* Calendar+Dates.swift in Sources */,
 				44B3D43729233CDC00B8C284 /* MyContactViewController.swift in Sources */,
