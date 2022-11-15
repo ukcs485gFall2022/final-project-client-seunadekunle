@@ -47,8 +47,10 @@ extension OCKStore {
                                               title: "Check in Care Plan",
                                               patientUUID: patientUUID)
             try await AppDelegateKey
-                .defaultValue?
-                .storeManager.addCarePlansIfNotPresent([checkInCarePlan], patientUUID: patientUUID)
+            .defaultValue?
+            .storeManager
+            .addCarePlansIfNotPresent([checkInCarePlan],
+                                      patientUUID: patientUUID)
        }
 
     func addContactsIfNotPresent(_ contacts: [OCKContact]) async throws {

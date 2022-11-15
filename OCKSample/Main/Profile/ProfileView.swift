@@ -93,6 +93,7 @@ struct ProfileView: View {
             }
             .sheet(isPresented: $viewModel.isPresentingContact) {
                 MyContactView().presentationDetents([.fraction(0.925)])
+                .cornerRadius(15)
             }
             .sheet(isPresented: $viewModel.isPresentingImagePicker) {
                 ImagePicker(image: $viewModel.profileUIImage)

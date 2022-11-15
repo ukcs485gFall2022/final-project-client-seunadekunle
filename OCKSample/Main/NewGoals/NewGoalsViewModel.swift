@@ -24,6 +24,12 @@ class NewGoalsViewModel: ObservableObject {
     @Published public var start = Date()
     @Published public var end = Date()
     @Published public var viewType = ViewType.labeledValueTaskView
+    @Published public var plan = OCKCarePlan(id: CarePlanID.checkIn.rawValue,
+                                                                   title: "Check in Care Plan",
+                                                                   patientUUID: nil)
+    @Published public var plans = [OCKCarePlan(id: CarePlanID.checkIn.rawValue,
+                                               title: "Check in Care Plan",
+                                               patientUUID: nil)]
 
     var assetName = "figure.stairs"
 
@@ -139,5 +145,39 @@ class NewGoalsViewModel: ObservableObject {
                 return
             }
         }
+    }
+
+    func getCarePlans() {
+        Task {
+            await queryCarePlans()
+        }
+    }
+
+    func queryCarePlans() async {
+
+        var plans: [OCKCarePlan] = []
+
+        do {
+            guard let appDelegate = AppDelegateKey.defaultValue else {
+                self.error = AppError.couldntBeUnwrapped
+                self.plans = plans
+                return
+            }
+
+            let query = OCKCarePlanQuery(for: Date())
+            try await appDelegate.store?.fetchCarePlans(completion: { result in
+                switch result {
+                case .success(let fetchedPlans):
+                    plans = fetchedPlans
+                case .failure(let error):
+                    Logger.task.error("Error \(error)")
+                }
+            })
+
+        }
+
+        print(plans)
+        self.plans = plans
+
     }
 }

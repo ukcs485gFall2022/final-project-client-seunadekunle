@@ -389,7 +389,7 @@ extension ProfileViewModel {
         }
     }
 
-    fileprivate func updateContact(_ contactToUpdate: inout OCKContact) async throws {
+    private func updateContact(_ contactToUpdate: inout OCKContact) async throws {
         // If a current contact was fetched, check to see if any of the fields have changed
         var contactHasBeenUpdated = false
 

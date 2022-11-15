@@ -14,7 +14,6 @@ import os.log
 
 struct NewGoalsView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State private var showSheet = false
 
     @StateObject var viewModel: NewGoalsViewModel
     let colorStyler = ColorStyler()
@@ -59,6 +58,12 @@ struct NewGoalsView: View {
                         .background(colorStyler.convertToColor(color: colorStyler.customBackground))
                         .cornerRadius(appearanceStyler.cornerRadius1)
                         .listRowSeparator(.hidden)
+
+//                    Picker("Select the Plan", selection: $viewModel.plan) {
+//                        ForEach(viewModel.getCarePlans(), id: \.self) {
+//                            Text($0.title)
+//                        }
+//                    }
 
                     VStack {
                         Picker("Select the frequency", selection: $freq) {

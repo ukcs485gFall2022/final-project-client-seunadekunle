@@ -82,11 +82,13 @@ class MyContactViewController: OCKListViewController {
          Hint3: You should have a warning currently, solving this properly would
          get rid of the warning without changing the line the warning is on.
          */
-        var query = OCKContactQuery(id: personUUIDString)
+
+        var query = OCKContactQuery(for: Date())
         query.sortDescriptors.append(.familyName(ascending: true))
         query.sortDescriptors.append(.givenName(ascending: true))
 
         self.contacts = try await storeManager.store.fetchAnyContacts(query: query)
+        self.contacts = self.contacts.filter({$0.remoteID == personUUIDString || $0.remoteID == nil})
         self.displayContacts()
     }
 

@@ -20,38 +20,54 @@ struct CareView: View {
     let appearanceStyler = AppearanceStyler()
     let dimensionStyler = DimensionStyler()
 
-    var body: some View {
-        ZStack {
-            VStack(spacing: 15) {
-                Text("0")
-                    .font(.largeTitle)
-                    .foregroundColor(.black)
-                    .fontWeight(.semibold)
-                #if os(iOS)
-                    .padding(EdgeInsets(top: dimensionStyler.sidePadding,
-                        leading: dimensionStyler.sidePadding + 17,
-                        bottom: dimensionStyler.sidePadding / 3,
-                        trailing: dimensionStyler.sidePadding + 17))
-                #endif
-                CareViewControllerRepresentable()
-            }
-            Button(action: {
+    @State private var showSheet = false
 
-            }, label: {
-                    Text("+")
-                        .font(.system(.largeTitle))
-                        .frame(width: 77, height: 70)
-                        .foregroundColor(Color.white)
-                        .padding(.bottom, 7)
-                })
-                .background(Color.blue)
-                .cornerRadius(38.5)
-                .padding()
-                .shadow(color: Color.black.opacity(0.3),
-                radius: 3,
-                x: 3,
-                y: 3)
+    var body: some View {
+        NavigationView {
+            ZStack {
+                VStack(spacing: 15) {
+                    Text("0")
+                        .font(.largeTitle)
+                        .foregroundColor(.black)
+                        .fontWeight(.semibold)
+                    #if os(iOS)
+                        .padding(EdgeInsets(top: dimensionStyler.sidePadding,
+                            leading: dimensionStyler.sidePadding + 17,
+                            bottom: dimensionStyler.sidePadding / 3,
+                            trailing: dimensionStyler.sidePadding + 17))
+                    #endif
+                    CareViewControllerRepresentable()
+                }
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            showSheet.toggle()
+                        }, label: {
+                                Text("+")
+                                    .font(.system(.largeTitle))
+                                    .frame(width: 77, height: 70)
+                                    .foregroundColor(Color.white)
+                                    .padding(.bottom, 7)
+                            })
+                            .background(Color.blue)
+                            .cornerRadius(38.5)
+
+                            .padding()
+                            .shadow(color: Color.black.opacity(0.3),
+                            radius: 3,
+                            x: 3,
+                            y: 3) }
+                }
+            }.sheet(isPresented: $showSheet) {
+                NewPlanView(viewModel: .init())
+                    .presentationDetents([.fraction(0.5)])
+                    .presentationDragIndicator(.hidden)
+                    .cornerRadius(15)
+            }
         }
+
     }
 }
 
