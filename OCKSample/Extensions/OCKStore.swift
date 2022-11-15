@@ -14,7 +14,6 @@ import ParseSwift
 import ParseCareKit
 
 extension OCKStore {
-
     func addTasksIfNotPresent(_ tasks: [OCKTask]) async throws {
         let taskIdsToAdd = tasks.compactMap { $0.id }
 
@@ -42,6 +41,17 @@ extension OCKStore {
             }
         }
     }
+
+    func populateCarePlans(patientUUID: UUID? = nil) async throws {
+            let checkInCarePlan = OCKCarePlan(id: CarePlanID.checkIn.rawValue,
+                                              title: "Check in Care Plan",
+                                              patientUUID: patientUUID)
+            try await AppDelegateKey
+            .defaultValue?
+            .storeManager
+            .addCarePlansIfNotPresent([checkInCarePlan],
+                                      patientUUID: patientUUID)
+       }
 
     func addContactsIfNotPresent(_ contacts: [OCKContact]) async throws {
         let contactIdsToAdd = contacts.compactMap { $0.id }
@@ -72,7 +82,8 @@ extension OCKStore {
     }
 
     // Adds tasks and contacts into the store
-    func populateSampleData() async throws {
+    func populateSampleData(_ patientUUID: UUID? = nil) async throws {
+        try await populateCarePlans(patientUUID: patientUUID)
 
         let thisMorning = Calendar.current.startOfDay(for: Date())
         let aFewDaysAgo = Calendar.current.date(byAdding: .day, value: -4, to: thisMorning)!
@@ -121,6 +132,12 @@ extension OCKStore {
 
         try await addTasksIfNotPresent([nausea, doxylamine, kegels, stretch])
 
+        guard User.current != nil,
+              let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
+            Logger.myContact.error("User not logged in")
+            return
+        }
+
         var contact1 = OCKContact(id: "jane", givenName: "Jane",
             familyName: "Daniels", carePlanUUID: nil)
         contact1.asset = "JaneDaniels"
@@ -129,7 +146,7 @@ extension OCKStore {
         contact1.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "janedaniels@uky.edu")]
         contact1.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 257-2000")]
         contact1.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 357-2040")]
-
+        contact1.remoteID = personUUIDString
         contact1.address = {
             let address = OCKPostalAddress()
             address.street = "2195 Harrodsburg Rd"
@@ -146,6 +163,7 @@ extension OCKStore {
         contact2.role = "Dr. Reiff is an OBGYN with 13 years of experience."
         contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 257-1000")]
         contact2.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 257-1234")]
+        contact2.remoteID = personUUIDString
         contact2.address = {
             let address = OCKPostalAddress()
             address.street = "1000 S Limestone"
