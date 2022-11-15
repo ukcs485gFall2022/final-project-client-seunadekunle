@@ -19,8 +19,7 @@ struct MyContactView: UIViewControllerRepresentable {
         return UINavigationController(rootViewController: viewController)
     }
 
-    func updateUIViewController(_ uiViewController: UIViewControllerType,
-        context: Context) { }
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
 }
 
 struct MyContactView_Previews: PreviewProvider {
