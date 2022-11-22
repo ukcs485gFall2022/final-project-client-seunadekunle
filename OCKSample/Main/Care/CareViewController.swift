@@ -36,6 +36,7 @@ import CareKit
 import CareKitStore
 import CareKitUI
 import os.log
+import ResearchKit
 
 class CareViewController: OCKDailyPageViewController {
 
@@ -131,24 +132,45 @@ class CareViewController: OCKDailyPageViewController {
      Use this as an opportunity to rebuild the content shown to the user.
      */ // swiftlint:disable:next line_length
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
-        let isCurrentDay = Calendar.current.isDate(date, inSameDayAs: Date())
-
-        // Only show the tip view on the current date
-        if isCurrentDay {
-            if Calendar.current.isDate(date, inSameDayAs: Date()) {
-                // Add a non-CareKit view into the list
-                let tipTitle = "The science of habits"
-                let tipText = "knowablemagazine.org"
-                let tipView = TipView()
-                tipView.headerView.titleLabel.text = tipTitle
-                tipView.headerView.detailLabel.text = tipText
-                tipView.imageView.image = UIImage(named: "article_icon")
-                tipView.customStyle = CustomStylerKey.defaultValue
-                listViewController.appendView(tipView, animated: false)
-            }
-        }
 
         Task {
+            guard await checkIfOnboardingIsComplete() else {
+                let onboardSurvey = Onboard()
+                let onboardCard = OCKSurveyTaskViewController(taskID: onboardSurvey.identifier(),
+                    eventQuery: OCKEventQuery(for: date),
+                    storeManager: self.storeManager,
+                    survey: onboardSurvey.createSurvey(),
+                    extractOutcome: onboardSurvey.extractAnswers)
+                if let carekitView = onboardCard.view as? OCKView {
+                    carekitView.customStyle = CustomStylerKey.defaultValue
+                }
+                onboardCard.surveyDelegate = self
+                onboardCard.title = "Onboard"
+
+                listViewController.appendViewController(
+                    onboardCard,
+                    animated: false
+                )
+                return
+            }
+
+            let isCurrentDay = Calendar.current.isDate(date, inSameDayAs: Date())
+
+            // Only show the tip view on the current date
+            if isCurrentDay {
+                if Calendar.current.isDate(date, inSameDayAs: Date()) {
+                    // Add a non-CareKit view into the list
+                    let tipTitle = "The science of habits"
+                    let tipText = "knowablemagazine.org"
+                    let tipView = TipView()
+                    tipView.headerView.titleLabel.text = tipTitle
+                    tipView.headerView.detailLabel.text = tipText
+                    tipView.imageView.image = UIImage(named: "article_icon")
+                    tipView.customStyle = CustomStylerKey.defaultValue
+                    listViewController.appendView(tipView, animated: false)
+                }
+            }
+
             let tasks = await self.fetchTasks(on: date)
 
             tasks.compactMap {
@@ -170,16 +192,7 @@ class CareViewController: OCKDailyPageViewController {
         }
     }
 
-    private func taskViewController(for task: OCKAnyTask, on date: Date) ->
-    [UIViewController]? {
-        var type: String? = ViewType.labeledValueTaskView.rawValue
-
-        if let ockTask = task as? OCKTask, let userInfo = ockTask.userInfo {
-            type = userInfo["ViewType"]
-        } else if let healthTask = task as? OCKHealthKitTask, let userInfo = healthTask.userInfo {
-            type = userInfo["ViewType"]
-        }
-
+    private func getViewType(_ type: String?, _ task: OCKAnyTask, _ date: Date) -> [UIViewController]? {
         switch type {
         case ViewType.numericProgressTaskView.rawValue:
             let linkView = LinkView(title: .init(""), links: [.website("https://www.wsj.com/", title: "WSJ")])
@@ -209,66 +222,57 @@ class CareViewController: OCKDailyPageViewController {
                 storeManager: self.storeManager)]
 
         case ViewType.buttonLog.rawValue:
-            var cards = [UIViewController]()
-            if task.id == TaskID.nausea {
-                    // dynamic gradient colors
-                    let nauseaGradientStart = UIColor { _ in
-                        return UIColor(Color(TintColorKey.defaultValue))
-                    }
-                    let nauseaGradientEnd = UIColor { _ in
-                        return UIColor(Color(TintColorKey.defaultValue))
-                    }
-
-                    // Create a plot comparing nausea to medication adherence.
-                    let nauseaDataSeries = OCKDataSeriesConfiguration(
-                        taskID: "nausea",
-                        legendTitle: "Nausea",
-                        gradientStartColor: nauseaGradientStart,
-                        gradientEndColor: nauseaGradientEnd,
-                        markerSize: 10,
-                        eventAggregator: OCKEventAggregator.countOutcomeValues)
-
-                    let doxylamineDataSeries = OCKDataSeriesConfiguration(
-                        taskID: "doxylamine",
-                        legendTitle: "Doxylamine",
-                        gradientStartColor: .systemGray2,
-                        gradientEndColor: .systemGray,
-                        markerSize: 10,
-                        eventAggregator: OCKEventAggregator.countOutcomeValues)
-
-                    let insightsCard = OCKCartesianChartViewController(
-                        plotType: .bar,
-                        selectedDate: date,
-                        configurations: [nauseaDataSeries, doxylamineDataSeries],
-                        storeManager: self.storeManager)
-
-                    insightsCard.chartView.headerView.titleLabel.text = "Nausea & Doxylamine Intake"
-                    insightsCard.chartView.headerView.detailLabel.text = "This Week"
-                    insightsCard.chartView.headerView.accessibilityLabel = "Nausea & Doxylamine Intake, This Week"
-                    cards.append(insightsCard)
-                }
-
-            /*
-             Also create a card that displays a single event.
-             The event query passed into the initializer specifies that only
-             today's log entries should be displayed by this log task view controller.
-             */
-            let buttonLogCard = OCKButtonLogTaskViewController(task: task,
+            return [OCKButtonLogTaskViewController(task: task,
                 eventQuery: .init(for: date),
-                storeManager: self.storeManager)
-            cards.append(buttonLogCard)
-            return cards
+                storeManager: self.storeManager)]
 
         case ViewType.gridTaskView.rawValue:
             return [OCKGridTaskViewController(task: task, eventQuery: .init(for: date), storeManager: storeManager)]
 
+        case ViewType.survey.rawValue:
+            guard let surveyTask = task as? OCKTask else {
+                Logger.feed.error("Can only use a survey for an \"OCKTask\", not \(task.id)")
+                return nil
+            }
+
+            if surveyTask.id == Onboard().identifier() {
+                return nil
+            }
+
+            // swiftlint:disable:next line_length
+            let surveyCard = OCKSurveyTaskViewController(taskID: surveyTask.survey.type().identifier(), eventQuery: OCKEventQuery(for: date),
+                storeManager: self.storeManager,
+                survey: surveyTask.survey.type().createSurvey(),
+                viewSynchronizer: SurveyViewSynchronizer(),
+                extractOutcome: surveyTask.survey.type().extractAnswers
+
+            )
+            surveyCard.surveyDelegate = self
+            return [surveyCard]
+
         default:
-            let taskView = LabeledValueTaskView(title: Text(task.title ?? "")) {
-                Text(task.instructions ?? "")
-            }.careKitStyle(CustomStylerKey.defaultValue)
+            let taskView = LabeledValueTaskView(
+                task: task,
+                eventQuery: OCKEventQuery(for: date),
+                storeManager: self.storeManager)
+                .padding([.vertical], 20)
+                .careKitStyle(CustomStylerKey.defaultValue)
 
             return [taskView.formattedHostingController()]
         }
+    }
+
+    private func taskViewController(for task: OCKAnyTask, on date: Date) ->
+    [UIViewController]? {
+        var type: String? = ViewType.labeledValueTaskView.rawValue
+
+        if let ockTask = task as? OCKTask, let userInfo = ockTask.userInfo {
+            type = userInfo["ViewType"]
+        } else if let healthTask = task as? OCKHealthKitTask, let userInfo = healthTask.userInfo {
+            type = userInfo["ViewType"]
+        }
+
+        return getViewType(type, task, date)
     }
 
     private func fetchTasks(on date: Date) async -> [OCKAnyTask] {
@@ -289,6 +293,39 @@ class CareViewController: OCKDailyPageViewController {
             Logger.feed.error("\(error.localizedDescription, privacy: .public)")
             return []
         }
+    }
+
+    @MainActor
+    private func checkIfOnboardingIsComplete() async -> Bool {
+        var query = OCKOutcomeQuery()
+        query.taskIDs = [Onboard.identifier()]
+
+        guard let store = AppDelegateKey.defaultValue?.store else {
+            Logger.feed.error("CareKit store could not be unwrapped")
+            return false
+        }
+
+        do {
+            let outcomes = try await store.fetchAnyOutcomes(query: query)
+            return !outcomes.isEmpty
+        } catch {
+            return false
+        }
+    }
+}
+
+extension CareViewController: OCKSurveyTaskViewControllerDelegate {
+    func surveyTask(
+        viewController: OCKSurveyTaskViewController,
+        for task: OCKAnyTask,
+        didFinish result: Result<ORKTaskViewControllerFinishReason, Error>) {
+
+        if case let .success(reason) = result, reason == .completed {
+            reload()
+        } else {
+            print(result)
+        }
+
     }
 }
 

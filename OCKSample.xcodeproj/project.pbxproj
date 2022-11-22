@@ -11,7 +11,26 @@
 		440E8C1B2922D41A000825F3 /* OCKBiologicalSex+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440E8C192922D41A000825F3 /* OCKBiologicalSex+Hashable.swift */; };
 		4417BFF628F60A8800B9956C /* DimensionStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417BFF528F60A8800B9956C /* DimensionStyler.swift */; };
 		441AA6262909DC3F0052F6DA /* NewGoalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441AA6252909DC3F0052F6DA /* NewGoalsViewModel.swift */; };
+		44323436292CC21100176EEF /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABD292C284000D38F13 /* Onboard.swift */; };
 		443AB99B2924155100D38F13 /* OCKCarePlan+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AB99A2924155100D38F13 /* OCKCarePlan+Hashable.swift */; };
+		443ABA9929244D3600D38F13 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443ABA9629244D0F00D38F13 /* ResearchKit.framework */; };
+		443ABA9A29244D3600D38F13 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 443ABA9629244D0F00D38F13 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		443ABAB1292C175B00D38F13 /* OCKAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABAB0292C175B00D38F13 /* OCKAnyEvent.swift */; };
+		443ABAB2292C175B00D38F13 /* OCKAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABAB0292C175B00D38F13 /* OCKAnyEvent.swift */; };
+		443ABAB7292C178D00D38F13 /* SurveyViewSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABAB6292C178C00D38F13 /* SurveyViewSynchronizer.swift */; };
+		443ABAC1292C284100D38F13 /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABC292C283F00D38F13 /* CheckIn.swift */; };
+		443ABAC2292C284100D38F13 /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABC292C283F00D38F13 /* CheckIn.swift */; };
+		443ABAC3292C284100D38F13 /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABD292C284000D38F13 /* Onboard.swift */; };
+		443ABAC5292C284100D38F13 /* RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABE292C284000D38F13 /* RangeOfMotion.swift */; };
+		443ABAC6292C284100D38F13 /* RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABE292C284000D38F13 /* RangeOfMotion.swift */; };
+		443ABAC7292C284100D38F13 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABF292C284000D38F13 /* Survey.swift */; };
+		443ABAC8292C284100D38F13 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABF292C284000D38F13 /* Survey.swift */; };
+		443ABAC9292C284100D38F13 /* Surveyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABAC0292C284100D38F13 /* Surveyable.swift */; };
+		443ABACA292C284100D38F13 /* Surveyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABAC0292C284100D38F13 /* Surveyable.swift */; };
+		443ABACD292C288B00D38F13 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABACC292C288B00D38F13 /* Consent.swift */; };
+		443ABACE292C288B00D38F13 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABACC292C288B00D38F13 /* Consent.swift */; };
+		443ABAD0292C2F1D00D38F13 /* OCKTask+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABACF292C2F1D00D38F13 /* OCKTask+Custom.swift */; };
+		443ABAD1292C2F1D00D38F13 /* OCKTask+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABACF292C2F1D00D38F13 /* OCKTask+Custom.swift */; };
 		4479F94A2920D05800239891 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479F9492920D05800239891 /* ProfileImageView.swift */; };
 		4479F94C2920E28000239891 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479F94B2920E28000239891 /* ImagePicker.swift */; };
 		449AF33A290AE3860010F107 /* NewGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF339290AE3860010F107 /* NewGoalsView.swift */; };
@@ -125,9 +144,24 @@
 		E7440E4F229477F7007AD30A /* CareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7440E4E229477F7007AD30A /* CareViewController.swift */; };
 		E7C37849228F887800E982D8 /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C37848228F887800E982D8 /* TipView.swift */; };
 		E7C4CA0B22809AD500ECC3D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C4CA0A22809AD500ECC3D7 /* Assets.xcassets */; };
+		F9EFA418291DA86700B3A74E /* Surveys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFA417291DA86700B3A74E /* Surveys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		443ABA9529244D0F00D38F13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 443ABA8F29244D0F00D38F13 /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B183A5951A8535D100C76870;
+			remoteInfo = ResearchKit;
+		};
+		443ABA9729244D0F00D38F13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 443ABA8F29244D0F00D38F13 /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
+			remoteInfo = ResearchKitTests;
+		};
 		5173CB8C23C3A846007655A0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E72B2BFE226939E3009A9438 /* Project object */;
@@ -145,12 +179,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		51431FA223D166AE006A7CFD /* Embed Frameworks */ = {
+		443ABA9B29244D3600D38F13 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				443ABA9A29244D3600D38F13 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,6 +210,16 @@
 		4417BFF528F60A8800B9956C /* DimensionStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionStyler.swift; sourceTree = "<group>"; };
 		441AA6252909DC3F0052F6DA /* NewGoalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalsViewModel.swift; sourceTree = "<group>"; };
 		443AB99A2924155100D38F13 /* OCKCarePlan+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCKCarePlan+Hashable.swift"; sourceTree = "<group>"; };
+		443ABA8F29244D0F00D38F13 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
+		443ABAB0292C175B00D38F13 /* OCKAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKAnyEvent.swift; sourceTree = "<group>"; };
+		443ABAB6292C178C00D38F13 /* SurveyViewSynchronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyViewSynchronizer.swift; sourceTree = "<group>"; };
+		443ABABC292C283F00D38F13 /* CheckIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckIn.swift; sourceTree = "<group>"; };
+		443ABABD292C284000D38F13 /* Onboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard.swift; sourceTree = "<group>"; };
+		443ABABE292C284000D38F13 /* RangeOfMotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeOfMotion.swift; sourceTree = "<group>"; };
+		443ABABF292C284000D38F13 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
+		443ABAC0292C284100D38F13 /* Surveyable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Surveyable.swift; sourceTree = "<group>"; };
+		443ABACC292C288B00D38F13 /* Consent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consent.swift; sourceTree = "<group>"; };
+		443ABACF292C2F1D00D38F13 /* OCKTask+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCKTask+Custom.swift"; sourceTree = "<group>"; };
 		4479F9492920D05800239891 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		4479F94B2920E28000239891 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		449AF339290AE3860010F107 /* NewGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalsView.swift; sourceTree = "<group>"; };
@@ -259,6 +304,7 @@
 		E7440E4E229477F7007AD30A /* CareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareViewController.swift; sourceTree = "<group>"; };
 		E7C37848228F887800E982D8 /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		E7C4CA0A22809AD500ECC3D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9EFA417291DA86700B3A74E /* Surveys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surveys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +314,7 @@
 			files = (
 				70202EC12807333900CF73FB /* CareKit in Frameworks */,
 				918FDEAF271B3F8F0045A0EF /* ParseCareKit in Frameworks */,
+				443ABA9929244D3600D38F13 /* ResearchKit.framework in Frameworks */,
 				70202EC52807333A00CF73FB /* CareKitUI in Frameworks */,
 				708542F9276687F90029E888 /* HealthKit.framework in Frameworks */,
 				70202EC32807333900CF73FB /* CareKitFHIR in Frameworks */,
@@ -300,6 +347,35 @@
 				449AF339290AE3860010F107 /* NewGoalsView.swift */,
 			);
 			path = NewGoals;
+			sourceTree = "<group>";
+		};
+		443ABA8E29243E9900D38F13 /* xSurveys */ = {
+			isa = PBXGroup;
+			children = (
+				443ABABC292C283F00D38F13 /* CheckIn.swift */,
+				443ABABD292C284000D38F13 /* Onboard.swift */,
+				443ABABE292C284000D38F13 /* RangeOfMotion.swift */,
+				443ABABF292C284000D38F13 /* Survey.swift */,
+				443ABAC0292C284100D38F13 /* Surveyable.swift */,
+			);
+			path = xSurveys;
+			sourceTree = "<group>";
+		};
+		443ABA9029244D0F00D38F13 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				443ABA9629244D0F00D38F13 /* ResearchKit.framework */,
+				443ABA9829244D0F00D38F13 /* ResearchKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		443ABACB292C287800D38F13 /* xOnboarding */ = {
+			isa = PBXGroup;
+			children = (
+				443ABACC292C288B00D38F13 /* Consent.swift */,
+			);
+			path = xOnboarding;
 			sourceTree = "<group>";
 		};
 		44B3D43329233C1600B8C284 /* MyContact */ = {
@@ -348,6 +424,7 @@
 		70221F2B28D7C7C600971195 /* CustomCards */ = {
 			isa = PBXGroup;
 			children = (
+				443ABAB6292C178C00D38F13 /* SurveyViewSynchronizer.swift */,
 				E7C37848228F887800E982D8 /* TipView.swift */,
 			);
 			path = CustomCards;
@@ -374,6 +451,8 @@
 		703088772582727500FFABB6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				443ABACB292C287800D38F13 /* xOnboarding */,
+				443ABA8E29243E9900D38F13 /* xSurveys */,
 				44B3D43B2923715200B8C284 /* NewPlan */,
 				44B3D43329233C1600B8C284 /* MyContact */,
 				44CA908B2911B4F50077917F /* ViewType */,
@@ -395,6 +474,7 @@
 				7036E4C3256E0A48006E9A3C /* CareView.swift */,
 				E7440E4E229477F7007AD30A /* CareViewController.swift */,
 				70221F2B28D7C7C600971195 /* CustomCards */,
+				F9EFA417291DA86700B3A74E /* Surveys.swift */,
 			);
 			path = Care;
 			sourceTree = "<group>";
@@ -513,6 +593,7 @@
 		918FDEBA271B4DF60045A0EF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				443ABAB0292C175B00D38F13 /* OCKAnyEvent.swift */,
 				70221F2928D7BE0600971195 /* AppDelegate+ParseRemoteDelegate.swift */,
 				70221F3328D8ABBE00971195 /* AppDelegate+UIApplicationDelegate.swift */,
 				918FDEBB271B4E4A0045A0EF /* Calendar+Dates.swift */,
@@ -528,6 +609,7 @@
 				440E8C192922D41A000825F3 /* OCKBiologicalSex+Hashable.swift */,
 				44B3D4382923593800B8C284 /* OCKSynchronizedStoreManager.swift */,
 				443AB99A2924155100D38F13 /* OCKCarePlan+Hashable.swift */,
+				443ABACF292C2F1D00D38F13 /* OCKTask+Custom.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -581,6 +663,7 @@
 		E72B2BFD226939E3009A9438 = {
 			isa = PBXGroup;
 			children = (
+				443ABA8F29244D0F00D38F13 /* ResearchKit.xcodeproj */,
 				9169381F271B80EA00A634ED /* CONTRIBUTING.md */,
 				91AD922324A461D200925D4D /* README.md */,
 				0520468223C3C1F2004F0F36 /* OCKSample.xctestplan */,
@@ -666,10 +749,10 @@
 				E72B2C02226939E3009A9438 /* Sources */,
 				E72B2C04226939E3009A9438 /* Resources */,
 				51431FA123D166AE006A7CFD /* Frameworks */,
-				51431FA223D166AE006A7CFD /* Embed Frameworks */,
 				91AD924C24A4C42E00925D4D /* Embed Watch Content */,
 				9169381E271B6E2100A634ED /* SwiftLint */,
 				44D3217028F2C1CE00891AF4 /* ShellScript */,
+				443ABA9B29244D3600D38F13 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -725,6 +808,12 @@
 			);
 			productRefGroup = E72B2C07226939E3009A9438 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 443ABA9029244D0F00D38F13 /* Products */;
+					ProjectRef = 443ABA8F29244D0F00D38F13 /* ResearchKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E72B2C05226939E3009A9438 /* OCKSample */,
@@ -733,6 +822,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		443ABA9629244D0F00D38F13 /* ResearchKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ResearchKit.framework;
+			remoteRef = 443ABA9529244D0F00D38F13 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		443ABA9829244D0F00D38F13 /* ResearchKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ResearchKitTests.xctest;
+			remoteRef = 443ABA9729244D0F00D38F13 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5173CB8523C3A846007655A0 /* Resources */ = {
@@ -824,7 +930,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				443ABAC2292C284100D38F13 /* CheckIn.swift in Sources */,
 				44B3D43A29236B6F00B8C284 /* OCKSynchronizedStoreManager.swift in Sources */,
+				44323436292CC21100176EEF /* Onboard.swift in Sources */,
 				70F921B327CAC16E00368CEC /* LocalSyncSessionDelegate.swift in Sources */,
 				70221F3928D8C10800971195 /* StoreManagerKey.swift in Sources */,
 				70A98D63278A268B009B58F2 /* ColorStyler.swift in Sources */,
@@ -835,16 +943,22 @@
 				7075151E28DE1A8300A57A0C /* MainView.swift in Sources */,
 				70A98D62278A2683009B58F2 /* Styler.swift in Sources */,
 				440E8C1B2922D41A000825F3 /* OCKBiologicalSex+Hashable.swift in Sources */,
+				443ABACE292C288B00D38F13 /* Consent.swift in Sources */,
 				91693818271B5E1600A634ED /* Constants.swift in Sources */,
 				7075152028DE1BB400A57A0C /* LoginView.swift in Sources */,
 				70F921B227CAC16E00368CEC /* RemoteSessionDelegate.swift in Sources */,
 				44D56B7B28F8A9F200FD0AAB /* AppearanceStyler.swift in Sources */,
 				70221F2F28D7CDE400971195 /* AppDelegate+ParseRemoteDelegate.swift in Sources */,
+				443ABAC8292C284100D38F13 /* Survey.swift in Sources */,
+				443ABACA292C284100D38F13 /* Surveyable.swift in Sources */,
 				7083A857279CA40F00B3832E /* PCKUtility.swift in Sources */,
 				44D56B7C28F8A9F500FD0AAB /* AnimationStyler.swift in Sources */,
 				91AD923924A4C42D00925D4D /* OCKWatchSampleApp.swift in Sources */,
 				70F03AA627860B2500E5AFB4 /* OCKPatient+Parse.swift in Sources */,
+				443ABAB2292C175B00D38F13 /* OCKAnyEvent.swift in Sources */,
+				443ABAD1292C2F1D00D38F13 /* OCKTask+Custom.swift in Sources */,
 				70221F3828D8C0CB00971195 /* AppDelegateKey.swift in Sources */,
+				443ABAC6292C284100D38F13 /* RangeOfMotion.swift in Sources */,
 				9103AA5227B8C913002C921E /* FontColorKey.swift in Sources */,
 				707CC719254DA91900116728 /* OCKLocalization.swift in Sources */,
 				44D56B7A28F8A9EC00FD0AAB /* DimensionStyler.swift in Sources */,
@@ -875,6 +989,7 @@
 				4479F94A2920D05800239891 /* ProfileImageView.swift in Sources */,
 				918FDEB5271B40590045A0EF /* Installation.swift in Sources */,
 				70F921AC27CABE3000368CEC /* SessionDelegate.swift in Sources */,
+				443ABAC3292C284100D38F13 /* Onboard.swift in Sources */,
 				70F0EFEA28C2EE6C0005B5A2 /* AppDelegateKey.swift in Sources */,
 				7036E64025717F85006E9A3C /* Constants.swift in Sources */,
 				44B3D4392923593800B8C284 /* OCKSynchronizedStoreManager.swift in Sources */,
@@ -882,8 +997,10 @@
 				918FDEBC271B4E4A0045A0EF /* Calendar+Dates.swift in Sources */,
 				44B3D43729233CDC00B8C284 /* MyContactViewController.swift in Sources */,
 				443AB99B2924155100D38F13 /* OCKCarePlan+Hashable.swift in Sources */,
+				443ABAD0292C2F1D00D38F13 /* OCKTask+Custom.swift in Sources */,
 				70F03AA127860AB700E5AFB4 /* OCKOutcome.swift in Sources */,
 				7036E4CE256E9A0C006E9A3C /* ContactView.swift in Sources */,
+				443ABAB7292C178D00D38F13 /* SurveyViewSynchronizer.swift in Sources */,
 				70F03A972786098F00E5AFB4 /* OCKStore.swift in Sources */,
 				70DFD80B2567074500B9DB12 /* LoginView.swift in Sources */,
 				70F03AA827860E7700E5AFB4 /* FontColorKey.swift in Sources */,
@@ -894,6 +1011,7 @@
 				449AF33A290AE3860010F107 /* NewGoalsView.swift in Sources */,
 				E72B2C0A226939E3009A9438 /* AppDelegate.swift in Sources */,
 				7036E4C4256E0A48006E9A3C /* CareView.swift in Sources */,
+				F9EFA418291DA86700B3A74E /* Surveys.swift in Sources */,
 				70F921B027CABED600368CEC /* LocalSyncSessionDelegate.swift in Sources */,
 				44CA908D2911B52D0077917F /* NewPlanViewModel.swift in Sources */,
 				44CA9096291ACDB10077917F /* SelectViewType.swift in Sources */,
@@ -911,12 +1029,17 @@
 				7036E4D3256EBE35006E9A3C /* MainView.swift in Sources */,
 				918FDEC5271B4EA70045A0EF /* StoreManagerKey.swift in Sources */,
 				91693822271B897200A634ED /* Utility.swift in Sources */,
+				443ABAC1292C284100D38F13 /* CheckIn.swift in Sources */,
 				44B3D43529233C7200B8C284 /* MyContactView.swift in Sources */,
 				707CC718254DA91900116728 /* OCKLocalization.swift in Sources */,
 				E7C37849228F887800E982D8 /* TipView.swift in Sources */,
+				443ABACD292C288B00D38F13 /* Consent.swift in Sources */,
 				70077597252228E900EC0EDA /* User.swift in Sources */,
+				443ABAB1292C175B00D38F13 /* OCKAnyEvent.swift in Sources */,
 				44B3D43D2923728600B8C284 /* NewPlanView.swift in Sources */,
 				70F03A9927860A0800E5AFB4 /* OCKSynchronizedStoreManager+Publishers.swift in Sources */,
+				443ABAC5292C284100D38F13 /* RangeOfMotion.swift in Sources */,
+				443ABAC7292C284100D38F13 /* Survey.swift in Sources */,
 				44CA9098291AF9800077917F /* CustomContactViewController.swift in Sources */,
 				7036E4C9256E1A6F006E9A3C /* ProfileView.swift in Sources */,
 				44D56B7728F8A1C800FD0AAB /* AppearanceStyler.swift in Sources */,
@@ -926,6 +1049,7 @@
 				7036E4BF256DA089006E9A3C /* LoginViewModel.swift in Sources */,
 				7036E517256F2413006E9A3C /* ProfileViewModel.swift in Sources */,
 				44D56B7928F8A2A200FD0AAB /* AnimationStyler.swift in Sources */,
+				443ABAC9292C284100D38F13 /* Surveyable.swift in Sources */,
 				441AA6262909DC3F0052F6DA /* NewGoalsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1158,7 +1282,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = K26KDKYY38;
+				DEVELOPMENT_TEAM = BH9BS3QV7C;
 				INFOPLIST_FILE = OCKWatchSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
