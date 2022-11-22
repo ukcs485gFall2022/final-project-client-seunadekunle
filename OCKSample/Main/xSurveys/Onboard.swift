@@ -158,8 +158,7 @@
         )
 
         completionStep.title = "Enrollment Complete"
-        // swiftlint:disable:next line_length
-        completionStep.text = "Thank you for enrolling in this study. Your participation will contribute to meaningful research!"
+        completionStep.text = "Thank you for participating. You are helping us to help you"
 
         let surveyTask = ORKOrderedTask(
             identifier: identifier(),
