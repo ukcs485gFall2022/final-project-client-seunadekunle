@@ -235,7 +235,9 @@ class CareViewController: OCKDailyPageViewController {
                 return nil
             }
 
-            print(surveyTask.survey.type().identifier())
+            if surveyTask.id == Onboard().identifier() {
+                return nil
+            }
 
             // swiftlint:disable:next line_length
             let surveyCard = OCKSurveyTaskViewController(taskID: surveyTask.survey.type().identifier(), eventQuery: OCKEventQuery(for: date),

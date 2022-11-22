@@ -38,7 +38,19 @@ final class SurveyViewSynchronizer: OCKSurveyTaskViewSynchronizer {
 //            let pain = event.answer(kind: CheckIn.painItemIdentifier)
 //            let sleep = event.answer(kind: CheckIn.sleepItemIdentifier)
 
-            if let instructions = event.task.instructions {
+            guard let surveyTask = event.task as? OCKTask else {
+                return
+            }
+
+            if let title = surveyTask.title {
+                let header = OCKHeaderView()
+                header.titleLabel.text = title
+
+                view.insertSubview(header, at: 0)
+            }
+
+            if let instructions = surveyTask.instructions {
+
                 view.instructionsLabel.text = """
                     \(instructions)
                     """
