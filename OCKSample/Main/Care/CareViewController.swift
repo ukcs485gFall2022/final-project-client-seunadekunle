@@ -323,7 +323,7 @@ extension CareViewController: OCKSurveyTaskViewControllerDelegate {
         if case let .success(reason) = result, reason == .completed {
             reload()
         } else {
-            print(result)
+            Logger.careViewController.error("Couldn't save survey task")
         }
 
     }

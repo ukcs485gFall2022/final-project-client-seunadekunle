@@ -39,9 +39,6 @@ class NewGoalsViewModel: ObservableObject {
     // Adds a normal task
     func addNormalTask(taskSchedule: OCKSchedule) async {
 
-        print(self.plan.id)
-        print(self.plan.uuid)
-
         var task = OCKTask(id: UUID().uuidString, title: title, carePlanUUID: nil, schedule: taskSchedule)
         task.instructions = instructions
         task.asset = assetName

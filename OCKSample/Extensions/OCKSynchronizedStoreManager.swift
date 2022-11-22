@@ -52,10 +52,6 @@ extension OCKSynchronizedStoreManager {
         }
     }
 
-    func printTest() {
-        print("hello")
-    }
-
     func addTasksIfNotPresent(_ tasks: [OCKAnyTask]) async throws {
         let taskIdsToAdd = tasks.compactMap { $0.id }
 
