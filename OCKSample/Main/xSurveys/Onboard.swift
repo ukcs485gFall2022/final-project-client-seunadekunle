@@ -1,4 +1,3 @@
-//
 //  Onboarding.swift
 //  OCKSample
 //
@@ -6,20 +5,20 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-import Foundation
-import CareKitStore
-#if canImport(ResearchKit)
-import ResearchKit
-#endif
+ import Foundation
+ import CareKitStore
+ #if canImport(ResearchKit)
+ import ResearchKit
+ #endif
 
-struct Onboard: Surveyable {
+ struct Onboard: Surveyable {
     static var surveyType: Survey {
         Survey.onboard
     }
-}
+ }
 
-#if canImport(ResearchKit)
-extension Onboard {
+ #if canImport(ResearchKit)
+ extension Onboard {
     /*
      t0do: Modify the onboarding so it properly represents the
      usecase of your application. Changes should be made to
@@ -35,7 +34,7 @@ extension Onboard {
 
         welcomeInstructionStep.title = "Stay on Track with Track"
         welcomeInstructionStep.detailText = "Tap Next to begin"
-        welcomeInstructionStep.image = UIImage(named: "circle")
+        welcomeInstructionStep.image = UIImage(systemName: "checkmark")
         welcomeInstructionStep.imageContentMode = .scaleAspectFit
 
         // The Informed Consent Instruction step.
@@ -44,13 +43,12 @@ extension Onboard {
         )
 
         studyOverviewInstructionStep.title = "Before You start"
+        studyOverviewInstructionStep.iconImage = UIImage(systemName: "checkmark.circle")
 
-        studyOverviewInstructionStep.iconImage = UIImage(named: "circle")
-
-        let heartStep = ORKLearnMoreInstructionStep(identifier: "learnMoreStep")
+        let heartStep = ORKLearnMoreInstructionStep(identifier: "\(identifier()).learnMoreStep")
         heartStep.image = UIImage(systemName: "heart.fill")
         heartStep.title = "Share Health Data"
-        heartStep.text = "Your data will be protected according to regulations and Apple Standards"
+        heartStep.text = "Your data will be protected according to regulations and Apple standards"
         let heartLearnMore = ORKLearnMoreItem(text: "Learn More", learnMoreInstructionStep: heartStep)
         let heartBodyItem = ORKBodyItem(
             text: "The study will ask you to share some of your health data.",
@@ -60,7 +58,7 @@ extension Onboard {
             bodyItemStyle: .image
         )
 
-        let completeStep = ORKLearnMoreInstructionStep(identifier: "completeStep")
+        let completeStep = ORKLearnMoreInstructionStep(identifier: "\(identifier()).completeStep")
         completeStep.image = UIImage(systemName: "checkmark.circle.fill")
         completeStep.title = "Complete Tasks"
         // swiftlint:disable:next line_length
@@ -182,5 +180,5 @@ extension Onboard {
         }
         return [OCKOutcomeValue(Date())]
     }
-}
-#endif
+ }
+ #endif

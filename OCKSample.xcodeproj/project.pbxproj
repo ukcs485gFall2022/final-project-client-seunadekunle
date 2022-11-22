@@ -11,6 +11,7 @@
 		440E8C1B2922D41A000825F3 /* OCKBiologicalSex+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440E8C192922D41A000825F3 /* OCKBiologicalSex+Hashable.swift */; };
 		4417BFF628F60A8800B9956C /* DimensionStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417BFF528F60A8800B9956C /* DimensionStyler.swift */; };
 		441AA6262909DC3F0052F6DA /* NewGoalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441AA6252909DC3F0052F6DA /* NewGoalsViewModel.swift */; };
+		44323436292CC21100176EEF /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABD292C284000D38F13 /* Onboard.swift */; };
 		443AB99B2924155100D38F13 /* OCKCarePlan+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AB99A2924155100D38F13 /* OCKCarePlan+Hashable.swift */; };
 		443ABA9929244D3600D38F13 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443ABA9629244D0F00D38F13 /* ResearchKit.framework */; };
 		443ABA9A29244D3600D38F13 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 443ABA9629244D0F00D38F13 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -20,7 +21,6 @@
 		443ABAC1292C284100D38F13 /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABC292C283F00D38F13 /* CheckIn.swift */; };
 		443ABAC2292C284100D38F13 /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABC292C283F00D38F13 /* CheckIn.swift */; };
 		443ABAC3292C284100D38F13 /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABD292C284000D38F13 /* Onboard.swift */; };
-		443ABAC4292C284100D38F13 /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABD292C284000D38F13 /* Onboard.swift */; };
 		443ABAC5292C284100D38F13 /* RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABE292C284000D38F13 /* RangeOfMotion.swift */; };
 		443ABAC6292C284100D38F13 /* RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABE292C284000D38F13 /* RangeOfMotion.swift */; };
 		443ABAC7292C284100D38F13 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABF292C284000D38F13 /* Survey.swift */; };
@@ -932,6 +932,7 @@
 			files = (
 				443ABAC2292C284100D38F13 /* CheckIn.swift in Sources */,
 				44B3D43A29236B6F00B8C284 /* OCKSynchronizedStoreManager.swift in Sources */,
+				44323436292CC21100176EEF /* Onboard.swift in Sources */,
 				70F921B327CAC16E00368CEC /* LocalSyncSessionDelegate.swift in Sources */,
 				70221F3928D8C10800971195 /* StoreManagerKey.swift in Sources */,
 				70A98D63278A268B009B58F2 /* ColorStyler.swift in Sources */,
@@ -954,7 +955,6 @@
 				44D56B7C28F8A9F500FD0AAB /* AnimationStyler.swift in Sources */,
 				91AD923924A4C42D00925D4D /* OCKWatchSampleApp.swift in Sources */,
 				70F03AA627860B2500E5AFB4 /* OCKPatient+Parse.swift in Sources */,
-				443ABAC4292C284100D38F13 /* Onboard.swift in Sources */,
 				443ABAB2292C175B00D38F13 /* OCKAnyEvent.swift in Sources */,
 				443ABAD1292C2F1D00D38F13 /* OCKTask+Custom.swift in Sources */,
 				70221F3828D8C0CB00971195 /* AppDelegateKey.swift in Sources */,
@@ -1282,7 +1282,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = K26KDKYY38;
+				DEVELOPMENT_TEAM = BH9BS3QV7C;
 				INFOPLIST_FILE = OCKWatchSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",

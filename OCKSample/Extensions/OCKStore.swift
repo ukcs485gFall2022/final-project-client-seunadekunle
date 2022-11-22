@@ -181,12 +181,12 @@ extension OCKStore {
         let onboardSchedule = OCKSchedule.dailyAtTime(
                     hour: 0, minutes: 0,
                     start: Date(), end: nil,
-                    text: "Task Due!",
+                    text: "Please Complete",
                     duration: .allDay
                 )
 
         var onboardTask = OCKTask(
-            id: TaskID.onboarding,
+            id: TaskID.onboard,
             title: "Onboard",
             carePlanUUID: nil,
             schedule: onboardSchedule

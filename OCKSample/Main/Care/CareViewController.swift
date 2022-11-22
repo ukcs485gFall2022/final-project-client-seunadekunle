@@ -132,24 +132,45 @@ class CareViewController: OCKDailyPageViewController {
      Use this as an opportunity to rebuild the content shown to the user.
      */ // swiftlint:disable:next line_length
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
-        let isCurrentDay = Calendar.current.isDate(date, inSameDayAs: Date())
-
-        // Only show the tip view on the current date
-        if isCurrentDay {
-            if Calendar.current.isDate(date, inSameDayAs: Date()) {
-                // Add a non-CareKit view into the list
-                let tipTitle = "The science of habits"
-                let tipText = "knowablemagazine.org"
-                let tipView = TipView()
-                tipView.headerView.titleLabel.text = tipTitle
-                tipView.headerView.detailLabel.text = tipText
-                tipView.imageView.image = UIImage(named: "article_icon")
-                tipView.customStyle = CustomStylerKey.defaultValue
-                listViewController.appendView(tipView, animated: false)
-            }
-        }
 
         Task {
+            guard await checkIfOnboardingIsComplete() else {
+                let onboardSurvey = Onboard()
+                let onboardCard = OCKSurveyTaskViewController(taskID: onboardSurvey.identifier(),
+                    eventQuery: OCKEventQuery(for: date),
+                    storeManager: self.storeManager,
+                    survey: onboardSurvey.createSurvey(),
+                    extractOutcome: onboardSurvey.extractAnswers)
+                if let carekitView = onboardCard.view as? OCKView {
+                    carekitView.customStyle = CustomStylerKey.defaultValue
+                }
+                onboardCard.surveyDelegate = self
+                onboardCard.title = "Onboard"
+
+                listViewController.appendViewController(
+                    onboardCard,
+                    animated: false
+                )
+                return
+            }
+
+            let isCurrentDay = Calendar.current.isDate(date, inSameDayAs: Date())
+
+            // Only show the tip view on the current date
+            if isCurrentDay {
+                if Calendar.current.isDate(date, inSameDayAs: Date()) {
+                    // Add a non-CareKit view into the list
+                    let tipTitle = "The science of habits"
+                    let tipText = "knowablemagazine.org"
+                    let tipView = TipView()
+                    tipView.headerView.titleLabel.text = tipTitle
+                    tipView.headerView.detailLabel.text = tipText
+                    tipView.imageView.image = UIImage(named: "article_icon")
+                    tipView.customStyle = CustomStylerKey.defaultValue
+                    listViewController.appendView(tipView, animated: false)
+                }
+            }
+
             let tasks = await self.fetchTasks(on: date)
 
             tasks.compactMap {
@@ -186,13 +207,13 @@ class CareViewController: OCKDailyPageViewController {
 
         case ViewType.instructionsTaskView.rawValue:
             return [OCKInstructionsTaskViewController(task: task,
-                                                      eventQuery: .init(for: date),
-                                                      storeManager: self.storeManager)]
+                eventQuery: .init(for: date),
+                storeManager: self.storeManager)]
 
         case ViewType.simpleTaskView.rawValue:
             return [OCKSimpleTaskViewController(task: task,
-                                                eventQuery: .init(for: date),
-                                                storeManager: self.storeManager)]
+                eventQuery: .init(for: date),
+                storeManager: self.storeManager)]
 
         case ViewType.checklist.rawValue:
             return [OCKChecklistTaskViewController(
@@ -202,8 +223,8 @@ class CareViewController: OCKDailyPageViewController {
 
         case ViewType.buttonLog.rawValue:
             return [OCKButtonLogTaskViewController(task: task,
-                                                   eventQuery: .init(for: date),
-                                                   storeManager: self.storeManager)]
+                eventQuery: .init(for: date),
+                storeManager: self.storeManager)]
 
         case ViewType.gridTaskView.rawValue:
             return [OCKGridTaskViewController(task: task, eventQuery: .init(for: date), storeManager: storeManager)]
@@ -214,12 +235,14 @@ class CareViewController: OCKDailyPageViewController {
                 return nil
             }
 
-            let surveyCard = OCKSurveyTaskViewController(taskID: surveyTask.survey.type().identifier(),
-                                                         eventQuery: OCKEventQuery(for: date),
-                                                         storeManager: self.storeManager,
-                                                         survey: surveyTask.survey.type().createSurvey(),
-                                                         viewSynchronizer: SurveyViewSynchronizer(),
-                                                         extractOutcome: surveyTask.survey.type().extractAnswers
+            print(surveyTask.survey.type().identifier())
+
+            // swiftlint:disable:next line_length
+            let surveyCard = OCKSurveyTaskViewController(taskID: surveyTask.survey.type().identifier(), eventQuery: OCKEventQuery(for: date),
+                storeManager: self.storeManager,
+                survey: surveyTask.survey.type().createSurvey(),
+                viewSynchronizer: SurveyViewSynchronizer(),
+                extractOutcome: surveyTask.survey.type().extractAnswers
 
             )
             surveyCard.surveyDelegate = self
@@ -297,7 +320,10 @@ extension CareViewController: OCKSurveyTaskViewControllerDelegate {
 
         if case let .success(reason) = result, reason == .completed {
             reload()
+        } else {
+            print(result)
         }
+
     }
 }
 

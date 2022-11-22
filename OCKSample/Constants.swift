@@ -100,7 +100,7 @@ enum TaskID {
     static let multistep = "multi-step"
     static let healthSugar = "healthSugar"
     static let defaultTask = "default"
-    static let onboarding = "onboarding"
+    static let onboard = "onboard"
 }
 
 enum ViewType: String, CaseIterable, Identifiable {

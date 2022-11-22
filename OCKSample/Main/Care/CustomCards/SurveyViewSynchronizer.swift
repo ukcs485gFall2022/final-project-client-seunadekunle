@@ -22,7 +22,6 @@ final class SurveyViewSynchronizer: OCKSurveyTaskViewSynchronizer {
         super.updateView(view, context: context)
 
         if let event = context.viewModel.first?.first, event.outcome != nil {
-            view.instructionsLabel.isHidden = false
             /*
              t0do: You need to modify this so the instuction label shows
              correctly for each Task/Card.
@@ -32,15 +31,21 @@ final class SurveyViewSynchronizer: OCKSurveyTaskViewSynchronizer {
              surveys.
              */
 
-            let pain = event.answer(kind: CheckIn.painItemIdentifier)
-            let sleep = event.answer(kind: CheckIn.sleepItemIdentifier)
+//            event.task.title
+//            event.task.instructions
+//            event.task.
+//
+//            let pain = event.answer(kind: CheckIn.painItemIdentifier)
+//            let sleep = event.answer(kind: CheckIn.sleepItemIdentifier)
 
-            view.instructionsLabel.text = """
-                Pain: \(Int(pain))
-                Sleep: \(Int(sleep)) hours
-                """
+            if let instructions = event.task.instructions {
+                view.instructionsLabel.text = """
+                    \(instructions)
+                    """
+            }
+
         } else {
-            view.instructionsLabel.isHidden = true
+            view.instructionsLabel.text = "Take Survey"
         }
     }
 }
