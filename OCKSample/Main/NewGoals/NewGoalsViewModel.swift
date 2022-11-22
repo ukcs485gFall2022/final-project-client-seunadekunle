@@ -45,7 +45,7 @@ class NewGoalsViewModel: ObservableObject {
         var task = OCKTask(id: UUID().uuidString, title: title, carePlanUUID: nil, schedule: taskSchedule)
         task.instructions = instructions
         task.asset = assetName
-        task.userInfo = ["ViewType": viewType.rawValue]
+        task.userInfo = [Constants.viewTypeKey: viewType.rawValue]
         task.carePlanUUID = self.plan.uuid
 
         do {
@@ -95,7 +95,7 @@ class NewGoalsViewModel: ObservableObject {
             healthKitLinkage: healthKitLinkage)
         healthKitTask.instructions = instructions
         healthKitTask.asset = assetName
-        healthKitTask.userInfo = ["ViewType": viewType.rawValue]
+        healthKitTask.userInfo = [Constants.viewTypeKey: viewType.rawValue]
         healthKitTask.carePlanUUID = self.plan.uuid
 
         do {

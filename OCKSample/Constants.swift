@@ -78,6 +78,8 @@ enum Constants {
     static let userLoggedIn = "userLoggedIn"
     static let storeInitialized = "storeInitialized"
     static let userTypeKey = "userType"
+    static let viewTypeKey = "ViewType"
+    static let survey = "survey"
 }
 
 enum MainViewPath {
@@ -99,8 +101,6 @@ enum TaskID {
     static let healthSugar = "healthSugar"
     static let defaultTask = "default"
     static let onboarding = "onboarding"
-    
-    
 }
 
 enum ViewType: String, CaseIterable, Identifiable {
@@ -114,6 +114,7 @@ enum ViewType: String, CaseIterable, Identifiable {
     case labeledValueTaskView
     case linkView
     case featuredContentView
+    case survey
 
     func getName(value: ViewType) -> String {
 
@@ -136,6 +137,8 @@ enum ViewType: String, CaseIterable, Identifiable {
                 return "Link View"
         case .featuredContentView:
                 return "Featured Content"
+        case .survey:
+                return "Survey"
             }
     }
 
