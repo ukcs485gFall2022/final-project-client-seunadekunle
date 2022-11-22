@@ -31,6 +31,7 @@ final class SurveyViewSynchronizer: OCKSurveyTaskViewSynchronizer {
              Look at how the CareViewController differentiates between
              surveys.
              */
+
             let pain = event.answer(kind: CheckIn.painItemIdentifier)
             let sleep = event.answer(kind: CheckIn.sleepItemIdentifier)
 

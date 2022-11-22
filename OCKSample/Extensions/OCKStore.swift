@@ -199,67 +199,67 @@ extension OCKStore {
         try await addTasksIfNotPresent([onboardTask])
     }
 
-//    func addSurveyTasks(_ carePlanUUID: UUID? = nil) async throws {
-//            let checkInSchedule = OCKSchedule.dailyAtTime(
-//                hour: 8, minutes: 0,
-//                start: Date(), end: nil,
-//                text: nil
-//            )
-//
-//            var checkInTask = OCKTask(
-//                id: CheckIn.identifier(),
-//                title: "Check In",
-//                carePlanUUID: carePlanUUID,
-//                schedule: checkInSchedule
-//            )
-//            checkInTask.card = .survey
-//            checkInTask.survey = .checkIn
-//
-//            let thisMorning = Calendar.current.startOfDay(for: Date())
-//
-//            let nextWeek = Calendar.current.date(
-//                byAdding: .weekOfYear,
-//                value: 1,
-//                to: Date()
-//            )!
-//
-//            let nextMonth = Calendar.current.date(
-//                byAdding: .month,
-//                value: 1,
-//                to: thisMorning
-//            )
-//
-//            let dailyElement = OCKScheduleElement(
-//                start: thisMorning,
-//                end: nextWeek,
-//                interval: DateComponents(day: 1),
-//                text: nil,
-//                targetValues: [],
-//                duration: .allDay
-//            )
-//
-//            let weeklyElement = OCKScheduleElement(
-//                start: nextWeek,
-//                end: nextMonth,
-//                interval: DateComponents(weekOfYear: 1),
-//                text: nil,
-//                targetValues: [],
-//                duration: .allDay
-//            )
-//
-//            let rangeOfMotionCheckSchedule = OCKSchedule(
-//                composing: [dailyElement, weeklyElement]
-//            )
-//
-//            var rangeOfMotionTask = OCKTask(
-//                id: RangeOfMotion.identifier(),
-//                title: "Range Of Motion",
-//                carePlanUUID: carePlanUUID,
-//                schedule: rangeOfMotionCheckSchedule
-//            )
-//            rangeOfMotionTask.card = .survey
-//            rangeOfMotionTask.survey = .rangeOfMotion
-//
-//            try await addTasksIfNotPresent([checkInTask, rangeOfMotionTask])
-//        }
+    func addSurveyTasks(_ carePlanUUID: UUID? = nil) async throws {
+            let checkInSchedule = OCKSchedule.dailyAtTime(
+                hour: 8, minutes: 0,
+                start: Date(), end: nil,
+                text: nil
+            )
+
+            var checkInTask = OCKTask(
+                id: CheckIn.identifier(),
+                title: "Check In",
+                carePlanUUID: carePlanUUID,
+                schedule: checkInSchedule
+            )
+            checkInTask.userInfo = [Constants.viewTypeKey: ViewType.survey.rawValue]
+            checkInTask.survey = .checkIn
+
+            let thisMorning = Calendar.current.startOfDay(for: Date())
+
+            let nextWeek = Calendar.current.date(
+                byAdding: .weekOfYear,
+                value: 1,
+                to: Date()
+            )!
+
+            let nextMonth = Calendar.current.date(
+                byAdding: .month,
+                value: 1,
+                to: thisMorning
+            )
+
+            let dailyElement = OCKScheduleElement(
+                start: thisMorning,
+                end: nextWeek,
+                interval: DateComponents(day: 1),
+                text: nil,
+                targetValues: [],
+                duration: .allDay
+            )
+
+            let weeklyElement = OCKScheduleElement(
+                start: nextWeek,
+                end: nextMonth,
+                interval: DateComponents(weekOfYear: 1),
+                text: nil,
+                targetValues: [],
+                duration: .allDay
+            )
+
+            let rangeOfMotionCheckSchedule = OCKSchedule(
+                composing: [dailyElement, weeklyElement]
+            )
+
+            var rangeOfMotionTask = OCKTask(
+                id: RangeOfMotion.identifier(),
+                title: "Range Of Motion",
+                carePlanUUID: carePlanUUID,
+                schedule: rangeOfMotionCheckSchedule
+            )
+            rangeOfMotionTask.userInfo = [Constants.viewTypeKey: ViewType.survey.rawValue]
+            rangeOfMotionTask.survey = .rangeOfMotion
+
+            try await addTasksIfNotPresent([checkInTask, rangeOfMotionTask])
+        }
 }
