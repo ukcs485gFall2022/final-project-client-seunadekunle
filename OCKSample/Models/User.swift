@@ -27,6 +27,7 @@ struct User: ParseUser {
     var lastTypeSelected: String?
     var userTypeUUIDs: [String: UUID]?
     var profilePicture: ParseFile?
+    var trackScore: Int = 0
 }
 
 // MARK: Default Implementation

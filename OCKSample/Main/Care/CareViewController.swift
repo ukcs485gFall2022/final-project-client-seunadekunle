@@ -80,8 +80,8 @@ class CareViewController: OCKDailyPageViewController {
                 if progress == 100 {
                     // Give sometime for the user to see 100
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
-                            target: self,
+                        // swiftlint:disable:next line_length
+                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self,
                             action: #selector(self.synchronizeWithRemote))
                         // swiftlint:disable:next line_length
                         self.navigationItem.rightBarButtonItem?.tintColor = self.navigationItem.leftBarButtonItem?.tintColor
@@ -162,17 +162,25 @@ class CareViewController: OCKDailyPageViewController {
                     // Add a non-CareKit view into the list
                     let tipTitle = "The science of habits"
                     let tipText = "knowablemagazine.org"
-                    let tipView = TipView()
-                    tipView.headerView.titleLabel.text = tipTitle
-                    tipView.headerView.detailLabel.text = tipText
-                    tipView.imageView.image = UIImage(named: "article_icon")
-                    tipView.customStyle = CustomStylerKey.defaultValue
-                    listViewController.appendView(tipView, animated: false)
+                    let customView = CustomFeaturedContentView(url: "knowablemagazine.org")
+                    //                    cu
+                    customView.imageView.image = UIImage(named: "article_icon")
+                    customView.customStyle = CustomStylerKey.defaultValue
+
+                    //                    let tipView = TipView()
+                    //                    tipView.headerView.titleLabel.text = tipTitle
+                    //                    tipView.headerView.detailLabel.text = tipText
+                    //                    tipView.imageView.image = UIImage(named: "article_icon")
+                    //                    tipView.customStyle = CustomStylerKey.defaultValue
+                    listViewController.appendView(customView, animated: false)
                 }
             }
 
-            let tasks = await self.fetchTasks(on: date)
+            var newCard = MyNewCardView()
+            newCard.standardInfo = "hello"
+            listViewController.appendViewController(newCard.formattedHostingController(), animated: false)
 
+            let tasks = await self.fetchTasks(on: date)
             tasks.compactMap {
                 let cards = self.taskViewController(for: $0, on: date)
                 cards?.forEach {
@@ -283,11 +291,11 @@ class CareViewController: OCKDailyPageViewController {
 
             let tasks = try await storeManager.store.fetchAnyTasks(query: query)
 
-//            let orderedTasks = TaskID.ordered.compactMap { orderedTaskID in
-//                tasks.first(where: { $0.id == orderedTaskID }) }
-//            for task in orderedTasks {
-//                Logger.feed.info(task.title)
-//            }
+            //            let orderedTasks = TaskID.ordered.compactMap { orderedTaskID in
+            //                tasks.first(where: { $0.id == orderedTaskID }) }
+            //            for task in orderedTasks {
+            //                Logger.feed.info(task.title)
+            //            }
             return tasks
         } catch {
             Logger.feed.error("\(error.localizedDescription, privacy: .public)")
@@ -329,7 +337,7 @@ extension CareViewController: OCKSurveyTaskViewControllerDelegate {
     }
 }
 
-private extension View {
+extension View {
     func formattedHostingController() -> UIHostingController<Self> {
         let viewController = UIHostingController(rootView: self)
         viewController.view.backgroundColor = .clear
