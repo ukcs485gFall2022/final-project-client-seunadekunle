@@ -11,6 +11,7 @@ import CareKitStore
 import ResearchKit
 #endif
 
+// todo: edit
 struct CheckIn: Surveyable {
     static var surveyType: Survey {
         Survey.checkIn

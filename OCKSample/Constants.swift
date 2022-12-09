@@ -107,6 +107,7 @@ enum TaskID {
     static let onboard = "onboard"
 }
 
+// For the different task views
 enum ViewType: String, CaseIterable, Identifiable {
 
     case instructionsTaskView

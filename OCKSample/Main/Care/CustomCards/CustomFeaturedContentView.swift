@@ -8,6 +8,7 @@
 import UIKit
 import CareKit
 import CareKitUI
+import os.log
 
 /// A simple subclass to take control of what CareKit already gives us.
 class CustomFeaturedContentView: OCKFeaturedContentView {
@@ -20,6 +21,14 @@ class CustomFeaturedContentView: OCKFeaturedContentView {
 
         // T0DO: 1 - Need to become a "delegate" so we know when view is tapped.
         self.delegate = self
+
+        let gradientLayer = CAGradientLayer()
+                gradientLayer.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+                gradientLayer.colors = [UIColor.white.cgColor, UIColor.red.withAlphaComponent(0.5).cgColor]
+                gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+                gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+                layer.addSublayer(gradientLayer)
+
     }
 
     // A convenience initializer to make it easier to use our custom featured content
@@ -28,13 +37,16 @@ class CustomFeaturedContentView: OCKFeaturedContentView {
         self.init(imageOverlayStyle: imageOverlayStyle)
         // T0DO: 3 - Need to turn the url string into a real URL using URL(string: String)
         self.url = URL(string: url)
+
     }
+
 }
 
 /// Need to conform to delegate in order to be delegated to.
 extension CustomFeaturedContentView: OCKFeaturedContentViewDelegate {
 
     func didTapView(_ view: OCKFeaturedContentView) {
+
         // When tapped open a URL.
         guard let url = url else {
             return
