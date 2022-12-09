@@ -19,7 +19,6 @@ class CustomFeaturedContentView: OCKFeaturedContentView {
         // See that this always calls the super
         super.init(imageOverlayStyle: imageOverlayStyle)
 
-        // T0DO: 1 - Need to become a "delegate" so we know when view is tapped.
         self.delegate = self
 
         let gradientLayer = CAGradientLayer()
@@ -33,9 +32,7 @@ class CustomFeaturedContentView: OCKFeaturedContentView {
 
     // A convenience initializer to make it easier to use our custom featured content
     convenience init(url: String, imageOverlayStyle: UIUserInterfaceStyle = .unspecified) {
-        // T0DO: 2 - Need to call the designated initializer
         self.init(imageOverlayStyle: imageOverlayStyle)
-        // T0DO: 3 - Need to turn the url string into a real URL using URL(string: String)
         self.url = URL(string: url)
 
     }

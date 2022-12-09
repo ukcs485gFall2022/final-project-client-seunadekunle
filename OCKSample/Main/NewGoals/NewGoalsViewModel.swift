@@ -21,14 +21,21 @@ class NewGoalsViewModel: ObservableObject {
     @Published public var taskID = ""
     @Published public var title = ""
     @Published public var instructions = ""
+    @Published public var taskType = "Normal"
+    @Published public var ockTaskTypes = ["Normal", "Health"]
+
     @Published public var start = Date()
     @Published public var end = Date()
     @Published public var viewType = ViewType.labeledValueTaskView
+    @Published public var plotType = PlotType.bar
     @Published public var plan = OCKCarePlan(id: UUID().uuidString,
         title: "Check in Care Plan", patientUUID: nil)
     @Published public var plans = [OCKCarePlan(id: UUID().uuidString,
         title: "Check in Care Plan",
         patientUUID: nil)]
+
+    @Published var isShowingAddAlert = false
+    private(set) var alertMessage = "All changs saved successfully!"
 
     var assetName = "figure.stairs"
 
@@ -42,7 +49,7 @@ class NewGoalsViewModel: ObservableObject {
         var task = OCKTask(id: UUID().uuidString, title: title, carePlanUUID: nil, schedule: taskSchedule)
         task.instructions = instructions
         task.asset = assetName
-        task.userInfo = [Constants.viewTypeKey: viewType.rawValue]
+        task.userInfo = [Constants.viewTypeKey: viewType.rawValue, Constants.plotTypeKey: plotType.rawValue]
         task.carePlanUUID = self.plan.uuid
 
         do {
@@ -56,6 +63,9 @@ class NewGoalsViewModel: ObservableObject {
             NotificationCenter.default.post(.init(name: Notification.Name(rawValue: Constants.shouldRefreshView)))
         } catch {
             self.error = AppError.errorString("Could not add new task \(error.localizedDescription)")
+
+            alertMessage = "Could not aduserd task: \(error)"
+            isShowingAddAlert = true
         }
     }
 
@@ -92,7 +102,7 @@ class NewGoalsViewModel: ObservableObject {
             healthKitLinkage: healthKitLinkage)
         healthKitTask.instructions = instructions
         healthKitTask.asset = assetName
-        healthKitTask.userInfo = [Constants.viewTypeKey: viewType.rawValue]
+        healthKitTask.userInfo = [Constants.viewTypeKey: viewType.rawValue, Constants.plotTypeKey: plotType.rawValue]
         healthKitTask.carePlanUUID = self.plan.uuid
 
         do {
@@ -109,11 +119,14 @@ class NewGoalsViewModel: ObservableObject {
             NotificationCenter.default.post(.init(name: Notification.Name(rawValue: Constants.shouldRefreshView)))
         } catch {
             self.error = AppError.errorString("Could not add new task \(error.localizedDescription)")
+
+            alertMessage = "Could not add task: \(error)"
+            isShowingAddAlert = true
         }
     }
 
     // General function for all tasks called by button
-    func addTask(freq: String = "Daily", taskType: String, newAssetName: String, healthTask: String? = nil) async {
+    func addTask(freq: String = "Daily", newAssetName: String, healthTask: String? = nil) async {
 
         if end <= start {
             self.error = AppError.errorString("Start date must before end Date")
@@ -175,7 +188,8 @@ class NewGoalsViewModel: ObservableObject {
             }
 
         } catch {
-            return
+            alertMessage = "Could not get care plan: \(error)"
+            isShowingAddAlert = true
         }
 
         self.plans = fetchedPlans

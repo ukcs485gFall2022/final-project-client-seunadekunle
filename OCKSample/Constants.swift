@@ -79,6 +79,7 @@ enum Constants {
     static let storeInitialized = "storeInitialized"
     static let userTypeKey = "userType"
     static let viewTypeKey = "ViewType"
+    static let plotTypeKey = "PlotType"
     static let survey = "survey"
 }
 
@@ -105,6 +106,30 @@ enum TaskID {
     static let healthSugar = "healthSugar"
     static let defaultTask = "default"
     static let onboard = "onboard"
+}
+
+// For the different task views
+enum PlotType: String, CaseIterable, Identifiable {
+
+    case line
+    case scatter
+    case bar
+
+    func getName(value: PlotType) -> String {
+
+        switch value {
+        case .line:
+                return "Line Graph"
+        case .scatter:
+                return "Scatter Graph"
+        case .bar:
+                return "Bar Graph"
+            }
+    }
+
+    var id: String {
+        getName(value: self)
+    }
 }
 
 // For the different task views

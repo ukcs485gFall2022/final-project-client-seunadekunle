@@ -40,16 +40,16 @@ struct ProfileView: View {
                             try await viewModel.saveContact()
                         }
                     }, label: {
-                            Text("Save Profile")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
+                        Text("Save Profile")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
 
-                        })
-                        .frame(width: dimensionStyler.screenWidth / 1.25)
-                        .background(colorStyler.convertToColor(color: colorStyler.iconYellow))
-                        .cornerRadius(appearanceStyler.cornerRadius1)
-                        .listRowSeparator(.hidden)
+                    })
+                    .frame(width: dimensionStyler.screenWidth / 1.25)
+                    .background(colorStyler.convertToColor(color: colorStyler.iconYellow))
+                    .cornerRadius(appearanceStyler.cornerRadius1)
+                    .listRowSeparator(.hidden)
 
                     // Notice that "action" is a closure (which is essentially
                     // a function as argument like we discussed in class)
@@ -58,16 +58,16 @@ struct ProfileView: View {
                             await loginViewModel.logout()
                         }
                     }, label: {
-                            Text("Log Out")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(width: dimensionStyler.screenWidth)
-                        })
-                        .listRowSeparator(.hidden)
-                        .frame(width: dimensionStyler.screenWidth / 1.25)
-                        .background(colorStyler.convertToColor(color: colorStyler.iconRed))
-                        .cornerRadius(appearanceStyler.cornerRadius1)
+                        Text("Log Out")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(width: dimensionStyler.screenWidth)
+                    })
+                    .listRowSeparator(.hidden)
+                    .frame(width: dimensionStyler.screenWidth / 1.25)
+                    .background(colorStyler.convertToColor(color: colorStyler.iconRed))
+                    .cornerRadius(appearanceStyler.cornerRadius1)
                 }
                 .background(.white)
                 .scrollContentBackground(.hidden)
@@ -83,10 +83,10 @@ struct ProfileView: View {
                     Button(action: {
                         viewModel.isPresentingAddTask = true
                     }, label: {
-                            Text("Add Task")
-                        })
-                        .sheet(isPresented: $viewModel.isPresentingAddTask) {
-                            NewGoalsView(viewModel: .init())
+                        Text("Add Task")
+                    })
+                    .sheet(isPresented: $viewModel.isPresentingAddTask) {
+                        NewGoalsView(viewModel: .init())
                             .presentationDetents([.fraction(0.925)])
                             .presentationDragIndicator(.hidden)
                     }
@@ -94,17 +94,17 @@ struct ProfileView: View {
             }
             .sheet(isPresented: $viewModel.isPresentingContact) {
                 MyContactView().presentationDetents([.fraction(0.925)])
-                .cornerRadius(15)
+                    .cornerRadius(15)
             }
             .sheet(isPresented: $viewModel.isPresentingImagePicker) {
                 ImagePicker(image: $viewModel.profileUIImage)
             }
             .alert(isPresented: $viewModel.isShowingSaveAlert) {
-            return Alert(title: Text("Update"),
-                message: Text(viewModel.alertMessage),
-                dismissButton: .default(Text("Ok"), action: {
-                        viewModel.isShowingSaveAlert = false
-                    }))
+                return Alert(title: Text("Update"),
+                             message: Text(viewModel.alertMessage),
+                             dismissButton: .default(Text("Ok"), action: {
+                    viewModel.isShowingSaveAlert = false
+                }))
             }
 
         }
@@ -115,7 +115,7 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(viewModel: .init(storeManager: Utility.createPreviewStoreManager()),
-            loginViewModel: .init())
-            .accentColor(Color(TintColorKey.defaultValue))
+                    loginViewModel: .init())
+        .accentColor(Color(TintColorKey.defaultValue))
     }
 }

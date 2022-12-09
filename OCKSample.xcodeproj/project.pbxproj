@@ -45,6 +45,7 @@
 		44C654852943CA9600530F3C /* InsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C654842943CA9600530F3C /* InsightsView.swift */; };
 		44C654872943CAC300530F3C /* InsightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C654862943CAC300530F3C /* InsightsViewController.swift */; };
 		44C654892943CF3C00530F3C /* OCKAnyOutcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C654882943CF3C00530F3C /* OCKAnyOutcome.swift */; };
+		44C6548B2943F19E00530F3C /* NewGoalsTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C6548A2943F19D00530F3C /* NewGoalsTopView.swift */; };
 		44CA908D2911B52D0077917F /* NewPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA908C2911B52D0077917F /* NewPlanViewModel.swift */; };
 		44CA9096291ACDB10077917F /* SelectViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA9095291ACDB10077917F /* SelectViewType.swift */; };
 		44CA9098291AF9800077917F /* CustomContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA9097291AF9800077917F /* CustomContactViewController.swift */; };
@@ -239,6 +240,7 @@
 		44C654842943CA9600530F3C /* InsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsView.swift; sourceTree = "<group>"; };
 		44C654862943CAC300530F3C /* InsightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsViewController.swift; sourceTree = "<group>"; };
 		44C654882943CF3C00530F3C /* OCKAnyOutcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKAnyOutcome.swift; sourceTree = "<group>"; };
+		44C6548A2943F19D00530F3C /* NewGoalsTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalsTopView.swift; sourceTree = "<group>"; };
 		44CA908C2911B52D0077917F /* NewPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlanViewModel.swift; sourceTree = "<group>"; };
 		44CA9095291ACDB10077917F /* SelectViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewType.swift; sourceTree = "<group>"; };
 		44CA9097291AF9800077917F /* CustomContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContactViewController.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 			children = (
 				441AA6252909DC3F0052F6DA /* NewGoalsViewModel.swift */,
 				449AF339290AE3860010F107 /* NewGoalsView.swift */,
+				44C6548A2943F19D00530F3C /* NewGoalsTopView.swift */,
 			);
 			path = NewGoals;
 			sourceTree = "<group>";
@@ -1076,6 +1079,7 @@
 				7036E4C9256E1A6F006E9A3C /* ProfileView.swift in Sources */,
 				44D56B7728F8A1C800FD0AAB /* AppearanceStyler.swift in Sources */,
 				7083A856279CA40A00B3832E /* PCKUtility.swift in Sources */,
+				44C6548B2943F19E00530F3C /* NewGoalsTopView.swift in Sources */,
 				70F921AE27CABE7700368CEC /* RemoteSessionDelegate.swift in Sources */,
 				70F03A952786093B00E5AFB4 /* OCKHealthKitPassthroughStore.swift in Sources */,
 				7036E4BF256DA089006E9A3C /* LoginViewModel.swift in Sources */,

@@ -17,7 +17,9 @@ struct SelectViewType: View {
             List {
                 ForEach(ViewType.allCases) { value in
                     VStack {
-                        Text(value.id)
+                        if value.id != "Survey" {
+                            Text(value.id)
+                        }
                     }.onTapGesture {
                         viewType = value
                         self.presentationMode.wrappedValue.dismiss()
@@ -29,9 +31,9 @@ struct SelectViewType: View {
             .background(.white)
             .scrollContentBackground(.hidden)
             .padding(EdgeInsets(top: 0,
-            leading: 0,
-            bottom: 0,
-            trailing: 0))
+                                leading: 0,
+                                bottom: 0,
+                                trailing: 0))
             .navigationBarTitleDisplayMode(.automatic)
     }
 }
