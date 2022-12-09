@@ -19,41 +19,53 @@ struct MainTabView: View {
         TabView(selection: $selectedTab) {
             CareView()
                 .tabItem {
-                if selectedTab == 0 {
-                    Image(systemName: "plus.rectangle.fill")
-                        .renderingMode(.template)
-                } else {
-                    Image(systemName: "plus.rectangle")
-                        .renderingMode(.template)
+                    if selectedTab == 0 {
+                        Image(systemName: "plus.rectangle.fill")
+                            .renderingMode(.template)
+                    } else {
+                        Image(systemName: "plus.rectangle")
+                            .renderingMode(.template)
+                    }
                 }
-            }
                 .tag(0)
 
-            ContactView()
+            InsightsView()
                 .tabItem {
-                if selectedTab == 1 {
-                    Image("phone.bubble.left.fill")
-                        .renderingMode(.template)
-                } else {
-                    Image("phone.bubble.left")
-                        .renderingMode(.template)
+                    if selectedTab == 1 {
+                        Image(systemName: "chart.bar.fill")
+                            .renderingMode(.template)
+                    } else {
+                        Image(systemName: "chart.bar")
+                            .renderingMode(.template)
+                    }
                 }
-            }
                 .tag(1)
 
             ProfileView(loginViewModel: loginViewModel)
                 .tabItem {
-                if selectedTab == 2 {
-                    Image("connect-filled")
-                        .renderingMode(.template)
-                } else {
-                    Image("connect")
-                        .renderingMode(.template)
+                    if selectedTab == 2 {
+                        Image("connect-filled")
+                            .renderingMode(.template)
+                    } else {
+                        Image("connect")
+                            .renderingMode(.template)
+                    }
                 }
-            }
                 .tag(2)
+
+            ContactView()
+                .tabItem {
+                    if selectedTab == 1 {
+                        Image("phone.bubble.left.fill")
+                            .renderingMode(.template)
+                    } else {
+                        Image("phone.bubble.left")
+                            .renderingMode(.template)
+                    }
+                }
+                .tag(3)
         }
-            .navigationBarHidden(true)
+        .navigationBarHidden(true)
     }
 }
 
