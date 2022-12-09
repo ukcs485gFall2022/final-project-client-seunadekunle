@@ -86,7 +86,11 @@ enum MainViewPath {
     case tabs
 }
 
-enum CarePlanID: String {
+enum CarePlanID: String, CaseIterable, Identifiable {
+    var id: String {
+        return UUID().uuidString
+    }
+
     case health // Add custom id's for your Care Plans, these are examples
     case checkIn
 }
@@ -103,6 +107,7 @@ enum TaskID {
     static let onboard = "onboard"
 }
 
+// For the different task views
 enum ViewType: String, CaseIterable, Identifiable {
 
     case instructionsTaskView
