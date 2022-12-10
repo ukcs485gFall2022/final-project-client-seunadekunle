@@ -124,7 +124,8 @@ extension OCKStore {
             carePlanUUID: nil, schedule: schedule)
         doxylamine.instructions = "Take 25mg of doxylamine when you experience nausea."
         doxylamine.asset = "pills.fill"
-        doxylamine.userInfo = [Constants.viewTypeKey: ViewType.checklist.rawValue]
+        // swiftlint:disable:next line_length
+        doxylamine.userInfo = [Constants.viewTypeKey: ViewType.checklist.rawValue, Constants.plotTypeKey: PlotType.bar.rawValue]
 
         let nauseaSchedule = OCKSchedule(composing: [
             OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1),
@@ -136,21 +137,24 @@ extension OCKStore {
         nausea.impactsAdherence = false
         nausea.instructions = "Tap the button below anytime you experience nausea."
         nausea.asset = "bed.double"
-        nausea.userInfo = [Constants.viewTypeKey: ViewType.buttonLog.rawValue]
+        // swiftlint:disable:next line_length
+        nausea.userInfo = [Constants.viewTypeKey: ViewType.buttonLog.rawValue, Constants.plotTypeKey: PlotType.bar.rawValue]
 
         let kegelElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 2))
         let kegelSchedule = OCKSchedule(composing: [kegelElement])
         var kegels = OCKTask(id: TaskID.kegels, title: "Kegel Exercises", carePlanUUID: nil, schedule: kegelSchedule)
         kegels.impactsAdherence = true
         kegels.instructions = "Perform kegel exercies"
-        kegels.userInfo = [Constants.viewTypeKey: ViewType.simpleTaskView.rawValue]
+        // swiftlint:disable:next line_length
+        kegels.userInfo = [Constants.viewTypeKey: ViewType.simpleTaskView.rawValue, Constants.plotTypeKey: PlotType.line.rawValue]
 
         let stretchElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1))
         let stretchSchedule = OCKSchedule(composing: [stretchElement])
         var stretch = OCKTask(id: "stretch", title: "Stretch", carePlanUUID: nil, schedule: stretchSchedule)
         stretch.impactsAdherence = true
         stretch.asset = "figure.walk"
-        stretch.userInfo = [Constants.viewTypeKey: ViewType.instructionsTaskView.rawValue]
+        // swiftlint:disable:next line_length
+        stretch.userInfo = [Constants.viewTypeKey: ViewType.instructionsTaskView.rawValue, Constants.plotTypeKey: PlotType.scatter.rawValue]
 
         try await addTasksIfNotPresent([nausea, doxylamine, kegels, stretch])
         try await addOnboardTask(carePlanUUIDs[.health])
@@ -199,8 +203,6 @@ extension OCKStore {
 
         try await addContactsIfNotPresent([contact1, contact2])
     }
-
-//    onboardTask.userInfo = [Constants.viewTypeKey: ViewType.survey.rawValue]
 
     func addOnboardTask(_ carePlanUUID: UUID? = nil) async throws {
         let onboardSchedule = OCKSchedule.dailyAtTime(

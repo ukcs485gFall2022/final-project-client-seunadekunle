@@ -272,9 +272,9 @@ class CareViewController: OCKDailyPageViewController {
         var type: String? = ViewType.labeledValueTaskView.rawValue
 
         if let ockTask = task as? OCKTask, let userInfo = ockTask.userInfo {
-            type = userInfo["ViewType"]
+            type = userInfo[Constants.viewTypeKey]
         } else if let healthTask = task as? OCKHealthKitTask, let userInfo = healthTask.userInfo {
-            type = userInfo["ViewType"]
+            type = userInfo[Constants.viewTypeKey]
         }
 
         return getViewType(type, task, date)

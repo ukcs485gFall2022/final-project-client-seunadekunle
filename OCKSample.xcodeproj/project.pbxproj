@@ -41,6 +41,11 @@
 		44B3D4392923593800B8C284 /* OCKSynchronizedStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D4382923593800B8C284 /* OCKSynchronizedStoreManager.swift */; };
 		44B3D43A29236B6F00B8C284 /* OCKSynchronizedStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D4382923593800B8C284 /* OCKSynchronizedStoreManager.swift */; };
 		44B3D43D2923728600B8C284 /* NewPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D43C2923728600B8C284 /* NewPlanView.swift */; };
+		44C654812943C91500530F3C /* OCKEventAggregator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C654802943C91500530F3C /* OCKEventAggregator.swift */; };
+		44C654852943CA9600530F3C /* InsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C654842943CA9600530F3C /* InsightsView.swift */; };
+		44C654872943CAC300530F3C /* InsightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C654862943CAC300530F3C /* InsightsViewController.swift */; };
+		44C654892943CF3C00530F3C /* OCKAnyOutcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C654882943CF3C00530F3C /* OCKAnyOutcome.swift */; };
+		44C6548B2943F19E00530F3C /* NewGoalsTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C6548A2943F19D00530F3C /* NewGoalsTopView.swift */; };
 		44CA908D2911B52D0077917F /* NewPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA908C2911B52D0077917F /* NewPlanViewModel.swift */; };
 		44CA9096291ACDB10077917F /* SelectViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA9095291ACDB10077917F /* SelectViewType.swift */; };
 		44CA9098291AF9800077917F /* CustomContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CA9097291AF9800077917F /* CustomContactViewController.swift */; };
@@ -231,6 +236,11 @@
 		44B3D43629233CDC00B8C284 /* MyContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactViewController.swift; sourceTree = "<group>"; };
 		44B3D4382923593800B8C284 /* OCKSynchronizedStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKSynchronizedStoreManager.swift; sourceTree = "<group>"; };
 		44B3D43C2923728600B8C284 /* NewPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlanView.swift; sourceTree = "<group>"; };
+		44C654802943C91500530F3C /* OCKEventAggregator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKEventAggregator.swift; sourceTree = "<group>"; };
+		44C654842943CA9600530F3C /* InsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsView.swift; sourceTree = "<group>"; };
+		44C654862943CAC300530F3C /* InsightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsViewController.swift; sourceTree = "<group>"; };
+		44C654882943CF3C00530F3C /* OCKAnyOutcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKAnyOutcome.swift; sourceTree = "<group>"; };
+		44C6548A2943F19D00530F3C /* NewGoalsTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalsTopView.swift; sourceTree = "<group>"; };
 		44CA908C2911B52D0077917F /* NewPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlanViewModel.swift; sourceTree = "<group>"; };
 		44CA9095291ACDB10077917F /* SelectViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewType.swift; sourceTree = "<group>"; };
 		44CA9097291AF9800077917F /* CustomContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContactViewController.swift; sourceTree = "<group>"; };
@@ -349,6 +359,7 @@
 			children = (
 				441AA6252909DC3F0052F6DA /* NewGoalsViewModel.swift */,
 				449AF339290AE3860010F107 /* NewGoalsView.swift */,
+				44C6548A2943F19D00530F3C /* NewGoalsTopView.swift */,
 			);
 			path = NewGoals;
 			sourceTree = "<group>";
@@ -398,6 +409,15 @@
 				44B3D43C2923728600B8C284 /* NewPlanView.swift */,
 			);
 			path = NewPlan;
+			sourceTree = "<group>";
+		};
+		44C654832943CA4D00530F3C /* Insights */ = {
+			isa = PBXGroup;
+			children = (
+				44C654842943CA9600530F3C /* InsightsView.swift */,
+				44C654862943CAC300530F3C /* InsightsViewController.swift */,
+			);
+			path = Insights;
 			sourceTree = "<group>";
 		};
 		44CA908B2911B4F50077917F /* ViewType */ = {
@@ -457,6 +477,7 @@
 		703088772582727500FFABB6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				44C654832943CA4D00530F3C /* Insights */,
 				443ABACB292C287800D38F13 /* xOnboarding */,
 				443ABA8E29243E9900D38F13 /* xSurveys */,
 				44B3D43B2923715200B8C284 /* NewPlan */,
@@ -616,6 +637,8 @@
 				44B3D4382923593800B8C284 /* OCKSynchronizedStoreManager.swift */,
 				443AB99A2924155100D38F13 /* OCKCarePlan+Hashable.swift */,
 				443ABACF292C2F1D00D38F13 /* OCKTask+Custom.swift */,
+				44C654802943C91500530F3C /* OCKEventAggregator.swift */,
+				44C654882943CF3C00530F3C /* OCKAnyOutcome.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1013,6 +1036,8 @@
 				9169381B271B64E100A634ED /* Styler.swift in Sources */,
 				70F921A827CA9A3A00368CEC /* CustomStylerKey.swift in Sources */,
 				70221F3428D8ABBE00971195 /* AppDelegate+UIApplicationDelegate.swift in Sources */,
+				44C654872943CAC300530F3C /* InsightsViewController.swift in Sources */,
+				44C654892943CF3C00530F3C /* OCKAnyOutcome.swift in Sources */,
 				9169381D271B650700A634ED /* ColorStyler.swift in Sources */,
 				449AF33A290AE3860010F107 /* NewGoalsView.swift in Sources */,
 				E72B2C0A226939E3009A9438 /* AppDelegate.swift in Sources */,
@@ -1032,6 +1057,7 @@
 				918FDEB7271B41FF0045A0EF /* Logger.swift in Sources */,
 				70F03A9F27860A8800E5AFB4 /* OCKOutcomeValue+Identifiable.swift in Sources */,
 				44B3D4322923271700B8C284 /* ProfileInputView.swift in Sources */,
+				44C654852943CA9600530F3C /* InsightsView.swift in Sources */,
 				70221F2A28D7BE0600971195 /* AppDelegate+ParseRemoteDelegate.swift in Sources */,
 				7036E4D3256EBE35006E9A3C /* MainView.swift in Sources */,
 				918FDEC5271B4EA70045A0EF /* StoreManagerKey.swift in Sources */,
@@ -1043,6 +1069,7 @@
 				E7C37849228F887800E982D8 /* TipView.swift in Sources */,
 				443ABACD292C288B00D38F13 /* Consent.swift in Sources */,
 				70077597252228E900EC0EDA /* User.swift in Sources */,
+				44C654812943C91500530F3C /* OCKEventAggregator.swift in Sources */,
 				443ABAB1292C175B00D38F13 /* OCKAnyEvent.swift in Sources */,
 				44B3D43D2923728600B8C284 /* NewPlanView.swift in Sources */,
 				70F03A9927860A0800E5AFB4 /* OCKSynchronizedStoreManager+Publishers.swift in Sources */,
@@ -1052,6 +1079,7 @@
 				7036E4C9256E1A6F006E9A3C /* ProfileView.swift in Sources */,
 				44D56B7728F8A1C800FD0AAB /* AppearanceStyler.swift in Sources */,
 				7083A856279CA40A00B3832E /* PCKUtility.swift in Sources */,
+				44C6548B2943F19E00530F3C /* NewGoalsTopView.swift in Sources */,
 				70F921AE27CABE7700368CEC /* RemoteSessionDelegate.swift in Sources */,
 				70F03A952786093B00E5AFB4 /* OCKHealthKitPassthroughStore.swift in Sources */,
 				7036E4BF256DA089006E9A3C /* LoginViewModel.swift in Sources */,
