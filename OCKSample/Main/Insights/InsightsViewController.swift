@@ -21,6 +21,7 @@ import os.log
 
 class InsightsViewController: OCKListViewController {
 
+    let colors = [ColorStyler().iconBlue, ColorStyler().iconRed, ColorStyler().iconBlue]
     /// The manager of the `Store` from which the `Contact` data is fetched.
     public let storeManager: OCKSynchronizedStoreManager
 
@@ -109,7 +110,16 @@ class InsightsViewController: OCKListViewController {
 
         let survey = CheckIn() // Only used for example.
         let surveyTaskID = survey.identifier() // Only used for example.
-        switch task.id {
+
+        var plotType: String? = PlotType.scatter.rawValue
+
+        if let ockTask = task as? OCKTask, let userInfo = ockTask.userInfo {
+            plotType = userInfo[Constants.plotTypeKey]
+        } else if let healthTask = task as? OCKHealthKitTask, let userInfo = healthTask.userInfo {
+            plotType = userInfo[Constants.plotTypeKey]
+        }
+
+        switch plotType {
         case surveyTaskID:
             /*
              Note that that there's a small bug for the check in graph because
@@ -180,15 +190,36 @@ class InsightsViewController: OCKListViewController {
                 configurations: [nauseaDataSeries, doxylamineDataSeries],
                 storeManager: self.storeManager)
 
-            insightsCard.chartView.headerView.titleLabel.text = "Nausea & Doxylamine Intake"
-            insightsCard.chartView.headerView.detailLabel.text = "This Week"
+            insightsCard.chartView.headerView.titleLabel.text = task.title
+            insightsCard.chartView.headerView.detailLabel.text = task.title
             insightsCard.chartView.headerView.accessibilityLabel = "Nausea & Doxylamine Intake, This Week"
             cards.append(insightsCard)
 
             return cards
 
         default:
-            return nil
+            // Create a plot comparing nausea to medication adherence.
+
+            // Create a plot comparing mean to median.
+            let meanDataSeries = OCKDataSeriesConfiguration(
+                taskID: task.id,
+                legendTitle: "Mean",
+                gradientStartColor: colors[0],
+                gradientEndColor: colors[1],
+                markerSize: 10,
+                eventAggregator: .aggregatorMean(task.id))
+
+            let insightsCard = OCKCartesianChartViewController(
+                plotType: .bar,
+                selectedDate: date,
+                configurations: [meanDataSeries],
+                storeManager: self.storeManager)
+
+            insightsCard.chartView.headerView.titleLabel.text = task.title
+            insightsCard.chartView.headerView.detailLabel.text = task.instructions
+            insightsCard.chartView.headerView.accessibilityLabel = task.instructions
+
+            return [insightsCard]
         }
     }
 

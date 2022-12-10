@@ -149,6 +149,9 @@ class NewGoalsViewModel: ObservableObject {
         } else if freq == "Weekly" {
             // swiftlint:disable:next line_length
             taskSchedule = OCKSchedule.weeklyAtTime(weekday: day, hours: hour, minutes: minute, start: start, end: end, targetValues: [], text: "")
+        } else if freq == "Hourly" {
+            let scheduleElement = OCKScheduleElement.init(start: start, end: end, interval: DateComponents(hour: 1))
+            taskSchedule = OCKSchedule(composing: [scheduleElement])
         } else {
             let scheduleElement = OCKScheduleElement.init(start: start, end: end, interval: DateComponents(month: 1))
             taskSchedule = OCKSchedule(composing: [scheduleElement])
