@@ -21,7 +21,7 @@ struct NewGoalsView: View {
     let dimensionStyler = DimensionStyler()
 
     @State private var freq = "Daily"
-    let freqTypes = ["Daily", "Weekly", "Monthly"]
+    let freqTypes = ["Daily", "Hourly", "Weekly", "Monthly"]
 
     @State private var healthTask = "Counting Sugar"
     let healthTaskList = ["Counting Sugar", "Water intake", "Protein", "Flights Climbed"]

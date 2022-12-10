@@ -204,8 +204,6 @@ extension OCKStore {
         try await addContactsIfNotPresent([contact1, contact2])
     }
 
-//    onboardTask.userInfo = [Constants.viewTypeKey: ViewType.survey.rawValue]
-
     func addOnboardTask(_ carePlanUUID: UUID? = nil) async throws {
         let onboardSchedule = OCKSchedule.dailyAtTime(
             hour: 0, minutes: 0,
