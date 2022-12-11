@@ -23,13 +23,13 @@ final class SurveyViewSynchronizer: OCKSurveyTaskViewSynchronizer {
 
         if let event = context.viewModel.first?.first, event.outcome != nil {
             /*
-             t0do: You need to modify this so the instuction label shows
-             correctly for each Task/Card.
-             Hint - Each event (OCKAnyEvent) has a task. How can you use
-             this task to determine what instruction answers should show?
-             Look at how the CareViewController differentiates between
-             surveys.
-             */
+                 t0do: You need to modify this so the instuction label shows
+                 correctly for each Task/Card.
+                 Hint - Each event (OCKAnyEvent) has a task. How can you use
+                 this task to determine what instruction answers should show?
+                 Look at how the CareViewController differentiates between
+                 surveys.
+                 */
 
             guard let surveyTask = event.task as? OCKTask else {
                 return
@@ -42,11 +42,23 @@ final class SurveyViewSynchronizer: OCKSurveyTaskViewSynchronizer {
                 view.insertSubview(header, at: 0)
             }
 
-            if let instructions = surveyTask.instructions {
+            if surveyTask.userInfo?[Constants.viewTypeKey] == ViewType.survey.rawValue {
+                if surveyTask.id == CheckIn.identifier() {
 
-                view.instructionsLabel.text = """
-                    \(instructions)
-                    """
+                    let feeling = event.answerString(kind: CheckIn.feelingItemIdentifier)
+                    let dayTurnOut = event.answerString(kind: CheckIn.dayTurnOutItemIdentifier)
+                    view.instructionsLabel.text = """
+                        You are feeling \(feeling)
+                        Are you enjoying Track: \(dayTurnOut)
+                        """
+                }
+            } else {
+                if let instructions = surveyTask.instructions {
+
+                    view.instructionsLabel.text = """
+                        \(instructions)
+                        """
+                }
             }
 
         } else {

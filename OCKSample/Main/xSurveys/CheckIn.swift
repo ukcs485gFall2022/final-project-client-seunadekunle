@@ -21,59 +21,64 @@ struct CheckIn: Surveyable {
         "\(Self.identifier()).form"
     }
 
-    static var painItemIdentifier: String {
-        "\(Self.identifier()).form.pain"
+    static var feelingItemIdentifier: String {
+        "\(Self.identifier()).form.feeling"
     }
 
-    static var sleepItemIdentifier: String {
+    static var dayTurnOutItemIdentifier: String {
         "\(Self.identifier()).form.sleep"
     }
+}
+
+enum SurveyAnswers {
+    static let veryGood = "😊 Very Good"
+    static let good = "🙂 Good"
+    static let bad = "😒 Bad"
+    static let veryBad = "😞 Very Bad"
+    static let trackYes = "👍 Yes"
+    static let trackNo = "👎 No"
+    static let trackIDK = "🤔 IDK"
 }
 
 #if canImport(ResearchKit)
 extension CheckIn {
     func createSurvey() -> ORKTask {
 
-        let painAnswerFormat = ORKAnswerFormat.scale(
-            withMaximumValue: 10,
-            minimumValue: 0,
-            defaultValue: 0,
-            step: 1,
-            vertical: false,
-            maximumValueDescription: "Very painful",
-            minimumValueDescription: "No pain"
-        )
+        let feelingTextChoices = [
+            // swiftlint:disable:next line_length
+            ORKTextChoice(text: SurveyAnswers.veryGood, value: SurveyAnswers.veryGood as NSSecureCoding & NSCopying & NSObjectProtocol),
+            // swiftlint:disable:next line_length
+            ORKTextChoice(text: SurveyAnswers.good, value: SurveyAnswers.good as NSSecureCoding & NSCopying & NSObjectProtocol),
+            // swiftlint:disable:next line_length
+            ORKTextChoice(text: SurveyAnswers.bad, value: SurveyAnswers.bad as NSSecureCoding & NSCopying & NSObjectProtocol),
+            // swiftlint:disable:next line_length
+            ORKTextChoice(text: SurveyAnswers.veryBad, value: SurveyAnswers.veryBad as NSSecureCoding & NSCopying & NSObjectProtocol)]
 
-        let painItem = ORKFormItem(
-            identifier: Self.painItemIdentifier,
-            text: "How would you rate your pain?",
-            answerFormat: painAnswerFormat
-        )
-        painItem.isOptional = false
+        // swiftlint:disable:next line_length
+        let feelingAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: ORKChoiceAnswerStyle.singleChoice, textChoices: feelingTextChoices)
 
-        let sleepAnswerFormat = ORKAnswerFormat.scale(
-            withMaximumValue: 12,
-            minimumValue: 0,
-            defaultValue: 0,
-            step: 1,
-            vertical: false,
-            maximumValueDescription: nil,
-            minimumValueDescription: nil
+        let feelingItem = ORKFormItem(
+            identifier: Self.feelingItemIdentifier,
+            text: "How are you feeling right now?",
+            answerFormat: feelingAnswerFormat
         )
+        feelingItem.isOptional = false
 
-        let sleepItem = ORKFormItem(
-            identifier: Self.sleepItemIdentifier,
-            text: "How many hours of sleep did you get last night?",
-            answerFormat: sleepAnswerFormat
+        // swiftlint:disable:next line_length
+        let dayTurnOutFormat = ORKAnswerFormat.booleanAnswerFormat(withYesString: SurveyAnswers.trackYes, noString: SurveyAnswers.trackNo)
+        let dayTurnOutItem = ORKFormItem(
+            identifier: Self.dayTurnOutItemIdentifier,
+            text: "Are you enjoying Track?",
+            answerFormat: dayTurnOutFormat
         )
-        sleepItem.isOptional = false
+        dayTurnOutItem.isOptional = false
 
         let formStep = ORKFormStep(
             identifier: Self.formIdentifier,
             title: "Check In",
             text: "Please answer the following questions."
         )
-        formStep.formItems = [painItem, sleepItem]
+        formStep.formItems = [feelingItem, dayTurnOutItem]
         formStep.isOptional = false
 
         let surveyTask = ORKOrderedTask(
@@ -90,28 +95,49 @@ extension CheckIn {
                 .compactMap({ $0 as? ORKStepResult })
                 .first(where: { $0.identifier == Self.formIdentifier }),
 
-            let scaleResults = response
-                .results?.compactMap({ $0 as? ORKScaleQuestionResult }),
+                let choiceResult = response
+                .results?.compactMap({ $0 as? ORKChoiceQuestionResult }),
 
-            let painAnswer = scaleResults
-                .first(where: { $0.identifier == Self.painItemIdentifier })?
-                .scaleAnswer,
+                let booleanResult = response
+                .results?.compactMap({ $0 as? ORKBooleanQuestionResult }),
 
-            let sleepAnswer = scaleResults
-                .first(where: { $0.identifier == Self.sleepItemIdentifier })?
-                .scaleAnswer
+                let feelingAnswer = choiceResult
+                .first(where: { $0.identifier == Self.feelingItemIdentifier })?
+                .choiceAnswers?[0],
+
+                let dayTurnOutAnswer = booleanResult
+                .first(where: { $0.identifier == Self.dayTurnOutItemIdentifier })?
+                .booleanAnswer
+
         else {
             assertionFailure("Failed to extract answers from check in survey!")
             return nil
         }
 
-        var painValue = OCKOutcomeValue(Double(truncating: painAnswer))
-        painValue.kind = Self.painItemIdentifier
+        // fills out the appropriate data type based on input
+        var feelingValue: OCKOutcomeValue
+        if let feelingValueStr = feelingAnswer as? String {
+            feelingValue = OCKOutcomeValue(feelingValueStr)
+        } else {
+            feelingValue = OCKOutcomeValue("")
+        }
 
-        var sleepValue = OCKOutcomeValue(Double(truncating: sleepAnswer))
-        sleepValue.kind = Self.sleepItemIdentifier
+        feelingValue.kind = Self.feelingItemIdentifier
 
-        return [painValue, sleepValue]
+        var dayTurnOutValue: OCKOutcomeValue
+        if let dayTurnOutBool = dayTurnOutAnswer as? Bool {
+            if dayTurnOutBool {
+                dayTurnOutValue = OCKOutcomeValue(SurveyAnswers.trackYes)
+            } else {
+                dayTurnOutValue = OCKOutcomeValue(SurveyAnswers.trackNo)
+            }
+        } else {
+            dayTurnOutValue = OCKOutcomeValue(SurveyAnswers.trackIDK)
+        }
+
+        dayTurnOutValue.kind = Self.dayTurnOutItemIdentifier
+
+        return [feelingValue, dayTurnOutValue]
     }
 }
 #endif

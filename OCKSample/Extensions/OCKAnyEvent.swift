@@ -15,4 +15,10 @@ extension OCKAnyEvent {
         let match = values.first(where: { $0.kind == kind })
         return match?.doubleValue ?? 0
     }
+
+    func answerString(kind: String) -> String {
+        let values = outcome?.values ?? []
+        let match = values.first(where: { $0.kind == kind })
+        return match?.stringValue ?? ""
+    }
 }
