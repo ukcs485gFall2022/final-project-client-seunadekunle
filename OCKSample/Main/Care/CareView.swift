@@ -48,10 +48,10 @@ struct CareView: View {
                                 Text("+")
                                     .font(.system(.largeTitle))
                                     .frame(width: 77, height: 70)
-                                    .foregroundColor(colorStyler.convertToColor(color: ColorStyler.iconYellow))
+                                    .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
                                     .padding(.bottom, 7)
                             })
-                        .background(colorStyler.convertToColor(color: ColorStyler.iconBlue))
+                        .background(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
                             .cornerRadius(38.5)
 
                             .padding()

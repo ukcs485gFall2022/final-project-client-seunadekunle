@@ -46,7 +46,7 @@ struct ColorStyler: OCKColorStyler {
         return UIColor(red: 0.16, green: 0.20, blue: 0.36, alpha: 1.00)
     }
 
-    func convertToColor(color: UIColor) -> Color {
+    public static func convertToColor(color: UIColor) -> Color {
         return Color(uiColor: color)
     }
 

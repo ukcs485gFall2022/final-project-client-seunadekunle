@@ -150,6 +150,16 @@ extension OCKStore {
         // swiftlint:disable:next line_length
         repetition.userInfo = [Constants.viewTypeKey: ViewType.counter.rawValue, Constants.plotTypeKey: PlotType.bar.rawValue]
 
+        var repetitionMood = OCKTask(id: TaskID.repetitionMood,
+                                 title: "Track your self help",
+                                 carePlanUUID: nil,
+                                 schedule: nauseaSchedule)
+        repetitionMood.impactsAdherence = false
+        repetitionMood.instructions = "Input how you are feeling"
+        repetitionMood.asset = "repeat.circle"
+        // swiftlint:disable:next line_length
+        repetitionMood.userInfo = [Constants.viewTypeKey: ViewType.logger.rawValue, Constants.plotTypeKey: PlotType.bar.rawValue]
+
         let kegelElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 2))
         let kegelSchedule = OCKSchedule(composing: [kegelElement])
         var kegels = OCKTask(id: TaskID.kegels, title: "Kegel Exercises", carePlanUUID: nil, schedule: kegelSchedule)
@@ -166,7 +176,7 @@ extension OCKStore {
         // swiftlint:disable:next line_length
         stretch.userInfo = [Constants.viewTypeKey: ViewType.instructionsTaskView.rawValue, Constants.plotTypeKey: PlotType.scatter.rawValue]
 
-        try await addTasksIfNotPresent([nausea, doxylamine, kegels, stretch, repetition])
+        try await addTasksIfNotPresent([nausea, doxylamine, kegels, stretch, repetition, repetitionMood])
         try await addOnboardTask(carePlanUUIDs[.health])
         try await addSurveyTasks(carePlanUUIDs[.checkIn])
 

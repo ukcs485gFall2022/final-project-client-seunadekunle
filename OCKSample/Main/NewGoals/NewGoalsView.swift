@@ -61,7 +61,7 @@ struct NewGoalsView: View {
                                     Text($0)
                                 }
                             }
-                            .foregroundColor(colorStyler.convertToColor(color: .black))
+                            .foregroundColor(ColorStyler.convertToColor(color: .black))
                             .pickerStyle(.menu)
                             .listRowSeparator(.hidden)
                             .padding(EdgeInsets(top: 0,
@@ -171,7 +171,7 @@ struct NewGoalsView: View {
                 .padding()
             Spacer()
         })
-        .background(colorStyler.convertToColor(color: ColorStyler.iconBlue))
+        .background(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
         .cornerRadius(appearanceStyler.cornerRadius1)
         .padding(EdgeInsets(top: 0,
                             leading: dimensionStyler.sidePadding + 17,

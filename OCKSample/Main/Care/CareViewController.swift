@@ -209,7 +209,7 @@ class CareViewController: OCKDailyPageViewController {
                 .careKitStyle(CustomStylerKey.defaultValue)
 
             // swiftlint:disable:next line_length
-            let linkView = LinkView(title: .init("Give us a rating"), links: [.website("https://www.apple.com/app-store/", title: "Rating")])
+            let linkView = LinkView(title: .init("Give us a rating on the App Store"), links: [.website("https://www.apple.com/app-store/", title: "Rating")])
 
             return [view.formattedHostingController(), linkView.formattedHostingController()]
 
@@ -259,9 +259,15 @@ class CareViewController: OCKDailyPageViewController {
             return [surveyCard]
         case ViewType.counter.rawValue:
             let viewModel = CounterCardViewModel(task: task,
+                                                 eventQuery: .init(for: date),
+                                                 storeManager: self.storeManager)
+            let customCard = CounterCardView(viewModel: viewModel)
+            return [customCard.formattedHostingController()]
+        case ViewType.logger.rawValue:
+            let viewModel = LoggerCardViewModel(task: task,
                                                 eventQuery: .init(for: date),
                                                 storeManager: self.storeManager)
-            let customCard = CounterCardView(viewModel: viewModel)
+            let customCard = LoggerCardView(viewModel: viewModel)
             return [customCard.formattedHostingController()]
         default:
             let taskView = LabeledValueTaskView(

@@ -159,7 +159,7 @@ struct LoginView: View {
                         Spacer()
                     }
                 })
-            .background(colorStyler.convertToColor(color: ColorStyler.iconBlue))
+            .background(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .padding(EdgeInsets(top: 0,
                 leading: dimensionStyler.sidePadding + 17,
@@ -181,7 +181,7 @@ struct LoginView: View {
                         EmptyView()
                     }
                 })
-            .background(colorStyler.convertToColor(color: ColorStyler.iconYellow))
+            .background(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .padding(EdgeInsets(top: dimensionStyler.sidePadding,
                 leading: dimensionStyler.sidePadding + 17,
@@ -191,7 +191,7 @@ struct LoginView: View {
             // If an error occurs show it on the screen, also make it multilline
             if let error = viewModel.loginError {
                 Text("Error: \(error.message)")
-                    .foregroundColor(colorStyler.convertToColor(color: colorStyler.quaternaryCustomFill))
+                    .foregroundColor(ColorStyler.convertToColor(color: colorStyler.quaternaryCustomFill))
                     .font(.system(size: 10))
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(EdgeInsets(top: 0,
@@ -207,10 +207,10 @@ struct LoginView: View {
              */
             Picker(selection: $signupLoginSegmentValue,
                 label: Text("Login Picker")) {
-                Text("Login").tag(0).background(colorStyler.convertToColor(color: colorStyler.customBackground))
-                Text("Sign Up").tag(1).foregroundColor(colorStyler.convertToColor(color: ColorStyler.iconYellow))
+                Text("Login").tag(0).background(ColorStyler.convertToColor(color: colorStyler.customBackground))
+                Text("Sign Up").tag(1).foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
             }.pickerStyle(.segmented)
-                .foregroundColor(colorStyler.convertToColor(color: ColorStyler.iconYellow))
+                .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .padding(EdgeInsets(top: 0,
                 leading: dimensionStyler.sidePadding,
@@ -220,7 +220,7 @@ struct LoginView: View {
             leading: 0,
             bottom: 0,
             trailing: 0))
-            .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+            .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
     }
 }
 

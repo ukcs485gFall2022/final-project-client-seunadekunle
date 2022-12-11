@@ -20,19 +20,19 @@ struct ProfileInputView: View {
         Section("About") {
             TextField("First Name", text: $viewModel.firstName)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
 
             TextField("Last Name", text: $viewModel.lastName)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
 
             TextField("Notes", text: $viewModel.note)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
 
@@ -43,7 +43,7 @@ struct ProfileInputView: View {
 
             TextField("Allergy", text: $viewModel.allergy)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
 
@@ -59,26 +59,26 @@ struct ProfileInputView: View {
         Section("Address") {
             TextField("Street", text: $viewModel.street)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
 
             TextField("City", text: $viewModel.city)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
 
             TextField("State", text: $viewModel.state)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
 
             TextField("Postal Code", text: $viewModel.zipcode)
                 .keyboardType(.numberPad)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
         }
@@ -87,27 +87,27 @@ struct ProfileInputView: View {
             TextField("Email", text: $viewModel.emailAddress)
                 .keyboardType(.phonePad)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
 
             TextField("Message Number", text: $viewModel.messagingNumber)
                 .keyboardType(.phonePad)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
 
             TextField("Phone Numbers", text: $viewModel.phoneNumber)
                 .keyboardType(.phonePad)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
 
             TextField("Contact info", text: $viewModel.otherContactInfo)
                 .padding()
-                .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                 .cornerRadius(appearanceStyler.cornerRadius1)
                 .listRowSeparator(.hidden)
         }

@@ -20,7 +20,7 @@ struct CounterCardView: View {
 
                 // Can look through HeaderView for creating custom
                 HeaderView(title: Text(viewModel.taskEvents.firstEventTitle),
-                           detail: Text(viewModel.taskEvents.firstEventDetail ?? ""))
+                           detail: Text(viewModel.taskEvents.firstTaskInstructions ?? ""))
                 Divider()
                 HStack(alignment: .center,
                        spacing: style.dimension.directionalInsets2.trailing) {

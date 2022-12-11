@@ -23,7 +23,7 @@ struct NewPlanView: View {
                 Form {
                     TextField("Title", text: $viewModel.title)
                         .padding()
-                        .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+                        .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
                         .cornerRadius(appearanceStyler.cornerRadius1)
                         .listRowSeparator(.hidden)
                 }
@@ -48,7 +48,7 @@ struct NewPlanView: View {
                     .padding()
                 Spacer()
             })
-            .background(colorStyler.convertToColor(color: ColorStyler.iconBlue))
+            .background(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
             .cornerRadius(appearanceStyler.cornerRadius1)
             .padding(EdgeInsets(top: 0,
             leading: dimensionStyler.sidePadding + 17,

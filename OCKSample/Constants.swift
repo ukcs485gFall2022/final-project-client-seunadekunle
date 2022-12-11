@@ -107,6 +107,7 @@ enum TaskID {
     static let defaultTask = "default"
     static let onboard = "onboard"
     static let repetition = "repetition"
+    static let repetitionMood = "repetitionMood"
 }
 
 // For the different task views
@@ -147,6 +148,7 @@ enum ViewType: String, CaseIterable, Identifiable {
     case featuredContentView
     case survey
     case counter
+    case logger
 
     // swiftlint:disable cyclomatic_complexity
     func getName(value: ViewType) -> String {
@@ -173,6 +175,8 @@ enum ViewType: String, CaseIterable, Identifiable {
             return "Survey"
         case .counter:
             return "Counter View"
+        case .logger:
+            return "Logger View"
         }
     }
 
