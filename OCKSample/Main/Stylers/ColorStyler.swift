@@ -31,19 +31,19 @@ struct ColorStyler: OCKColorStyler {
     }
 
     var customBlue: UIColor {
-        iconBlue
+        ColorStyler.iconBlue
     }
 
-    var iconRed: UIColor {
-        UIColor(red: 0.86, green: 0.17, blue: 0.22, alpha: 1.00)
+    static var iconRed: UIColor {
+        return UIColor(red: 0.86, green: 0.17, blue: 0.22, alpha: 1.00)
     }
 
-    var iconYellow: UIColor {
-        UIColor(red: 0.95, green: 0.65, blue: 0.07, alpha: 1.00)
+    static var iconYellow: UIColor {
+        return UIColor(red: 0.95, green: 0.65, blue: 0.07, alpha: 1.00)
     }
 
-    var iconBlue: UIColor {
-        UIColor(red: 0.16, green: 0.20, blue: 0.36, alpha: 1.00)
+    static var iconBlue: UIColor {
+        return UIColor(red: 0.16, green: 0.20, blue: 0.36, alpha: 1.00)
     }
 
     func convertToColor(color: UIColor) -> Color {

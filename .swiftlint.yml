@@ -5,4 +5,4 @@ disabled_rules:
   - weak_delegate
   - file_length
   - function_body_length
-
+  - multiple_closures_with_trailing_closure

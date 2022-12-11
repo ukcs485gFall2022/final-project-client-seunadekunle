@@ -20,7 +20,7 @@ struct NewGoalsTopView: View {
                 Text($0)
             }
         }
-        .foregroundColor(colorStyler.convertToColor(color: colorStyler.iconYellow))
+        .foregroundColor(colorStyler.convertToColor(color: ColorStyler.iconYellow))
         .pickerStyle(.menu)
 
         TextField("Title", text: $viewModel.title)

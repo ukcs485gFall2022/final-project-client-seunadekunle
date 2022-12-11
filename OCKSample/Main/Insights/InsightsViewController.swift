@@ -21,7 +21,7 @@ import os.log
 
 class InsightsViewController: OCKListViewController {
 
-    let colors = [ColorStyler().iconBlue, ColorStyler().iconRed, ColorStyler().iconBlue, .systemGray2, .systemGray]
+    let colors = [ColorStyler.iconBlue, ColorStyler.iconRed, ColorStyler.iconBlue, .systemGray2, .systemGray]
     /// The manager of the `Store` from which the `Contact` data is fetched.
     public let storeManager: OCKSynchronizedStoreManager
 
@@ -136,7 +136,7 @@ class InsightsViewController: OCKListViewController {
             gradientStartColor: colors[start],
             gradientEndColor: colors[end],
             markerSize: 10,
-            eventAggregator: OCKEventAggregator.countOutcomeValues)
+            eventAggregator: OCKEventAggregator.aggregatorStreak())
 
         switch plotType {
         case PlotType.line.rawValue:

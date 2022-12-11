@@ -47,7 +47,7 @@ struct ProfileView: View {
 
                     })
                     .frame(width: dimensionStyler.screenWidth / 1.25)
-                    .background(colorStyler.convertToColor(color: colorStyler.iconYellow))
+                    .background(colorStyler.convertToColor(color: ColorStyler.iconYellow))
                     .cornerRadius(appearanceStyler.cornerRadius1)
                     .listRowSeparator(.hidden)
 
@@ -66,7 +66,7 @@ struct ProfileView: View {
                     })
                     .listRowSeparator(.hidden)
                     .frame(width: dimensionStyler.screenWidth / 1.25)
-                    .background(colorStyler.convertToColor(color: colorStyler.iconRed))
+                    .background(colorStyler.convertToColor(color: ColorStyler.iconRed))
                     .cornerRadius(appearanceStyler.cornerRadius1)
                 }
                 .background(.white)

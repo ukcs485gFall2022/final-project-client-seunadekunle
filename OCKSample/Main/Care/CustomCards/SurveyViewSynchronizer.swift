@@ -31,13 +31,6 @@ final class SurveyViewSynchronizer: OCKSurveyTaskViewSynchronizer {
              surveys.
              */
 
-//            event.task.title
-//            event.task.instructions
-//            event.task.
-//
-//            let pain = event.answer(kind: CheckIn.painItemIdentifier)
-//            let sleep = event.answer(kind: CheckIn.sleepItemIdentifier)
-
             guard let surveyTask = event.task as? OCKTask else {
                 return
             }

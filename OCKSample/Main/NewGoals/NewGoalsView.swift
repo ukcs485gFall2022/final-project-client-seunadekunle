@@ -171,7 +171,7 @@ struct NewGoalsView: View {
                 .padding()
             Spacer()
         })
-        .background(colorStyler.convertToColor(color: colorStyler.iconBlue))
+        .background(colorStyler.convertToColor(color: ColorStyler.iconBlue))
         .cornerRadius(appearanceStyler.cornerRadius1)
         .padding(EdgeInsets(top: 0,
                             leading: dimensionStyler.sidePadding + 17,

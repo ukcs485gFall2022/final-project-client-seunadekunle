@@ -81,8 +81,8 @@ class CareViewController: OCKDailyPageViewController {
                 if progress == 100 {
                     // Give sometime for the user to see 100
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
-                        target: self, action: #selector(self.synchronizeWithRemote))
+                        // swiftlint:disable:next line_length
+                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.synchronizeWithRemote))
                         // swiftlint:disable:next line_length
                         self.navigationItem.rightBarButtonItem?.tintColor = self.navigationItem.leftBarButtonItem?.tintColor
                     }
@@ -173,9 +173,9 @@ class CareViewController: OCKDailyPageViewController {
                 }
             }
 
-//            var newCard = MyNewCardView()
-//            newCard.standardInfo = "hello"
-//            listViewController.appendViewController(newCard.formattedHostingController(), animated: false)
+            //            var newCard = MyNewCardView()
+            //            newCard.standardInfo = "hello"
+            //            listViewController.appendViewController(newCard.formattedHostingController(), animated: false)
 
             let tasks = await self.fetchTasks(on: date)
             tasks.compactMap {
@@ -197,10 +197,10 @@ class CareViewController: OCKDailyPageViewController {
         }
     }
 
+    // swiftlint:disable cyclomatic_complexity
     private func getViewType(_ type: String?, _ task: OCKAnyTask, _ date: Date) -> [UIViewController]? {
         switch type {
         case ViewType.numericProgressTaskView.rawValue:
-            let linkView = LinkView(title: .init(""), links: [.website("https://www.wsj.com/", title: "WSJ")])
             let view = NumericProgressTaskView(
                 task: task,
                 eventQuery: OCKEventQuery(for: date),
@@ -208,7 +208,10 @@ class CareViewController: OCKDailyPageViewController {
                 .padding([.vertical], 20)
                 .careKitStyle(CustomStylerKey.defaultValue)
 
-            return [linkView.formattedHostingController(), view.formattedHostingController()]
+            // swiftlint:disable:next line_length
+            let linkView = LinkView(title: .init("Give us a rating"), links: [.website("https://www.apple.com/app-store/", title: "Rating")])
+
+            return [view.formattedHostingController(), linkView.formattedHostingController()]
 
         case ViewType.instructionsTaskView.rawValue:
             return [OCKInstructionsTaskViewController(task: task,
@@ -254,7 +257,12 @@ class CareViewController: OCKDailyPageViewController {
             )
             surveyCard.surveyDelegate = self
             return [surveyCard]
-
+        case ViewType.counter.rawValue:
+            let viewModel = CounterCardViewModel(task: task,
+                                                eventQuery: .init(for: date),
+                                                storeManager: self.storeManager)
+            let customCard = CounterCardView(viewModel: viewModel)
+            return [customCard.formattedHostingController()]
         default:
             let taskView = LabeledValueTaskView(
                 task: task,

@@ -44,13 +44,13 @@ extension OCKStore {
 
     func populateCarePlans(patientUUID: UUID? = nil) async throws {
         let checkInCarePlan = OCKCarePlan(id: CarePlanID.checkIn.rawValue,
-            title: "Check in Care Plan",
-            patientUUID: patientUUID)
+                                          title: "Check in Care Plan",
+                                          patientUUID: patientUUID)
         try await AppDelegateKey
             .defaultValue?
             .storeManager
             .addCarePlansIfNotPresent([checkInCarePlan],
-            patientUUID: patientUUID)
+                                      patientUUID: patientUUID)
     }
 
     @MainActor
@@ -63,7 +63,7 @@ extension OCKStore {
 
         var query = OCKCarePlanQuery(for: Date())
         query.ids = [CarePlanID.health.rawValue,
-            CarePlanID.checkIn.rawValue]
+                     CarePlanID.checkIn.rawValue]
 
         let foundCarePlans = try await store.fetchCarePlans(query: query)
         // Populate the dictionary for all CarePlan's
@@ -114,14 +114,14 @@ extension OCKStore {
 
         let schedule = OCKSchedule(composing: [
             OCKScheduleElement(start: beforeBreakfast, end: nil,
-                interval: DateComponents(day: 1)),
+                               interval: DateComponents(day: 1)),
 
             OCKScheduleElement(start: afterLunch, end: nil,
-                interval: DateComponents(day: 2))
-            ])
+                               interval: DateComponents(day: 2))
+        ])
 
         var doxylamine = OCKTask(id: TaskID.doxylamine, title: "Take Doxylamine",
-            carePlanUUID: nil, schedule: schedule)
+                                 carePlanUUID: nil, schedule: schedule)
         doxylamine.instructions = "Take 25mg of doxylamine when you experience nausea."
         doxylamine.asset = "pills.fill"
         // swiftlint:disable:next line_length
@@ -129,16 +129,26 @@ extension OCKStore {
 
         let nauseaSchedule = OCKSchedule(composing: [
             OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 1),
-                text: "Anytime throughout the day", targetValues: [], duration: .allDay)
-            ])
+                               text: "Anytime throughout the day", targetValues: [], duration: .allDay)
+        ])
 
         var nausea = OCKTask(id: TaskID.nausea, title: "Track your nausea",
-            carePlanUUID: nil, schedule: nauseaSchedule)
+                             carePlanUUID: nil, schedule: nauseaSchedule)
         nausea.impactsAdherence = false
         nausea.instructions = "Tap the button below anytime you experience nausea."
         nausea.asset = "bed.double"
         // swiftlint:disable:next line_length
         nausea.userInfo = [Constants.viewTypeKey: ViewType.buttonLog.rawValue, Constants.plotTypeKey: PlotType.bar.rawValue]
+
+        var repetition = OCKTask(id: TaskID.repetition,
+                                 title: "Track your self help",
+                                 carePlanUUID: nil,
+                                 schedule: nauseaSchedule)
+        repetition.impactsAdherence = false
+        repetition.instructions = "Input your positive speaking score"
+        repetition.asset = "repeat.circle"
+        // swiftlint:disable:next line_length
+        repetition.userInfo = [Constants.viewTypeKey: ViewType.counter.rawValue, Constants.plotTypeKey: PlotType.bar.rawValue]
 
         let kegelElement = OCKScheduleElement(start: beforeBreakfast, end: nil, interval: DateComponents(day: 2))
         let kegelSchedule = OCKSchedule(composing: [kegelElement])
@@ -156,18 +166,18 @@ extension OCKStore {
         // swiftlint:disable:next line_length
         stretch.userInfo = [Constants.viewTypeKey: ViewType.instructionsTaskView.rawValue, Constants.plotTypeKey: PlotType.scatter.rawValue]
 
-        try await addTasksIfNotPresent([nausea, doxylamine, kegels, stretch])
+        try await addTasksIfNotPresent([nausea, doxylamine, kegels, stretch, repetition])
         try await addOnboardTask(carePlanUUIDs[.health])
         try await addSurveyTasks(carePlanUUIDs[.checkIn])
 
         guard User.current != nil,
-            let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
+              let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
             Logger.myContact.error("User not logged in")
             return
         }
 
         var contact1 = OCKContact(id: "jane", givenName: "Jane",
-            familyName: "Daniels", carePlanUUID: nil)
+                                  familyName: "Daniels", carePlanUUID: nil)
         contact1.asset = "JaneDaniels"
         contact1.title = "Family Practice Doctor"
         contact1.role = "Dr. Daniels is a family practice doctor with 8 years of experience."
@@ -185,7 +195,7 @@ extension OCKStore {
         }()
 
         var contact2 = OCKContact(id: "matthew", givenName: "Matthew",
-            familyName: "Reiff", carePlanUUID: nil)
+                                  familyName: "Reiff", carePlanUUID: nil)
         contact2.asset = "MatthewReiff"
         contact2.title = "OBGYN"
         contact2.role = "Dr. Reiff is an OBGYN with 13 years of experience."
@@ -239,6 +249,7 @@ extension OCKStore {
             carePlanUUID: carePlanUUID,
             schedule: checkInSchedule
         )
+        checkInTask.instructions = "Check In with Track"
         checkInTask.userInfo = [Constants.viewTypeKey: ViewType.survey.rawValue]
         checkInTask.survey = .checkIn
 
