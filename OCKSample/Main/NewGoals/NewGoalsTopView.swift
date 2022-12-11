@@ -20,18 +20,18 @@ struct NewGoalsTopView: View {
                 Text($0)
             }
         }
-        .foregroundColor(colorStyler.convertToColor(color: colorStyler.iconYellow))
+        .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
         .pickerStyle(.menu)
 
         TextField("Title", text: $viewModel.title)
             .padding()
-            .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+            .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
             .cornerRadius(appearanceStyler.cornerRadius1)
             .listRowSeparator(.hidden)
 
         TextField("Instructions", text: $viewModel.instructions)
             .padding()
-            .background(colorStyler.convertToColor(color: colorStyler.customBackground))
+            .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
             .cornerRadius(appearanceStyler.cornerRadius1)
             .listRowSeparator(.hidden)
 

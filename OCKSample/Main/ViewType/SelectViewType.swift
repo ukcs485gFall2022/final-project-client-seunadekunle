@@ -17,9 +17,7 @@ struct SelectViewType: View {
             List {
                 ForEach(ViewType.allCases) { value in
                     VStack {
-                        if value.id != "Survey" {
-                            Text(value.id)
-                        }
+                        Text(value.id)
                     }.onTapGesture {
                         viewType = value
                         self.presentationMode.wrappedValue.dismiss()

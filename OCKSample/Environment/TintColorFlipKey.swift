@@ -12,7 +12,7 @@ import SwiftUI
 struct TintColorFlipKey: EnvironmentKey {
     static var defaultValue: UIColor {
         #if os(iOS)
-        return ColorStyler().iconBlue
+        return ColorStyler.iconBlue
         #else
         return #colorLiteral(red: 0.06253327429, green: 0.6597633362, blue: 0.8644603491, alpha: 1)
         #endif
@@ -21,6 +21,6 @@ struct TintColorFlipKey: EnvironmentKey {
 
 extension EnvironmentValues {
     var tintColorFlip: UIColor {
-        return ColorStyler().iconYellow
+        return ColorStyler.iconYellow
     }
 }

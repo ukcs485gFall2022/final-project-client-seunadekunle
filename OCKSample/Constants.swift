@@ -42,16 +42,16 @@ extension AppError: LocalizedError {
         switch self {
         case .couldntCast:
             return NSLocalizedString("OCKSampleError: Could not cast to required type.",
-                comment: "Casting error")
+                                     comment: "Casting error")
         case .couldntBeUnwrapped:
             return NSLocalizedString("OCKSampleError: Could not unwrap a required type.",
-                comment: "Unwrapping error")
+                                     comment: "Unwrapping error")
         case .valueNotFoundInUserInfo:
             return NSLocalizedString("OCKSampleError: Could not find the required value in userInfo.",
-                comment: "Value not found error")
+                                     comment: "Value not found error")
         case .remoteClockIDNotAvailable:
             return NSLocalizedString("OCKSampleError: Could not get remote clock ID.",
-                comment: "Value not available error")
+                                     comment: "Value not available error")
         case .emptyTaskEvents: return "Task events is empty"
         case let .noOutcomeValueForEvent(event, index): return "Event has no outcome value at index \(index): \(event)"
         case .invalidIndexPath(let indexPath): return "Invalid index path \(indexPath)"
@@ -106,6 +106,8 @@ enum TaskID {
     static let healthSugar = "healthSugar"
     static let defaultTask = "default"
     static let onboard = "onboard"
+    static let repetition = "repetition"
+    static let repetitionMood = "repetitionMood"
 }
 
 // For the different task views
@@ -119,12 +121,12 @@ enum PlotType: String, CaseIterable, Identifiable {
 
         switch value {
         case .line:
-                return "Line Graph"
+            return "Line Graph"
         case .scatter:
-                return "Scatter Graph"
+            return "Scatter Graph"
         case .bar:
-                return "Bar Graph"
-            }
+            return "Bar Graph"
+        }
     }
 
     var id: String {
@@ -145,31 +147,37 @@ enum ViewType: String, CaseIterable, Identifiable {
     case linkView
     case featuredContentView
     case survey
+    case counter
+    case logger
 
+    // swiftlint:disable cyclomatic_complexity
     func getName(value: ViewType) -> String {
-
         switch value {
         case .instructionsTaskView:
-                return "Instructions Task View"
+            return "Instructions Task View"
         case .simpleTaskView:
-                return "Simple Task View"
+            return "Simple Task View"
         case .checklist:
-                return "Checklist"
+            return "Checklist"
         case .buttonLog:
-                return "Button Log"
+            return "Button Log"
         case .gridTaskView:
-                return "Grid Task View"
+            return "Grid Task View"
         case .numericProgressTaskView:
-                return "Numeric Progress Task View"
+            return "Numeric Progress Task View"
         case .labeledValueTaskView:
-                return "Labeled Task View"
+            return "Labeled Task View"
         case .linkView:
-                return "Link View"
+            return "Link View"
         case .featuredContentView:
-                return "Featured Content"
+            return "Featured Content"
         case .survey:
-                return "Survey"
-            }
+            return "Survey"
+        case .counter:
+            return "Counter View"
+        case .logger:
+            return "Logger View"
+        }
     }
 
     var id: String {
@@ -184,7 +192,7 @@ enum UserType: String, Codable {
     // Return all types as an array, make sure to maintain order above
     func allTypesAsArray() -> [String] {
         return [UserType.patient.rawValue,
-            UserType.none.rawValue]
+                UserType.none.rawValue]
     }
 }
 
