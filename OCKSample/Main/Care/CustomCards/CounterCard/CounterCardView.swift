@@ -12,18 +12,18 @@ import CareKitStore
 struct CounterCardView: View {
     @Environment(\.careKitStyle) var style
     @StateObject var viewModel: CounterCardViewModel
-    
+
     var body: some View {
         CardView {
             VStack(alignment: .leading,
                    spacing: style.dimension.directionalInsets1.top) {
-                
+
                 HeaderView(title: Text(viewModel.taskEvents.firstEventTitle),
                            detail: Text(viewModel.taskEvents.firstTaskInstructions ?? ""))
                 Divider()
                 HStack(alignment: .center,
                        spacing: style.dimension.directionalInsets2.trailing) {
-                    
+
                     Button(action: {
                         Task {
                             viewModel.decrement()
@@ -38,14 +38,14 @@ struct CounterCardView: View {
                         }
                     }
                     Spacer()
-                    
+
                     Text(viewModel.valueForButton)
                         .multilineTextAlignment(.trailing)
                         .font(Font.title.weight(.bold))
                         .foregroundColor(.accentColor)
-                    
+
                     Spacer()
-                    
+
                     Button(action: {
                         Task {
                             viewModel.increment()
@@ -59,9 +59,9 @@ struct CounterCardView: View {
                                 .frame(width: 50, height: 50)
                         }
                     }
-                    
+
                 }
-                
+
             }
                    .padding()
         }

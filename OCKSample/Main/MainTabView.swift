@@ -17,7 +17,7 @@ struct MainTabView: View {
     var body: some View {
         // todo: add animations for transition FAB
         TabView(selection: $selectedTab) {
-            CareView()
+            CareView(careViewModel: .init())
                 .tabItem {
                     if selectedTab == 0 {
                         Image(systemName: "plus.rectangle.fill")

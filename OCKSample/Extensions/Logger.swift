@@ -22,6 +22,7 @@ extension Logger {
     static let feed = Logger(subsystem: subsystem, category: "Feed")
     static let watch = Logger(subsystem: subsystem, category: "Watch")
     static let profile = Logger(subsystem: subsystem, category: "Profile")
+    static let careViewModel = Logger(subsystem: subsystem, category: "careViewModel")
     static let insights = Logger(subsystem: subsystem, category: "Insights")
     static let ockStore = Logger(subsystem: subsystem, category: "OCKStore+Extension")
     static let ockSynchronizedStoreManager = Logger(subsystem: subsystem,

@@ -22,21 +22,27 @@ struct CareView: View {
 
     @State private var showSheet = false
 
+    @ObservedObject var careViewModel: CareViewModel
+
     var body: some View {
         NavigationView {
             ZStack {
                 VStack(spacing: 15) {
-                    Text("0")
-                        .font(.largeTitle)
-                        .foregroundColor(.black)
-                        .fontWeight(.semibold)
-                    #if os(iOS)
-                        .padding(EdgeInsets(top: dimensionStyler.sidePadding,
-                            leading: dimensionStyler.sidePadding + 17,
-                            bottom: dimensionStyler.sidePadding / 3,
-                            trailing: dimensionStyler.sidePadding + 17))
-                    #endif
-                    CareViewControllerRepresentable()
+
+                    if let score = careViewModel.trackScore {
+                        Text("\(score)")
+                            .font(.largeTitle)
+                            .foregroundColor(.black)
+                            .fontWeight(.semibold)
+                            #if os(iOS)
+                            .padding(EdgeInsets(top: dimensionStyler.sidePadding,
+                                                leading: dimensionStyler.sidePadding + 17,
+                                                bottom: dimensionStyler.sidePadding / 3,
+                                                trailing: dimensionStyler.sidePadding + 17))
+                            #endif
+                    }
+
+                    CareViewControllerRepresentable(careViewModel: careViewModel)
                 }
                 VStack {
                     Spacer()
@@ -45,20 +51,20 @@ struct CareView: View {
                         Button(action: {
                             showSheet.toggle()
                         }, label: {
-                                Text("+")
-                                    .font(.system(.largeTitle))
-                                    .frame(width: 77, height: 70)
-                                    .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
-                                    .padding(.bottom, 7)
-                            })
+                            Text("+")
+                                .font(.system(.largeTitle))
+                                .frame(width: 77, height: 70)
+                                .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
+                                .padding(.bottom, 7)
+                        })
                         .background(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
-                            .cornerRadius(38.5)
+                        .cornerRadius(38.5)
 
-                            .padding()
-                            .shadow(color: Color.black.opacity(0.3),
-                            radius: 3,
-                            x: 3,
-                            y: 3) }
+                        .padding()
+                        .shadow(color: Color.black.opacity(0.3),
+                                radius: 3,
+                                x: 3,
+                                y: 3) }
                 }
             }.sheet(isPresented: $showSheet) {
                 NewPlanView(viewModel: .init())
@@ -73,9 +79,14 @@ struct CareView: View {
 
 struct CareViewControllerRepresentable: UIViewControllerRepresentable {
     @State var storeManager = StoreManagerKey.defaultValue
+    @ObservedObject var careViewModel: CareViewModel
+
+    init(careViewModel: CareViewModel) {
+        self.careViewModel = careViewModel
+    }
 
     func makeUIViewController(context: Context) -> some UIViewController {
-        let viewController = CareViewController(storeManager: storeManager)
+        let viewController = CareViewController(storeManager: storeManager, careViewModel: self.careViewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.backgroundColor = UIColor { $0.userInterfaceStyle == .light ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1): #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1) }
         return navigationController
@@ -86,7 +97,7 @@ struct CareViewControllerRepresentable: UIViewControllerRepresentable {
 
 struct CareView_Previews: PreviewProvider {
     static var previews: some View {
-        CareView(storeManager: Utility.createPreviewStoreManager())
+        CareView(storeManager: Utility.createPreviewStoreManager(), careViewModel: .init())
             .accentColor(Color(TintColorKey.defaultValue))
     }
 }

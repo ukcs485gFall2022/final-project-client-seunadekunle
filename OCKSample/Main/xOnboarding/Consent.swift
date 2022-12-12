@@ -5,7 +5,7 @@
 //  Created by Corey Baker on 11/11/22.
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
-
+// swiftlint:disable all
 import Foundation
 
 let informedConsentHTML = """
@@ -18,31 +18,31 @@ let informedConsentHTML = """
                 ul, p, h1, h3 {
                     text-align: left;
                 }
-    
+
                 * {
                     color: white;
                     font-type:
                     line-spacing: 1em;
                     font-family: Helvetica;
                 }
-    
+
                 body {
                      background: rgb(41,51,92);
                      background: linear-gradient(135deg, rgba(41,51,92,1) 0%, rgba(219,43,57,1) 50%, rgba(243,167,18,1) 100%);
                 }
-    
+
                 h1 {
                     font-size: 2em;
                 }
-    
+
                 h3 {
                     font-size: 1.25em;
                 }
-    
+
                 p, li {
                     line-height: 1.45;
                 }
-    
+
             </style>
         </head>
         <body>
@@ -51,7 +51,7 @@ let informedConsentHTML = """
             <ul>
                 <li>We will ask you to complete various study tasks such as surveys.</li>
                 <li>Track will send you notifications to remind you to complete these surveys.</li>
-    
+
                 <li>Have a Positive Attitude and Be Truthful when answering survey</li>
             </ul>
             <h3>Privacy</h3>

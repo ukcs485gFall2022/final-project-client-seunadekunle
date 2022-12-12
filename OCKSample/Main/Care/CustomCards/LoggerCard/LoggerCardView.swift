@@ -16,23 +16,23 @@ struct LoggerCardView: View {
     let colorStyler = ColorStyler()
     let appearanceStyler = AppearanceStyler()
     let dimensionStyler = DimensionStyler()
-    
+
     var body: some View {
         CardView {
             VStack(alignment: .leading,
                    spacing: style.dimension.directionalInsets1.top) {
-                
+
                 HeaderView(title: Text(viewModel.taskEvents.firstEventTitle),
                            detail: Text(viewModel.taskEvents.firstEventDetail ?? ""))
                 Divider()
                 VStack(alignment: .center,
                        spacing: style.dimension.directionalInsets2.trailing) {
-                    
+
                     Text(viewModel.valueForButton)
                         .multilineTextAlignment(.trailing)
                         .font(Font.title.weight(.bold))
                         .foregroundColor(.accentColor)
-                    
+
                     HStack {
                         TextField("Log", text: $viewModel.value)
                             .padding()
@@ -57,7 +57,7 @@ struct LoggerCardView: View {
                                             leading: 0,
                                             bottom: 0,
                                             trailing: 0))
-                    
+
                     List(viewModel.outcomeValues) { value in
                         VStack {
                             HStack(alignment: .center) {
@@ -76,7 +76,7 @@ struct LoggerCardView: View {
                                 .frame(width: dimensionStyler.screenWidth / 0.9)
                         }
                         .listRowSeparator(.hidden)
-                        
+
                     }
                     .frame(height: dimensionStyler.screenHeight / 3)
                     .scrollContentBackground(.hidden)
@@ -84,9 +84,9 @@ struct LoggerCardView: View {
                                         leading: 0,
                                         bottom: 0,
                                         trailing: 0))
-                    
+
                 }
-                
+
             }
                    .padding()
         }
@@ -98,7 +98,7 @@ struct LoggerCardView: View {
              */
             viewModel.checkIfValueShouldUpdate(taskEvents)
         }
-        
+
     }
 }
 

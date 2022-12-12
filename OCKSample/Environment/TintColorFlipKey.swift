@@ -14,7 +14,7 @@ struct TintColorFlipKey: EnvironmentKey {
         #if os(iOS)
         return ColorStyler.iconBlue
         #else
-        return #colorLiteral(red: 0.06253327429, green: 0.6597633362, blue: 0.8644603491, alpha: 1)
+        return ColorStyler.iconBlue
         #endif
     }
 }
