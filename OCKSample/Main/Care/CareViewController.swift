@@ -173,10 +173,6 @@ class CareViewController: OCKDailyPageViewController {
                 }
             }
 
-            //            var newCard = MyNewCardView()
-            //            newCard.standardInfo = "hello"
-            //            listViewController.appendViewController(newCard.formattedHostingController(), animated: false)
-
             let tasks = await self.fetchTasks(on: date)
             tasks.compactMap {
                 let cards = self.taskViewController(for: $0, on: date)

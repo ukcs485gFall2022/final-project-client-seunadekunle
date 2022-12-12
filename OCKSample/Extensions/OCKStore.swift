@@ -265,11 +265,11 @@ extension OCKStore {
 
         let thisMorning = Calendar.current.startOfDay(for: Date())
 
-        let nextWeek = Calendar.current.date(
-            byAdding: .weekOfYear,
-            value: 1,
-            to: Date()
-        )!
+//        let nextWeek = Calendar.current.date(
+//            byAdding: .weekOfYear,
+//            value: 1,
+//            to: Date()
+//        )!
 
         let nextMonth = Calendar.current.date(
             byAdding: .month,
@@ -277,17 +277,17 @@ extension OCKStore {
             to: thisMorning
         )
 
-        let dailyElement = OCKScheduleElement(
-            start: thisMorning,
-            end: nextWeek,
-            interval: DateComponents(day: 1),
-            text: nil,
-            targetValues: [],
-            duration: .allDay
-        )
+//        let dailyElement = OCKScheduleElement(
+//            start: thisMorning,
+//            end: nextWeek,
+//            interval: DateComponents(day: 1),
+//            text: nil,
+//            targetValues: [],
+//            duration: .allDay
+//        )
 
         let weeklyElement = OCKScheduleElement(
-            start: nextWeek,
+            start: thisMorning,
             end: nextMonth,
             interval: DateComponents(weekOfYear: 1),
             text: nil,
@@ -295,19 +295,19 @@ extension OCKStore {
             duration: .allDay
         )
 
-        let rangeOfMotionCheckSchedule = OCKSchedule(
-            composing: [dailyElement, weeklyElement]
+        let motivateSchedule = OCKSchedule(
+            composing: [weeklyElement]
         )
 
-        var rangeOfMotionTask = OCKTask(
-            id: RangeOfMotion.identifier(),
-            title: "Range Of Motion",
+        var motivateTask = OCKTask(
+            id: Motivate.identifier(),
+            title: "Get on Track",
             carePlanUUID: carePlanUUID,
-            schedule: rangeOfMotionCheckSchedule
+            schedule: motivateSchedule
         )
-        rangeOfMotionTask.userInfo = [Constants.viewTypeKey: ViewType.survey.rawValue]
-        rangeOfMotionTask.survey = .rangeOfMotion
+        motivateTask.userInfo = [Constants.viewTypeKey: ViewType.survey.rawValue]
+        motivateTask.survey = .motivate
 
-        try await addTasksIfNotPresent([checkInTask, rangeOfMotionTask])
+        try await addTasksIfNotPresent([checkInTask, motivateTask])
     }
 }

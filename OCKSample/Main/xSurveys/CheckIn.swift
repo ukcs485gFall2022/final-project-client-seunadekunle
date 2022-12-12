@@ -26,7 +26,7 @@ struct CheckIn: Surveyable {
     }
 
     static var dayTurnOutItemIdentifier: String {
-        "\(Self.identifier()).form.sleep"
+        "\(Self.identifier()).form.dayTurnOut"
     }
 }
 
@@ -75,7 +75,7 @@ extension CheckIn {
 
         let formStep = ORKFormStep(
             identifier: Self.formIdentifier,
-            title: "Check In",
+            title: "Check In with Track",
             text: "Please answer the following questions."
         )
         formStep.formItems = [feelingItem, dayTurnOutItem]

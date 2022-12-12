@@ -13,12 +13,12 @@ import SwiftUI
 
 struct ColorStyler: OCKColorStyler {
     #if os(iOS)
-    var label: UIColor {
-        FontColorKey.defaultValue
-    }
-    var tertiaryLabel: UIColor {
-        TintColorKey.defaultValue
-    }
+        var label: UIColor {
+            FontColorKey.defaultValue
+        }
+        var tertiaryLabel: UIColor {
+            TintColorKey.defaultValue
+        }
     #endif
 
     // Changed style variables

@@ -17,7 +17,6 @@
 		4422361F29444DFF000B5020 /* ScheduleUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4422361E29444DFF000B5020 /* ScheduleUtility.swift */; };
 		442D239729458E0800F4F37A /* CounterCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442D239529458E0800F4F37A /* CounterCardViewModel.swift */; };
 		442D239829458E0800F4F37A /* CounterCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442D239629458E0800F4F37A /* CounterCardView.swift */; };
-		44323436292CC21100176EEF /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABD292C284000D38F13 /* Onboard.swift */; };
 		443234402936AD1800176EEF /* CustomFeaturedContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432343F2936AD1800176EEF /* CustomFeaturedContentView.swift */; };
 		443AB99B2924155100D38F13 /* OCKCarePlan+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AB99A2924155100D38F13 /* OCKCarePlan+Hashable.swift */; };
 		443ABA9929244D3600D38F13 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443ABA9629244D0F00D38F13 /* ResearchKit.framework */; };
@@ -26,20 +25,23 @@
 		443ABAB2292C175B00D38F13 /* OCKAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABAB0292C175B00D38F13 /* OCKAnyEvent.swift */; };
 		443ABAB7292C178D00D38F13 /* SurveyViewSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABAB6292C178C00D38F13 /* SurveyViewSynchronizer.swift */; };
 		443ABAC1292C284100D38F13 /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABC292C283F00D38F13 /* CheckIn.swift */; };
-		443ABAC2292C284100D38F13 /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABC292C283F00D38F13 /* CheckIn.swift */; };
 		443ABAC3292C284100D38F13 /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABD292C284000D38F13 /* Onboard.swift */; };
-		443ABAC5292C284100D38F13 /* RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABE292C284000D38F13 /* RangeOfMotion.swift */; };
-		443ABAC6292C284100D38F13 /* RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABE292C284000D38F13 /* RangeOfMotion.swift */; };
 		443ABAC7292C284100D38F13 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABF292C284000D38F13 /* Survey.swift */; };
-		443ABAC8292C284100D38F13 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABF292C284000D38F13 /* Survey.swift */; };
 		443ABAC9292C284100D38F13 /* Surveyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABAC0292C284100D38F13 /* Surveyable.swift */; };
-		443ABACA292C284100D38F13 /* Surveyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABAC0292C284100D38F13 /* Surveyable.swift */; };
 		443ABACD292C288B00D38F13 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABACC292C288B00D38F13 /* Consent.swift */; };
 		443ABACE292C288B00D38F13 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABACC292C288B00D38F13 /* Consent.swift */; };
 		443ABAD0292C2F1D00D38F13 /* OCKTask+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABACF292C2F1D00D38F13 /* OCKTask+Custom.swift */; };
-		443ABAD1292C2F1D00D38F13 /* OCKTask+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABACF292C2F1D00D38F13 /* OCKTask+Custom.swift */; };
 		444877662945931E00E84F0D /* LoggerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444877652945931E00E84F0D /* LoggerCardView.swift */; };
 		444877682945933400E84F0D /* LoggerCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444877672945933400E84F0D /* LoggerCardViewModel.swift */; };
+		444C2D222946B0E500DD6F5F /* Motivate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C2D212946B0E500DD6F5F /* Motivate.swift */; };
+		444C2D232946D0D100DD6F5F /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91693821271B897200A634ED /* Utility.swift */; };
+		444C2D242946D1DC00DD6F5F /* OCKTask+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABACF292C2F1D00D38F13 /* OCKTask+Custom.swift */; };
+		444C2D252946D1E000DD6F5F /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABD292C284000D38F13 /* Onboard.swift */; };
+		444C2D272946D1E700DD6F5F /* Surveyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABAC0292C284100D38F13 /* Surveyable.swift */; };
+		444C2D282946D5B300DD6F5F /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABF292C284000D38F13 /* Survey.swift */; };
+		444C2D292946D5B900DD6F5F /* Motivate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C2D212946B0E500DD6F5F /* Motivate.swift */; };
+		444C2D2A2946D5BF00DD6F5F /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443ABABC292C283F00D38F13 /* CheckIn.swift */; };
+		444C2D2B2946D61800DD6F5F /* OCKStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A962786098F00E5AFB4 /* OCKStore.swift */; };
 		4479F94A2920D05800239891 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479F9492920D05800239891 /* ProfileImageView.swift */; };
 		4479F94C2920E28000239891 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479F94B2920E28000239891 /* ImagePicker.swift */; };
 		449AF33A290AE3860010F107 /* NewGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449AF339290AE3860010F107 /* NewGoalsView.swift */; };
@@ -97,7 +99,6 @@
 		70A98D62278A2683009B58F2 /* Styler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9169381A271B64E100A634ED /* Styler.swift */; };
 		70A98D63278A268B009B58F2 /* ColorStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9169381C271B650700A634ED /* ColorStyler.swift */; };
 		70A98D68278A2DF1009B58F2 /* TintColorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FDEC2271B4E950045A0EF /* TintColorKey.swift */; };
-		70C0D474279BA492003DA141 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91693821271B897200A634ED /* Utility.swift */; };
 		70CF66E428E1E74C00FAE977 /* TintColorFlipKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF66E328E1E74C00FAE977 /* TintColorFlipKey.swift */; };
 		70CF66E528E1E74C00FAE977 /* TintColorFlipKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF66E328E1E74C00FAE977 /* TintColorFlipKey.swift */; };
 		70DFD80B2567074500B9DB12 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BD2B1E254B44DB0030B424 /* LoginView.swift */; };
@@ -107,7 +108,6 @@
 		70F03A972786098F00E5AFB4 /* OCKStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A962786098F00E5AFB4 /* OCKStore.swift */; };
 		70F03A9927860A0800E5AFB4 /* OCKSynchronizedStoreManager+Publishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A9827860A0800E5AFB4 /* OCKSynchronizedStoreManager+Publishers.swift */; };
 		70F03A9B27860A2000E5AFB4 /* OCKAnyEvent+CustomStringConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A922786087800E5AFB4 /* OCKAnyEvent+CustomStringConvertable.swift */; };
-		70F03A9C27860A2000E5AFB4 /* OCKStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A962786098F00E5AFB4 /* OCKStore.swift */; };
 		70F03A9D27860A5600E5AFB4 /* OCKSynchronizedStoreManager+Publishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A9827860A0800E5AFB4 /* OCKSynchronizedStoreManager+Publishers.swift */; };
 		70F03A9F27860A8800E5AFB4 /* OCKOutcomeValue+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A9E27860A8800E5AFB4 /* OCKOutcomeValue+Identifiable.swift */; };
 		70F03AA127860AB700E5AFB4 /* OCKOutcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03AA027860AB700E5AFB4 /* OCKOutcome.swift */; };
@@ -236,13 +236,13 @@
 		443ABAB6292C178C00D38F13 /* SurveyViewSynchronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyViewSynchronizer.swift; sourceTree = "<group>"; };
 		443ABABC292C283F00D38F13 /* CheckIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckIn.swift; sourceTree = "<group>"; };
 		443ABABD292C284000D38F13 /* Onboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard.swift; sourceTree = "<group>"; };
-		443ABABE292C284000D38F13 /* RangeOfMotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeOfMotion.swift; sourceTree = "<group>"; };
 		443ABABF292C284000D38F13 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		443ABAC0292C284100D38F13 /* Surveyable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Surveyable.swift; sourceTree = "<group>"; };
 		443ABACC292C288B00D38F13 /* Consent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consent.swift; sourceTree = "<group>"; };
 		443ABACF292C2F1D00D38F13 /* OCKTask+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCKTask+Custom.swift"; sourceTree = "<group>"; };
 		444877652945931E00E84F0D /* LoggerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerCardView.swift; sourceTree = "<group>"; };
 		444877672945933400E84F0D /* LoggerCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerCardViewModel.swift; sourceTree = "<group>"; };
+		444C2D212946B0E500DD6F5F /* Motivate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motivate.swift; sourceTree = "<group>"; };
 		4479F9492920D05800239891 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		4479F94B2920E28000239891 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		449AF339290AE3860010F107 /* NewGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalsView.swift; sourceTree = "<group>"; };
@@ -392,9 +392,9 @@
 			children = (
 				443ABABC292C283F00D38F13 /* CheckIn.swift */,
 				443ABABD292C284000D38F13 /* Onboard.swift */,
-				443ABABE292C284000D38F13 /* RangeOfMotion.swift */,
 				443ABABF292C284000D38F13 /* Survey.swift */,
 				443ABAC0292C284100D38F13 /* Surveyable.swift */,
+				444C2D212946B0E500DD6F5F /* Motivate.swift */,
 			);
 			path = xSurveys;
 			sourceTree = "<group>";
@@ -996,9 +996,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				443ABAC2292C284100D38F13 /* CheckIn.swift in Sources */,
 				44B3D43A29236B6F00B8C284 /* OCKSynchronizedStoreManager.swift in Sources */,
-				44323436292CC21100176EEF /* Onboard.swift in Sources */,
 				70F921B327CAC16E00368CEC /* LocalSyncSessionDelegate.swift in Sources */,
 				70221F3928D8C10800971195 /* StoreManagerKey.swift in Sources */,
 				70A98D63278A268B009B58F2 /* ColorStyler.swift in Sources */,
@@ -1015,17 +1013,18 @@
 				70F921B227CAC16E00368CEC /* RemoteSessionDelegate.swift in Sources */,
 				44D56B7B28F8A9F200FD0AAB /* AppearanceStyler.swift in Sources */,
 				70221F2F28D7CDE400971195 /* AppDelegate+ParseRemoteDelegate.swift in Sources */,
-				443ABAC8292C284100D38F13 /* Survey.swift in Sources */,
-				443ABACA292C284100D38F13 /* Surveyable.swift in Sources */,
+				444C2D282946D5B300DD6F5F /* Survey.swift in Sources */,
 				7083A857279CA40F00B3832E /* PCKUtility.swift in Sources */,
 				44D56B7C28F8A9F500FD0AAB /* AnimationStyler.swift in Sources */,
 				91AD923924A4C42D00925D4D /* OCKWatchSampleApp.swift in Sources */,
+				444C2D232946D0D100DD6F5F /* Utility.swift in Sources */,
+				444C2D252946D1E000DD6F5F /* Onboard.swift in Sources */,
 				70F03AA627860B2500E5AFB4 /* OCKPatient+Parse.swift in Sources */,
+				444C2D2B2946D61800DD6F5F /* OCKStore.swift in Sources */,
 				443ABAB2292C175B00D38F13 /* OCKAnyEvent.swift in Sources */,
-				443ABAD1292C2F1D00D38F13 /* OCKTask+Custom.swift in Sources */,
 				70221F3828D8C0CB00971195 /* AppDelegateKey.swift in Sources */,
-				443ABAC6292C284100D38F13 /* RangeOfMotion.swift in Sources */,
 				9103AA5227B8C913002C921E /* FontColorKey.swift in Sources */,
+				444C2D2A2946D5BF00DD6F5F /* CheckIn.swift in Sources */,
 				707CC719254DA91900116728 /* OCKLocalization.swift in Sources */,
 				44D56B7A28F8A9EC00FD0AAB /* DimensionStyler.swift in Sources */,
 				7007759B252229C900EC0EDA /* User.swift in Sources */,
@@ -1035,14 +1034,15 @@
 				918FDEB9271B493A0045A0EF /* Installation.swift in Sources */,
 				70F03A9D27860A5600E5AFB4 /* OCKSynchronizedStoreManager+Publishers.swift in Sources */,
 				70F03AA527860B2500E5AFB4 /* OCKOutcomeValue+Identifiable.swift in Sources */,
+				444C2D242946D1DC00DD6F5F /* OCKTask+Custom.swift in Sources */,
 				91AD923F24A4C42D00925D4D /* NotificationController.swift in Sources */,
 				70CF66E528E1E74C00FAE977 /* TintColorFlipKey.swift in Sources */,
-				70F03A9C27860A2000E5AFB4 /* OCKStore.swift in Sources */,
-				70C0D474279BA492003DA141 /* Utility.swift in Sources */,
 				91AD923D24A4C42D00925D4D /* AppDelegate.swift in Sources */,
 				91AD924124A4C42D00925D4D /* NotificationView.swift in Sources */,
+				444C2D272946D1E700DD6F5F /* Surveyable.swift in Sources */,
 				70308886258273D400FFABB6 /* LoginViewModel.swift in Sources */,
 				70F921B127CAC16E00368CEC /* SessionDelegate.swift in Sources */,
+				444C2D292946D5B900DD6F5F /* Motivate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,6 +1106,7 @@
 				443234402936AD1800176EEF /* CustomFeaturedContentView.swift in Sources */,
 				707CC718254DA91900116728 /* OCKLocalization.swift in Sources */,
 				E7C37849228F887800E982D8 /* TipView.swift in Sources */,
+				444C2D222946B0E500DD6F5F /* Motivate.swift in Sources */,
 				443ABACD292C288B00D38F13 /* Consent.swift in Sources */,
 				4422361829444AEB000B5020 /* CardViewModel.swift in Sources */,
 				70077597252228E900EC0EDA /* User.swift in Sources */,
@@ -1113,7 +1114,6 @@
 				443ABAB1292C175B00D38F13 /* OCKAnyEvent.swift in Sources */,
 				44B3D43D2923728600B8C284 /* NewPlanView.swift in Sources */,
 				70F03A9927860A0800E5AFB4 /* OCKSynchronizedStoreManager+Publishers.swift in Sources */,
-				443ABAC5292C284100D38F13 /* RangeOfMotion.swift in Sources */,
 				443ABAC7292C284100D38F13 /* Survey.swift in Sources */,
 				44CA9098291AF9800077917F /* CustomContactViewController.swift in Sources */,
 				4422361F29444DFF000B5020 /* ScheduleUtility.swift in Sources */,
