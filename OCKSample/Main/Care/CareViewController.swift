@@ -45,12 +45,18 @@ class CareViewController: OCKDailyPageViewController {
     private let colorStyler = ColorStyler()
     @ObservedObject var careViewModel: CareViewModel
 
+   
+    /// Init function
+    /// - Parameters:
+    ///   - storeManager: manages store info
+    ///   - adherenceAggregator: computes adherence based on array of events
+    ///   - careViewModel: viewmodel that updates the UI/trackscore based on actions taken in the feed
     // swiftlint:disable:next line_length
     init(storeManager: OCKSynchronizedStoreManager, adherenceAggregator: OCKAdherenceAggregator = .compareTargetValues, careViewModel: CareViewModel) {
         self.careViewModel = careViewModel
         super.init(storeManager: storeManager)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
@@ -139,7 +145,13 @@ class CareViewController: OCKDailyPageViewController {
     /*
      This will be called each time the selected date changes.
      Use this as an opportunity to rebuild the content shown to the user.
-     */ // swiftlint:disable:next line_length
+     */
+    /// <#Description#>
+    /// - Parameters:
+    ///   - dailyPageViewController: controls the dailyView includes the date and completion graph
+    ///   - listViewController: controlls the listview in the feed
+    ///   - date: day that is requested
+    // swiftlint:disable:next line_length
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
 
         Task {

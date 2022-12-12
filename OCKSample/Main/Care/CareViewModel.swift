@@ -25,29 +25,29 @@ class CareViewModel: ObservableObject {
                                                name: Notification.Name(rawValue: Constants.shouldRefreshView),
                                                object: nil)
     }
-
+    
+    /// reload ViewModel to reflect changes in the view
+    /// - Parameter notification: notification object passed by NotificationCenter
     @objc private func reloadViewModel(_ notification: Notification? = nil) {
         Task {
-            _ = await findAndObserveCurrentProfile()
+            _ = await findAndObserveCurrentUser()
         }
     }
 
     @MainActor
-    private func findAndObserveCurrentProfile() async {
-        guard let uuid = try? Utility.getRemoteClockUUID() else {
-            Logger.careViewModel.error("Could not get remote uuid for this user.")
-            return
-        }
+    /// observer function
+    private func findAndObserveCurrentUser() async {
 
         do {
-            try await fetchProfilePicture()
+            try await fetchTrackScore()
         } catch {
-            Logger.careViewModel.error("Could not fetch profile image: \(error)")
+            Logger.careViewModel.error("Could not fetch track score: \(error)")
         }
     }
 
     @MainActor
-    private func fetchProfilePicture() async throws {
+    /// fetches trackScore from Parse database to update published variable
+    private func fetchTrackScore() async throws {
 
         guard let currentUser = try await User.current?.fetch() else {
             Logger.careViewModel.error("User is not logged in")
@@ -56,15 +56,15 @@ class CareViewModel: ObservableObject {
 
         if let trackScore = currentUser.trackScore {
 
-            // Download trackscore if needed
+            // get trackscore if needed
             self.trackScore = trackScore
         }
 
     }
-
+    
+    /// trackScore variable that saves to database when changed
     @Published var trackScore = 0 {
         willSet {
-
             Task {
                 guard var currentUser = User.current else {
                     Logger.careViewModel.error("User is not logged in")
