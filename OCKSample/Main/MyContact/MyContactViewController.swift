@@ -16,13 +16,13 @@ import ParseCareKit
 import os.log
 
 class MyContactViewController: OCKListViewController {
-
+    
     fileprivate weak var contactDelegate: OCKContactViewControllerDelegate?
     fileprivate var contacts = [OCKAnyContact]()
-
+    
     /// The manager of the `Store` from which the `Contact` data is fetched.
     public let storeManager: OCKSynchronizedStoreManager
-
+    
     /// Initialize using a store manager. All of the contacts in the store manager will be queried and dispalyed.
     ///
     /// - Parameters:
@@ -31,12 +31,12 @@ class MyContactViewController: OCKListViewController {
         self.storeManager = storeManager
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     @available(*, unavailable)
     public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Task {
@@ -45,13 +45,13 @@ class MyContactViewController: OCKListViewController {
         self.title = "My Contacts"
         self.navigationItem.largeTitleDisplayMode = .always
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         Task {
             try? await fetchContacts()
         }
     }
-
+    
     override func appendViewController(_ viewController: UIViewController, animated: Bool) {
         super.appendViewController(viewController, animated: animated)
         // Make sure this contact card matches app style when possible
@@ -59,45 +59,32 @@ class MyContactViewController: OCKListViewController {
             carekitView.customStyle = CustomStylerKey.defaultValue
         }
     }
-
+    
     @MainActor
     func fetchContacts() async throws {
-
+        
         guard User.current != nil,
-            let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
+              let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
             Logger.myContact.error("User not logged in")
             self.contacts.removeAll()
             return
         }
-
-        /*
-         t0do: How would you modify this query to only fetch the contact that belongs to this device?
-         
-         Hint 1: There are multiple ways to do this. You can modify the query
-         below which can work.
-         
-         Hint2: Look at the other queries in the app related to the uuid of the
-         user/patient who's signed in.
-         
-         Hint3: You should have a warning currently, solving this properly would
-         get rid of the warning without changing the line the warning is on.
-         */
-
+        
         var query = OCKContactQuery(for: Date())
         query.sortDescriptors.append(.familyName(ascending: true))
         query.sortDescriptors.append(.givenName(ascending: true))
-
+        
         self.contacts = try await storeManager.store.fetchAnyContacts(query: query)
         self.contacts = self.contacts.filter({ $0.remoteID == personUUIDString || $0.remoteID == nil })
         self.displayContacts()
     }
-
+    
     @MainActor
     func displayContacts() {
         self.clear()
         for contact in self.contacts {
             let contactViewController = OCKDetailedContactViewController(contact: contact,
-                storeManager: storeManager)
+                                                                         storeManager: storeManager)
             contactViewController.delegate = self.contactDelegate
             self.appendViewController(contactViewController, animated: false)
         }
@@ -105,7 +92,7 @@ class MyContactViewController: OCKListViewController {
 }
 
 extension MyContactViewController: OCKContactViewControllerDelegate {
-
+    
     // swiftlint:disable:next line_length
     func contactViewController<C, VS>(_ viewController: CareKit.OCKContactViewController<C, VS>, didEncounterError error: Error) where C: CareKit.OCKContactController, VS: CareKit.OCKContactViewSynchronizerProtocol {
         Logger.myContact.error("\(error.localizedDescription)")

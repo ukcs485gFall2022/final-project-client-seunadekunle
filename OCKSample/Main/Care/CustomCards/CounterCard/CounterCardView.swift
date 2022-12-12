@@ -12,23 +12,18 @@ import CareKitStore
 struct CounterCardView: View {
     @Environment(\.careKitStyle) var style
     @StateObject var viewModel: CounterCardViewModel
-
+    
     var body: some View {
         CardView {
             VStack(alignment: .leading,
                    spacing: style.dimension.directionalInsets1.top) {
-
-                // Can look through HeaderView for creating custom
+                
                 HeaderView(title: Text(viewModel.taskEvents.firstEventTitle),
                            detail: Text(viewModel.taskEvents.firstTaskInstructions ?? ""))
                 Divider()
                 HStack(alignment: .center,
                        spacing: style.dimension.directionalInsets2.trailing) {
-
-                    /*
-                     // Example of custom content.
-                     T0DO: Remove all that you are not using.
-                     */
+                    
                     Button(action: {
                         Task {
                             viewModel.decrement()
@@ -36,21 +31,21 @@ struct CounterCardView: View {
                         }
                     }) {
                         CircularCompletionView(isComplete: viewModel.taskEvents.isFirstEventComplete) {
-                            Image(systemName: "minus.circle.fill") // Can place any view type here
+                            Image(systemName: "minus.circle.fill")
                                 .resizable()
                                 .padding()
-                                .frame(width: 50, height: 50) // Change size to make larger/smaller
+                                .frame(width: 50, height: 50)
                         }
                     }
                     Spacer()
-
+                    
                     Text(viewModel.valueForButton)
                         .multilineTextAlignment(.trailing)
                         .font(Font.title.weight(.bold))
                         .foregroundColor(.accentColor)
-
+                    
                     Spacer()
-
+                    
                     Button(action: {
                         Task {
                             viewModel.increment()
@@ -58,15 +53,15 @@ struct CounterCardView: View {
                         }
                     }) {
                         CircularCompletionView(isComplete: viewModel.taskEvents.isFirstEventComplete) {
-                            Image(systemName: "plus.circle.fill") // Can place any view type here
+                            Image(systemName: "plus.circle.fill")
                                 .resizable()
                                 .padding()
-                                .frame(width: 50, height: 50) // Change size to make larger/smaller
+                                .frame(width: 50, height: 50)
                         }
                     }
-
+                    
                 }
-
+                
             }
                    .padding()
         }
@@ -84,6 +79,6 @@ struct CounterCardView: View {
 struct CustomCardView_Previews: PreviewProvider {
     static var previews: some View {
         CounterCardView(viewModel: .init(storeManager: .init(wrapping: OCKStore(name: Constants.noCareStoreName,
-                                                                               type: .inMemory))))
+                                                                                type: .inMemory))))
     }
 }
