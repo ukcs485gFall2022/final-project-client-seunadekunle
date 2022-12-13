@@ -134,6 +134,20 @@ enum PlotType: String, CaseIterable, Identifiable {
     }
 }
 
+enum HealthKitLinkages {
+    static let countingSugar = OCKHealthKitLinkage(quantityIdentifier: .dietarySugar,
+                                                   quantityType: .cumulative,
+                                                   unit: .gram())
+    static let waterIntake = OCKHealthKitLinkage(quantityIdentifier: .dietaryWater,
+                                                 quantityType: .cumulative,
+                                                 unit: .fluidOunceUS())
+    static let protein = OCKHealthKitLinkage(quantityIdentifier: .dietaryProtein,
+                                             quantityType: .cumulative,
+                                             unit: .gram())
+    static let flightsClimbed = OCKHealthKitLinkage(quantityIdentifier: .flightsClimbed,
+                                                    quantityType: .cumulative,
+                                                    unit: .count())
+}
 // For the different task views
 enum ViewType: String, CaseIterable, Identifiable {
 

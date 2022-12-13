@@ -22,22 +22,35 @@ struct CareView: View {
 
     @State private var showSheet = false
 
+    @ObservedObject var careViewModel: CareViewModel
+
+    @State private var score = 0
+
     var body: some View {
         NavigationView {
             ZStack {
-                VStack(spacing: 15) {
-                    Text("0")
-                        .font(.largeTitle)
-                        .foregroundColor(.black)
-                        .fontWeight(.semibold)
-                    #if os(iOS)
-                        .padding(EdgeInsets(top: dimensionStyler.sidePadding,
-                            leading: dimensionStyler.sidePadding + 17,
-                            bottom: dimensionStyler.sidePadding / 3,
-                            trailing: dimensionStyler.sidePadding + 17))
-                    #endif
-                    CareViewControllerRepresentable()
-                }
+                VStack {
+                    HStack {
+                        Text("\(score)")
+                            .font(.custom("Helvetica", fixedSize: 50))
+                            .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
+                            .fontWeight(.semibold)
+
+                        #if os(iOS)
+                            .padding(EdgeInsets(top: dimensionStyler.sidePadding,
+                                leading: dimensionStyler.sidePadding + 17,
+                                bottom: dimensionStyler.sidePadding / 3,
+                                trailing: 0))
+                        #endif
+                        Text("trackScore")
+                            .font(.title3)
+                            .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
+                            .fontWeight(.light)
+                            .frame(width: 100, height: 50, alignment: .bottom)
+                    }.frame(width: dimensionStyler.screenWidth)
+                        .background(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
+                    CareViewControllerRepresentable(careViewModel: careViewModel)
+                }.frame(width: dimensionStyler.screenWidth)
                 VStack {
                     Spacer()
                     HStack {
@@ -51,7 +64,7 @@ struct CareView: View {
                                     .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
                                     .padding(.bottom, 7)
                             })
-                        .background(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
+                            .background(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
                             .cornerRadius(38.5)
 
                             .padding()
@@ -65,6 +78,8 @@ struct CareView: View {
                     .presentationDetents([.fraction(0.5)])
                     .presentationDragIndicator(.hidden)
                     .cornerRadius(15)
+            }.onReceive(careViewModel.$trackScore) { value in
+                score = value
             }
         }
 
@@ -73,9 +88,14 @@ struct CareView: View {
 
 struct CareViewControllerRepresentable: UIViewControllerRepresentable {
     @State var storeManager = StoreManagerKey.defaultValue
+    @ObservedObject var careViewModel: CareViewModel
+
+    init(careViewModel: CareViewModel) {
+        self.careViewModel = careViewModel
+    }
 
     func makeUIViewController(context: Context) -> some UIViewController {
-        let viewController = CareViewController(storeManager: storeManager)
+        let viewController = CareViewController(storeManager: storeManager, careViewModel: self.careViewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.backgroundColor = UIColor { $0.userInterfaceStyle == .light ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1): #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1) }
         return navigationController
@@ -86,7 +106,7 @@ struct CareViewControllerRepresentable: UIViewControllerRepresentable {
 
 struct CareView_Previews: PreviewProvider {
     static var previews: some View {
-        CareView(storeManager: Utility.createPreviewStoreManager())
+        CareView(storeManager: Utility.createPreviewStoreManager(), careViewModel: .init())
             .accentColor(Color(TintColorKey.defaultValue))
     }
 }

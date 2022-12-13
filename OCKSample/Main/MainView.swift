@@ -23,7 +23,7 @@ struct MainView: View {
                         if isSyncingWithCloud {
                             MainTabView(loginViewModel: loginViewModel)
                         } else {
-                            CareView()
+                            CareView(careViewModel: .init())
                         }
                     }
                 }

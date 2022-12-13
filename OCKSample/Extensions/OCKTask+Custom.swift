@@ -15,7 +15,7 @@ extension OCKTask {
         get {
             guard let surveyInfo = userInfo?[Constants.survey],
                   let surveyType = Survey(rawValue: surveyInfo) else {
-                return .checkIn // Default survey if none was saved
+                return .motivate // Default survey if none was saved
             }
             return surveyType // Saved survey type
         }
