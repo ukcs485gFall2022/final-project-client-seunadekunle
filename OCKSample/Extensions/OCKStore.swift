@@ -195,11 +195,11 @@ extension OCKStore {
         try await addOnboardTask(carePlanUUIDs[.health])
         try await addSurveyTasks(carePlanUUIDs[.checkIn])
 
-        guard User.current != nil,
-              let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
-            Logger.myContact.error("User not logged in")
-            return
-        }
+//        guard User.current != nil,
+//              let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
+//            Logger.myContact.error("User not logged in")
+//            return
+//        }
 
         var contact1 = OCKContact(id: "jane", givenName: "Jane",
                                   familyName: "Daniels", carePlanUUID: nil)
@@ -209,7 +209,7 @@ extension OCKStore {
         contact1.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "janedaniels@uky.edu")]
         contact1.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 257-2000")]
         contact1.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 357-2040")]
-        contact1.remoteID = personUUIDString
+//        contact1.remoteID = personUUIDString
         contact1.address = {
             let address = OCKPostalAddress()
             address.street = "2195 Harrodsburg Rd"
@@ -226,7 +226,7 @@ extension OCKStore {
         contact2.role = "Dr. Reiff is an OBGYN with 13 years of experience."
         contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 257-1000")]
         contact2.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 257-1234")]
-        contact2.remoteID = personUUIDString
+//        contact2.remoteID = personUUIDString
         contact2.address = {
             let address = OCKPostalAddress()
             address.street = "1000 S Limestone"
