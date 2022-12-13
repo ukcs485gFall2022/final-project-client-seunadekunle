@@ -33,7 +33,7 @@ Add the public link to your YouTube or video posted elsewhere.
 
 To learn more about this application, watch the video below:
 
-<a href="https://youtu.be/8M3ye77BfZI" target="__blank" alt="Sample demo video"/>   ideo Link</a>
+<a href="https://youtu.be/7YD5-Iivrjs" target="__blank" alt="Sample demo video"/> Video Link</a>
 
 
 
