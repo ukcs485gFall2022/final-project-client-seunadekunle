@@ -15,26 +15,27 @@ struct MainTabView: View {
     @State private var selectedTab = 0
 
     var body: some View {
+        // todo: add animations for transition FAB
         TabView(selection: $selectedTab) {
-            CareView()
+            CareView(careViewModel: .init())
                 .tabItem {
                     if selectedTab == 0 {
-                        Image("carecard-filled")
+                        Image(systemName: "plus.rectangle.fill")
                             .renderingMode(.template)
                     } else {
-                        Image("carecard")
+                        Image(systemName: "plus.rectangle")
                             .renderingMode(.template)
                     }
                 }
                 .tag(0)
 
-            ContactView()
+            InsightsView()
                 .tabItem {
                     if selectedTab == 1 {
-                        Image("phone.bubble.left.fill")
+                        Image(systemName: "chart.bar.fill")
                             .renderingMode(.template)
                     } else {
-                        Image("phone.bubble.left")
+                        Image(systemName: "chart.bar")
                             .renderingMode(.template)
                     }
                 }
@@ -51,12 +52,26 @@ struct MainTabView: View {
                     }
                 }
                 .tag(2)
+
+            ContactView()
+                .tabItem {
+                    if selectedTab == 1 {
+                        Image("phone.bubble.left.fill")
+                            .renderingMode(.template)
+                    } else {
+                        Image("phone.bubble.left")
+                            .renderingMode(.template)
+                    }
+                }
+                .tag(3)
         }
         .navigationBarHidden(true)
     }
 }
 
 struct MainTabView_Previews: PreviewProvider {
+    let colorStyler = ColorStyler()
+
     static var previews: some View {
         MainTabView(loginViewModel: .init())
             .accentColor(Color(TintColorKey.defaultValue))

@@ -24,67 +24,88 @@ struct LoginView: View {
     @Environment(\.tintColor) var tintColor
     @Environment(\.tintColorFlip) var tintColorFlip
     @ObservedObject var viewModel: LoginViewModel
-    @State var usersname = ""
+    @State var username = ""
     @State var password = ""
+    @State var email = ""
     @State var firstName: String = ""
     @State var lastName: String = ""
     @State var signupLoginSegmentValue = 0
+    let colorStyler = ColorStyler()
+    let appearanceStyler = AppearanceStyler()
+    let dimensionStyler = DimensionStyler()
 
     var body: some View {
         VStack {
-            // Change the title to the name of your application
-            Text("CareKit Sample App")
-                .font(.largeTitle)
-                .foregroundColor(.white)
-                .padding()
-            // Change this image to something that represents your application
-            Image("exercise.jpg")
-                .resizable()
-                .frame(width: 150, height: 150, alignment: .center)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color(.white), lineWidth: 4))
-                .shadow(radius: 10)
-                .padding()
+            VStack(alignment: .leading) {
+                Image("track-icon")
+                    .resizable()
+                    .clipShape(Circle())
+                    .frame(width: dimensionStyler.splashIconSize,
+                    height: dimensionStyler.splashIconSize,
+                    alignment: .center)
+                Text("Track")
+                    .font(.subheadline)
+                    .foregroundColor(.black)
+                    .frame(width: dimensionStyler.splashIconSize,
+                    height: dimensionStyler.sidePadding,
+                    alignment: .center)
+                    .padding(EdgeInsets(top: dimensionStyler.sidePadding / 2,
+                    leading: 0,
+                    bottom: 0,
+                    trailing: 0))
 
-            /*
-             Example of how to do the picker here:
-             https://www.swiftkickmobile.com/creating-a-segmented-control-in-swiftui/
-             */
-            Picker(selection: $signupLoginSegmentValue,
-                   label: Text("Login Picker")) {
-                Text("Login").tag(0)
-                Text("Sign Up").tag(1)
-            }
-            .pickerStyle(.segmented)
-            .background(Color(tintColorFlip))
-            .cornerRadius(20.0)
-            .padding()
+            }.frame(width: dimensionStyler.screenWidth)
+                .padding(EdgeInsets(top: dimensionStyler.sidePadding * 1.05,
+                leading: 0,
+                bottom: dimensionStyler.sidePadding * 1.5,
+                trailing: 0))
 
             VStack(alignment: .leading) {
-                TextField("Username", text: $usersname)
+                TextField("Username", text: $username)
                     .padding()
                     .background(.white)
-                    .cornerRadius(20.0)
-                    .shadow(radius: 10.0, x: 20, y: 10)
+                    .cornerRadius(appearanceStyler.cornerRadius1)
+                    .padding(EdgeInsets(top: -40,
+                    leading: dimensionStyler.sidePadding,
+                    bottom: 0,
+                    trailing: dimensionStyler.sidePadding))
                 SecureField("Password", text: $password)
                     .padding()
                     .background(.white)
-                    .cornerRadius(20.0)
-                    .shadow(radius: 10.0, x: 20, y: 10)
+                    .cornerRadius(appearanceStyler.cornerRadius1)
+                    .padding(EdgeInsets(top: dimensionStyler.sidePadding / 7.5,
+                    leading: dimensionStyler.sidePadding,
+                    bottom: 0,
+                    trailing: dimensionStyler.sidePadding))
 
                 switch signupLoginSegmentValue {
                 case 1:
+
                     TextField("First Name", text: $firstName)
                         .padding()
                         .background(.white)
-                        .cornerRadius(20.0)
-                        .shadow(radius: 10.0, x: 20, y: 10)
-
+                        .cornerRadius(appearanceStyler.cornerRadius1)
+                        .padding(EdgeInsets(top: dimensionStyler.sidePadding / 7.5,
+                        leading: dimensionStyler.sidePadding,
+                        bottom: 0,
+                        trailing: dimensionStyler.sidePadding))
                     TextField("Last Name", text: $lastName)
                         .padding()
                         .background(.white)
-                        .cornerRadius(20.0)
-                        .shadow(radius: 10.0, x: 20, y: 10)
+                        .cornerRadius(appearanceStyler.cornerRadius1)
+                        .padding(EdgeInsets(top: dimensionStyler.sidePadding / 7.5,
+                        leading: dimensionStyler.sidePadding,
+                        bottom: 0,
+                        trailing: dimensionStyler.sidePadding))
+                    TextField("Email (optional)", text: $email)
+                        .padding()
+                        .background(.white)
+                        .cornerRadius(appearanceStyler.cornerRadius1)
+                        .padding(EdgeInsets(top: dimensionStyler.sidePadding / 7.5,
+                        leading: dimensionStyler.sidePadding,
+                        bottom: 0,
+                        trailing: dimensionStyler.sidePadding))
+
                 default:
                     EmptyView()
                 }
@@ -99,67 +120,107 @@ struct LoginView: View {
                 switch signupLoginSegmentValue {
                 case 1:
                     Task {
-                        await viewModel.signup(.patient,
-                                               username: usersname,
-                                               password: password,
-                                               firstName: firstName,
-                                               lastName: lastName)
+                        if email.isEmpty {
+                            await viewModel.signup(.patient,
+                                username: username,
+                                password: password,
+                                firstName: firstName,
+                                lastName: lastName)
+                        } else {
+                            await viewModel.signup(.patient,
+                                username: username,
+                                password: password,
+                                firstName: firstName,
+                                lastName: lastName, email: email)
+                        }
                     }
                 default:
                     Task {
-                        await viewModel.login(username: usersname,
-                                              password: password)
+                        await viewModel.login(username: username,
+                            password: password)
                     }
                 }
             }, label: {
-                switch signupLoginSegmentValue {
-                case 1:
-                    Text("Sign Up")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(width: 300)
-                default:
-                    Text("Login")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(width: 300)
-                }
-            })
-            .background(Color(.green))
-            .cornerRadius(15)
+                    switch signupLoginSegmentValue {
+                    case 1:
+                        Spacer()
+                        Text("Sign Up")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                        Spacer()
+
+                    default:
+                        Spacer()
+                        Text("Login")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                        Spacer()
+                    }
+                })
+            .background(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
+                .cornerRadius(appearanceStyler.cornerRadius1)
+                .padding(EdgeInsets(top: 0,
+                leading: dimensionStyler.sidePadding + 17,
+                bottom: 0,
+                trailing: dimensionStyler.sidePadding + 17))
 
             Button(action: {
                 Task {
                     await viewModel.loginAnonymously()
                 }
             }, label: {
-                switch signupLoginSegmentValue {
-                case 0:
-                    Text("Login Anonymously")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(width: 300)
-                default:
-                    EmptyView()
-                }
-            })
-            .background(Color(.lightGray))
-            .cornerRadius(15)
+                    switch signupLoginSegmentValue {
+                    case 0:
+                        Text("Login Anonymously")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                    default:
+                        EmptyView()
+                    }
+                })
+            .background(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
+                .cornerRadius(appearanceStyler.cornerRadius1)
+                .padding(EdgeInsets(top: dimensionStyler.sidePadding,
+                leading: dimensionStyler.sidePadding + 17,
+                bottom: 0,
+                trailing: dimensionStyler.sidePadding + 17))
 
-            // If an error occurs show it on the screen
+            // If an error occurs show it on the screen, also make it multilline
             if let error = viewModel.loginError {
                 Text("Error: \(error.message)")
-                    .foregroundColor(.red)
+                    .foregroundColor(ColorStyler.convertToColor(color: colorStyler.quaternaryCustomFill))
+                    .font(.system(size: 10))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(EdgeInsets(top: 0,
+                    leading: dimensionStyler.sidePadding,
+                    bottom: 0,
+                    trailing: dimensionStyler.sidePadding))
             }
             Spacer()
-        }
-        .background(LinearGradient(gradient: Gradient(colors: [Color(tintColorFlip),
-                                                               Color(tintColor)]),
-                                   startPoint: .top,
-                                   endPoint: .bottom))
+
+            /*
+             Example of how to do the picker here:
+             https://www.swiftkickmobile.com/creating-a-segmented-control-in-swiftui/
+             */
+            Picker(selection: $signupLoginSegmentValue,
+                label: Text("Login Picker")) {
+                Text("Login").tag(0).background(ColorStyler.convertToColor(color: colorStyler.customBackground))
+                Text("Sign Up").tag(1).foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
+            }.pickerStyle(.segmented)
+                .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
+                .cornerRadius(appearanceStyler.cornerRadius1)
+                .padding(EdgeInsets(top: 0,
+                leading: dimensionStyler.sidePadding,
+                bottom: dimensionStyler.sidePadding,
+                trailing: dimensionStyler.sidePadding))
+        }.padding(EdgeInsets(top: 0,
+            leading: 0,
+            bottom: 0,
+            trailing: 0))
+            .background(ColorStyler.convertToColor(color: colorStyler.customBackground))
     }
 }
 

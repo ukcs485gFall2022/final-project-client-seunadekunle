@@ -16,10 +16,10 @@ struct CareView: View {
 
     var body: some View {
         ScrollView {
-            SimpleTaskView(taskID: TaskID.kegels,
+            SimpleTaskView(taskID: TaskID.loudVoice,
                            eventQuery: .init(for: Date()),
                            storeManager: viewModel.storeManager)
-            InstructionsTaskView(taskID: TaskID.stretch,
+            InstructionsTaskView(taskID: TaskID.proteinShake,
                                  eventQuery: .init(for: Date()),
                                  storeManager: viewModel.storeManager)
         }

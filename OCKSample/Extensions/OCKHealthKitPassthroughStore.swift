@@ -42,22 +42,34 @@ extension OCKHealthKitPassthroughStore {
         }
     }
 
-    func populateSampleData() async throws {
+    func populateSampleData(_ patientUUID: UUID? = nil) async throws {
 
-        let schedule = OCKSchedule.dailyAtTime(
-            hour: 8, minutes: 0, start: Date(), end: nil, text: nil,
-            duration: .hours(12), targetValues: [OCKOutcomeValue(2000.0, units: "Steps")])
+        let schedule1 = OCKSchedule.dailyAtTime(
+            hour: 6, minutes: 0, start: Date(), end: nil, text: nil,
+            duration: .hours(16), targetValues: [OCKOutcomeValue(600, units: "mL")])
 
-        var steps = OCKHealthKitTask(
-            id: TaskID.steps,
-            title: "Steps",
-            carePlanUUID: nil,
-            schedule: schedule,
-            healthKitLinkage: OCKHealthKitLinkage(
-                quantityIdentifier: .stepCount,
-                quantityType: .cumulative,
-                unit: .count()))
-        steps.asset = "figure.walk"
-        try await addTasksIfNotPresent([steps])
+        let schedule2 = OCKSchedule.dailyAtTime(
+            hour: 9, minutes: 0, start: Date(), end: nil, text: "Sugar",
+            duration: .hours(24))
+
+        var drinkWater = OCKHealthKitTask(
+            id: TaskID.drinkWater,
+            title: "Drink Water",
+            carePlanUUID: patientUUID,
+            schedule: schedule1,
+            healthKitLinkage: HealthKitLinkages.waterIntake)
+        drinkWater.asset = "drop.fill"
+        drinkWater.userInfo = [Constants.viewTypeKey: ViewType.numericProgressTaskView.rawValue]
+
+        var countSugar = OCKHealthKitTask(
+            id: TaskID.countSugar,
+            title: "Count Sugar",
+            carePlanUUID: patientUUID,
+            schedule: schedule2,
+            healthKitLinkage: HealthKitLinkages.countingSugar)
+        countSugar.asset = "fork.knife.circle.fill"
+        countSugar.userInfo = [Constants.viewTypeKey: ViewType.labeledValueTaskView.rawValue]
+
+        try await addTasksIfNotPresent([drinkWater, countSugar])
     }
 }

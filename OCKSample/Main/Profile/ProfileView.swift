@@ -13,77 +13,102 @@ import CareKit
 import os.log
 
 struct ProfileView: View {
+    @Environment(\.tintColor) private var tintColor
     @StateObject var viewModel = ProfileViewModel()
     @ObservedObject var loginViewModel: LoginViewModel
-    @State var firstName = ""
-    @State var lastName = ""
-    @State var birthday = Date()
+
+    let colorStyler = ColorStyler()
+    let appearanceStyler = AppearanceStyler()
+    let dimensionStyler = DimensionStyler()
 
     var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
-                TextField("First Name", text: $firstName)
-                    .padding()
-                    .cornerRadius(20.0)
-                    .shadow(radius: 10.0, x: 20, y: 10)
 
-                TextField("Last Name", text: $lastName)
-                    .padding()
-                    .cornerRadius(20.0)
-                    .shadow(radius: 10.0, x: 20, y: 10)
+        NavigationView {
+            VStack {
+                ProfileImageView(viewModel: viewModel)
 
-                DatePicker("Birthday", selection: $birthday, displayedComponents: [DatePickerComponents.date])
-                    .padding()
-                    .cornerRadius(20.0)
-                    .shadow(radius: 10.0, x: 20, y: 10)
+                if let username = viewModel.username {
+                    Text(username)
+                }
+
+                Form {
+                    ProfileInputView(viewModel: viewModel)
+
+                    Button(action: {
+                        Task {
+                            await viewModel.saveProfile()
+                            try await viewModel.saveContact()
+                        }
+                    }, label: {
+                        Text("Save Profile")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+
+                    })
+                    .frame(width: dimensionStyler.screenWidth / 1.25)
+                    .background(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
+                    .cornerRadius(appearanceStyler.cornerRadius1)
+                    .listRowSeparator(.hidden)
+
+                    // Notice that "action" is a closure (which is essentially
+                    // a function as argument like we discussed in class)
+                    Button(action: {
+                        Task {
+                            await loginViewModel.logout()
+                        }
+                    }, label: {
+                        Text("Log Out")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(width: dimensionStyler.screenWidth)
+                    })
+                    .listRowSeparator(.hidden)
+                    .frame(width: dimensionStyler.screenWidth / 1.25)
+                    .background(ColorStyler.convertToColor(color: ColorStyler.iconRed))
+                    .cornerRadius(appearanceStyler.cornerRadius1)
+                }
+                .background(.white)
+                .scrollContentBackground(.hidden)
             }
-
-            Button(action: {
-                Task {
-                    do {
-                        try await viewModel.saveProfile(firstName,
-                                                        last: lastName,
-                                                        birth: birthday)
-                    } catch {
-                        Logger.profile.error("Error saving profile: \(error.localizedDescription)")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("MyContact") {
+                        viewModel.isPresentingContact = true
                     }
                 }
-            }, label: {
-                Text("Save Profile")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 300, height: 50)
-            })
-            .background(Color(.green))
-            .cornerRadius(15)
 
-            // Notice that "action" is a closure (which is essentially
-            // a function as argument like we discussed in class)
-            Button(action: {
-                Task {
-                    await loginViewModel.logout()
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        viewModel.isPresentingAddTask = true
+                    }, label: {
+                        Text("Add Task")
+                    })
+                    .sheet(isPresented: $viewModel.isPresentingAddTask) {
+                        NewGoalsView(viewModel: .init())
+                            .presentationDetents([.fraction(0.925)])
+                            .presentationDragIndicator(.hidden)
+                    }
                 }
-            }, label: {
-                Text("Log Out")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 300, height: 50)
-            })
-            .background(Color(.red))
-            .cornerRadius(15)
-        }.onReceive(viewModel.$patient, perform: { patient in
-            if let currentFirstName = patient?.name.givenName {
-                firstName = currentFirstName
             }
-            if let currentLastName = patient?.name.familyName {
-                lastName = currentLastName
+            .sheet(isPresented: $viewModel.isPresentingContact) {
+                MyContactView().presentationDetents([.fraction(0.925)])
+                    .cornerRadius(15)
             }
-            if let currentBirthday = patient?.birthday {
-                birthday = currentBirthday
+            .sheet(isPresented: $viewModel.isPresentingImagePicker) {
+                ImagePicker(image: $viewModel.profileUIImage)
             }
-        })
+            .alert(isPresented: $viewModel.isShowingSaveAlert) {
+                return Alert(title: Text("Update"),
+                             message: Text(viewModel.alertMessage),
+                             dismissButton: .default(Text("Ok"), action: {
+                    viewModel.isShowingSaveAlert = false
+                }))
+            }
+
+        }
+
     }
 }
 
@@ -91,6 +116,6 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(viewModel: .init(storeManager: Utility.createPreviewStoreManager()),
                     loginViewModel: .init())
-            .accentColor(Color(TintColorKey.defaultValue))
+        .accentColor(Color(TintColorKey.defaultValue))
     }
 }

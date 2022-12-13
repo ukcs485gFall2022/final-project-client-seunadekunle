@@ -74,31 +74,137 @@ enum Constants {
     static let requestSync = "requestSync"
     static let progressUpdate = "progressUpdate"
     static let finishedAskingForPermission = "finishedAskingForPermission"
-    static let completedFirstSyncAfterLogin = "completedFirstSyncAfterLogin"
+    static let shouldRefreshView = "shouldRefreshView"
     static let userLoggedIn = "userLoggedIn"
     static let storeInitialized = "storeInitialized"
     static let userTypeKey = "userType"
+    static let viewTypeKey = "ViewType"
+    static let plotTypeKey = "PlotType"
+    static let survey = "survey"
 }
 
 enum MainViewPath {
     case tabs
 }
 
-enum TaskID {
-    static let doxylamine = "doxylamine"
-    static let nausea = "nausea"
-    static let stretch = "stretch"
-    static let kegels = "kegels"
-    static let steps = "steps"
+enum CarePlanID: String, CaseIterable, Identifiable {
+    var id: String {
+        return UUID().uuidString
+    }
 
-    static var ordered: [String] {
-        [Self.steps, Self.doxylamine, Self.kegels, Self.stretch, Self.nausea]
+    case health
+    case checkIn
+    case social
+    case stronger
+}
+
+enum TaskID {
+    static let proteinShake = "proteinShake"
+    static let loudVoice = "loudVoice"
+    static let pushup = "pushup"
+    static let sayHi = "sayHi"
+    static let steps = "steps"
+    static let multistep = "multi-step"
+    static let healthSugar = "healthSugar"
+    static let drinkWater = "drinkWater"
+    static let countSugar = "countSugar"
+    static let onboard = "onboard"
+    static let repetition = "repetition"
+    static let repetitionMood = "repetitionMood"
+}
+
+// For the different task views
+enum PlotType: String, CaseIterable, Identifiable {
+
+    case line
+    case scatter
+    case bar
+
+    func getName(value: PlotType) -> String {
+
+        switch value {
+        case .line:
+            return "Line Graph"
+        case .scatter:
+            return "Scatter Graph"
+        case .bar:
+            return "Bar Graph"
+        }
+    }
+
+    var id: String {
+        getName(value: self)
+    }
+}
+
+enum HealthKitLinkages {
+    static let countingSugar = OCKHealthKitLinkage(quantityIdentifier: .dietarySugar,
+                                                   quantityType: .cumulative,
+                                                   unit: .gram())
+    static let waterIntake = OCKHealthKitLinkage(quantityIdentifier: .dietaryWater,
+                                                 quantityType: .cumulative,
+                                                 unit: .fluidOunceUS())
+    static let protein = OCKHealthKitLinkage(quantityIdentifier: .dietaryProtein,
+                                             quantityType: .cumulative,
+                                             unit: .gram())
+    static let flightsClimbed = OCKHealthKitLinkage(quantityIdentifier: .flightsClimbed,
+                                                    quantityType: .cumulative,
+                                                    unit: .count())
+}
+// For the different task views
+enum ViewType: String, CaseIterable, Identifiable {
+
+    case instructionsTaskView
+    case simpleTaskView
+    case checklist
+    case buttonLog
+    case gridTaskView
+    case numericProgressTaskView
+    case labeledValueTaskView
+    case linkView
+    case featuredContentView
+    case survey
+    case counter
+    case logger
+
+    // swiftlint:disable cyclomatic_complexity
+    func getName(value: ViewType) -> String {
+        switch value {
+        case .instructionsTaskView:
+            return "Instructions Task View"
+        case .simpleTaskView:
+            return "Simple Task View"
+        case .checklist:
+            return "Checklist"
+        case .buttonLog:
+            return "Button Log"
+        case .gridTaskView:
+            return "Grid Task View"
+        case .numericProgressTaskView:
+            return "Numeric Progress Task View"
+        case .labeledValueTaskView:
+            return "Labeled Task View"
+        case .linkView:
+            return "Link View"
+        case .featuredContentView:
+            return "Featured Content"
+        case .survey:
+            return "Survey"
+        case .counter:
+            return "Counter View"
+        case .logger:
+            return "Logger View"
+        }
+    }
+
+    var id: String {
+        getName(value: self)
     }
 }
 
 enum UserType: String, Codable {
-    case patient                           = "Patient"
-    case none                              = "None"
+    case patient = "Patient"
+    case none = "None"
 
     // Return all types as an array, make sure to maintain order above
     func allTypesAsArray() -> [String] {
