@@ -153,10 +153,8 @@ struct NewGoalsView: View {
             Task {
                 switch viewModel.taskType {
                 case "Health":
-                    viewModel.taskID = TaskID.healthSugar
                     await viewModel.addTask(freq: freq, newAssetName: taskAsset, healthTask: healthTask)
                 default:
-                    viewModel.taskID = TaskID.defaultTask
                     await viewModel.addTask(freq: freq, newAssetName: taskAsset)
                 }
 

@@ -19,7 +19,6 @@ class NewGoalsViewModel: ObservableObject {
 
     @Published var error: AppError?
 
-    @Published public var taskID = ""
     @Published public var title = ""
     @Published public var instructions = ""
     @Published public var taskType = "Normal"

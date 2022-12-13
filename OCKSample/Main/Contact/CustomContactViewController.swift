@@ -42,7 +42,7 @@ class CustomContactViewController: OCKListViewController {
 
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.searchBarStyle = UISearchBar.Style.prominent
-        searchController.searchBar.placeholder = " Search Contacts"
+        searchController.searchBar.placeholder = "Search Contacts"
         searchController.searchBar.showsCancelButton = true
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
