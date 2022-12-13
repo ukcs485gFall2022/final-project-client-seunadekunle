@@ -59,16 +59,16 @@ In addition, you can drop screenshots directly into your README file to add them
 
 -->
 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-11-22%20at%2014.12.12.png?raw=true"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.27.png"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.38.png"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.40.png"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.48.png"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.13.00.png"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.21.31.png"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.40.44.png"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.43.55.png"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.45.34.png">
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-11-22%20at%2014.12.12.png?raw=true" width="300"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.27.png" width="300"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.38.png" width="300"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.40.png" width="300"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.48.png" width="300"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.13.00.png" width="300"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.21.31.png" width="300"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.40.44.png" width="300"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.43.55.png" width="300"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.45.34.png" width="300">
 
 
 <!--
@@ -226,7 +226,6 @@ Describe any challenges you faced with learning Swift, your baseline app, or add
 -->
 
 One challenge was in implementing the trackScore feature was to find a way to trigger it, upload the changed value to the Parse Server. The main agent for doing this was the CareViewModel which was created and then passed through. To solve a warning involving background threads and the @Publisher variable changing the trackScore variable had to be done on the main thread since it was published this was done using DispatchQueue.main.async instead of other options that failed such receive(on:) and onReceive only. One unexpected obstacle was dealing with Swiftlint having to refactor code and change how some parts of the code was structured in order to resolve swiftlint build errors. Simply adding the file names to .swiftlint.yml or adding the disable all command wasn't the optimal solution.
-
 
 
 
