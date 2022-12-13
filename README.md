@@ -35,7 +35,7 @@ To learn more about this application, watch the video below:
 
 <a href="https://youtu.be/7YD5-Iivrjs" target="__blank" alt="Sample demo video"/> Video Link </a>
 
-<a href="https://youtu.be/dCNDImU9QqI" target="__blank" alt="Sample demo video"/> Video(Uncropped) Link </a>
+<a href="https://youtu.be/tyqU2eQpi6s" target="__blank" alt="Sample demo video"/> Video(Uncropped) Link </a>
 
 
 
