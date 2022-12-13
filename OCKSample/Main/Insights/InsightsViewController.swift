@@ -110,7 +110,7 @@ class InsightsViewController: OCKListViewController {
             gradientStartColor: colors[start],
             gradientEndColor: colors[end],
             markerSize: 4,
-            eventAggregator: OCKEventAggregator.aggregatorStreak())
+            eventAggregator: OCKEventAggregator.countOutcomeValues)
 
         switch plotType {
         case PlotType.line.rawValue:
@@ -124,7 +124,7 @@ class InsightsViewController: OCKListViewController {
             plot = .bar
         }
 
-        // Create a plot comparing nausea to medication adherence.
+        // Create a plot for each task
         let insightsCard = OCKCartesianChartViewController(
             plotType: plot,
             selectedDate: date,

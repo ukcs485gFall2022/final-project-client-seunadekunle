@@ -23,7 +23,7 @@ struct LoggerCardView: View {
                    spacing: style.dimension.directionalInsets1.top) {
 
                 HeaderView(title: Text(viewModel.taskEvents.firstEventTitle),
-                           detail: Text(viewModel.taskEvents.firstEventDetail ?? ""))
+                           detail: Text(viewModel.taskEvents.firstTaskInstructions ?? ""))
                 Divider()
                 VStack(alignment: .center,
                        spacing: style.dimension.directionalInsets2.trailing) {

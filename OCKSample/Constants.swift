@@ -92,19 +92,22 @@ enum CarePlanID: String, CaseIterable, Identifiable {
         return UUID().uuidString
     }
 
-    case health // Add custom id's for your Care Plans, these are examples
+    case health
     case checkIn
+    case social
+    case stronger
 }
 
 enum TaskID {
-    static let doxylamine = "doxylamine"
-    static let nausea = "nausea"
-    static let stretch = "stretch"
-    static let kegels = "kegels"
+    static let proteinShake = "proteinShake"
+    static let loudVoice = "loudVoice"
+    static let pushup = "pushup"
+    static let sayHi = "sayHi"
     static let steps = "steps"
     static let multistep = "multi-step"
     static let healthSugar = "healthSugar"
-    static let defaultTask = "default"
+    static let drinkWater = "drinkWater"
+    static let countCalories = "countCalories"
     static let onboard = "onboard"
     static let repetition = "repetition"
     static let repetitionMood = "repetitionMood"

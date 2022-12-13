@@ -85,7 +85,7 @@ This is from the checkist from the final [Code](https://uk.instructure.com/cours
   - [X] Button Log - typically used with a OCKTask
   - [X] GridTaskView - typically used with a OCKTask
   - [X] NumericProgressTaskView (SwiftUI) - typically used with a OCKHealthKitTask
-  - [X] LabeledValueTaskView (SwiftUI) - typically used with a OCKHealthKitTask
+  - [ ] LabeledValueTaskView (SwiftUI) - typically used with a OCKHealthKitTask
 - [X] Add the LinkView (SwiftUI) card to your app
 - [X] Replace the current TipView with a class with CustomFeaturedContentView that subclasses OCKFeaturedContentView. This card should have an initializer which takes any link
 - [X] Tailor the ResearchKit Onboarding to reflect your application
@@ -107,7 +107,7 @@ Describe at least 3 features you want to add in the future before releasing your
 <!--
 Describe any challenges you faced with learning Swift, your baseline app, or adding features. You can describe how you overcame them.
 -->
-One challenge was in implementing the trackScore feature was to find a way to trigger it, upload the changed value to the Parse Server. The main agent for doing this was the CareViewModel which was created and then passed through. To solve a warning involving background threads and the @Publisher variable changing the trackScore variable had to be done on the main thread since it was published this was done using Dispatch.main.async instead of other options that failed such receive(on:) and onReceive only.
+One challenge was in implementing the trackScore feature was to find a way to trigger it, upload the changed value to the Parse Server. The main agent for doing this was the CareViewModel which was created and then passed through. To solve a warning involving background threads and the @Publisher variable changing the trackScore variable had to be done on the main thread since it was published this was done using Dispatch.main.async instead of other options that failed such receive(on:) and onReceive only. One unexpected obstacle was dealing with Swiftlint having to refactor code and change how some parts of the code was structured in order to resolve swiftlint build errors. Simply adding the file names to .swiftlint.yml or adding the disable all command wasn't the optimal solution.
 
 
 
