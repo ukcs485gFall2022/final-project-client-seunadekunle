@@ -19,7 +19,7 @@ Give a short description on what your project accomplishes and what tools is use
 
 -->
 
-An example application of [CareKit](https://github.com/carekit-apple/CareKit)'s OCKSample synchronizing CareKit data to the Cloud via [ParseCareKit](https://github.com/netreconlab/ParseCareKit). This app allows user to maintain habits and to track them the goal is to provide a centralized locations for users to stick to habits, this app also provides a trackScore that measures how devoted you are to making your app better.
+An example application of [CareKit](https://github.com/carekit-apple/CareKit)'s OCKSample synchronizing CareKit data to the Cloud via [ParseCareKit](https://github.com/netreconlab/ParseCareKit). This app allows user to maintain habits and to track them the goal is to provide a centralized locations for users to stick to habits, this app also provides a trackScore that measures how devoted you are to making your life better.
 
 
 
@@ -197,7 +197,7 @@ Describe at least 3 features you want to add in the future before releasing your
 
 1. Add a rudimentary social network feature where users can follow each other - Users can follow other users, users can get badges and customizable content.
 
-2. Add UI changes for a dark theme and Implement a more flexible CareView - Developing a Care feed that would allow for grouping by care plans within a certain and integrate calculated data such as a TrackScore and user info (followers)
+2. Add UI changes for a dark theme and Implement a more flexible CareView - Developing a Care feed that would allow for grouping by care plans within a certain and integrate calculated data such as a TrackScore and user info (followers).
 
 3. Calculate trackScore using a more complex algorithm which will take into account streaks, time of completion, and other factors.
 
@@ -211,7 +211,7 @@ Describe any challenges you faced with learning Swift, your baseline app, or add
 
 -->
 
-One challenge was in implementing the trackScore feature was to find a way to trigger it, upload the changed value to the Parse Server. The main agent for doing this was the CareViewModel which was created and then passed through. To solve a warning involving background threads and the @Publisher variable changing the trackScore variable had to be done on the main thread since it was published this was done using DispatchQueue.main.async instead of other options that failed such receive(on:) and onReceive only. One unexpected obstacle was dealing with Swiftlint having to refactor code and change how some parts of the code was structured in order to resolve swiftlint build errors. Simply adding the file names to .swiftlint.yml or adding the disable all command wasn't the optimal solution. Another issue was dealing with closures within forms there were multiple errors that occurred when attempting to use Pickers within forms, this error involved trailing closures and the 
+One challenge was in implementing the trackScore feature was to find a way to trigger it, upload the changed value to the Parse Server. The main agent for doing this was the CareViewModel which was created and then passed through. To solve a warning involving background threads and the @Publisher variable changing the trackScore variable had to be done on the main thread since it was published this was done using DispatchQueue.main.async instead of other options that failed such receive(on:) and onReceive only. One unexpected obstacle was dealing with Swiftlint having to refactor code and change how some parts of the code was structured in order to resolve swiftlint build errors. Simply adding the file names to .swiftlint.yml or adding the disable all command wasn't the optimal solution. Another issue was dealing with closures within forms there were multiple errors that occurred when attempting to use Pickers within forms, this error involved trailing closures and was solved by using the right Function to instantiate a Picker within variable scope and using the right type. 
 
 
 
