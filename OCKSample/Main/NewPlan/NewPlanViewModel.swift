@@ -20,6 +20,15 @@ class NewPlanViewModel: ObservableObject {
 
     @Published var error: AppError?
     @Published public var title = ""
+    @Published public var carePlans = [OCKCarePlan(id: UUID().uuidString,
+        title: "Check in Care Plan",
+        patientUUID: nil)]
+
+    init() {
+        Task {
+            await queryCarePlans()
+        }
+    }
 
     func addCarePlan() async throws {
 
@@ -37,6 +46,29 @@ class NewPlanViewModel: ObservableObject {
         try await AppDelegateKey
             .defaultValue?
             .storeManager.addCarePlansIfNotPresent([newPlan], patientUUID: patient.uuid)
+    }
+
+    func queryCarePlans() async {
+
+        do {
+            guard let appDelegate = AppDelegateKey.defaultValue else {
+                self.error = AppError.couldntBeUnwrapped
+                self.carePlans = []
+                return
+            }
+
+            let query = OCKCarePlanQuery()
+            if let queriedPlans = try await appDelegate.store?.fetchCarePlans(query: query) {
+                // runs on main thread
+                DispatchQueue.main.async {
+                    self.carePlans = queriedPlans
+                }
+            }
+
+        } catch {
+            Logger.newPlanView.error("Can't get error: \(error)")
+        }
+
     }
 
 }
