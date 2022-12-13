@@ -14,6 +14,7 @@ import CareKitStore
 import HealthKit
 import os.log
 
+@MainActor
 class NewGoalsViewModel: ObservableObject {
 
     @Published var error: AppError?
@@ -64,7 +65,7 @@ class NewGoalsViewModel: ObservableObject {
         } catch {
             self.error = AppError.errorString("Could not add new task \(error.localizedDescription)")
 
-            alertMessage = "Could not aduserd task: \(error)"
+            alertMessage = "Could not add user task: \(error)"
             isShowingAddAlert = true
         }
     }
@@ -195,7 +196,10 @@ class NewGoalsViewModel: ObservableObject {
             isShowingAddAlert = true
         }
 
-        self.plans = fetchedPlans
-        self.plan = self.plans[0]
+        // runs on main thread
+        DispatchQueue.main.async {
+            self.plans = fetchedPlans
+            self.plan = self.plans[0]
+        }
     }
 }

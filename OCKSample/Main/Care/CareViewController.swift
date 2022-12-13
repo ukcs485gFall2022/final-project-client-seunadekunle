@@ -86,6 +86,7 @@ class CareViewController: OCKDailyPageViewController {
             return
         }
 
+        // runs on main thread
         DispatchQueue.main.async {
             switch progress {
             case 0, 100:

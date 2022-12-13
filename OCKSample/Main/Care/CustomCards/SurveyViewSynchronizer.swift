@@ -19,50 +19,52 @@ final class SurveyViewSynchronizer: OCKSurveyTaskViewSynchronizer {
         _ view: OCKInstructionsTaskView,
         context: OCKSynchronizationContext<OCKTaskEvents>) {
 
-        super.updateView(view, context: context)
+            super.updateView(view, context: context)
 
-        if let event = context.viewModel.first?.first, event.outcome != nil {
+            if let event = context.viewModel.first?.first, event.outcome != nil {
 
-            // first retrieve the task
-            guard let surveyTask = event.task as? OCKTask else {
-                return
-            }
+                // first retrieve the task
+                guard let surveyTask = event.task as? OCKTask else {
+                    return
+                }
 
-            if let title = surveyTask.title {
-                let header = OCKHeaderView()
-                header.titleLabel.text = title
+                if let title = surveyTask.title {
+                    let header = OCKHeaderView()
+                    header.titleLabel.text = title
 
-                view.insertSubview(header, at: 0)
-            }
+                    view.insertSubview(header, at: 0)
+                }
 
-            // displays custom info based on the survey type
-            if surveyTask.userInfo?[Constants.viewTypeKey] == ViewType.survey.rawValue {
-                if surveyTask.id == CheckIn.identifier() {
+                // displays custom info based on the survey type
+                if surveyTask.userInfo?[Constants.viewTypeKey] == ViewType.survey.rawValue {
+                    // swiftlint:disable:next line_length
+                    let identifier = surveyTask.survey.rawValue.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+                    if identifier == CheckIn.identifier() {
 
-                    let feeling = event.answerString(kind: CheckIn.feelingItemIdentifier)
-                    let dayTurnOut = event.answerString(kind: CheckIn.dayTurnOutItemIdentifier)
-                    view.instructionsLabel.text = """
+                        let feeling = event.answerString(kind: CheckIn.feelingItemIdentifier)
+                        let dayTurnOut = event.answerString(kind: CheckIn.dayTurnOutItemIdentifier)
+                        view.instructionsLabel.text = """
                         You are feeling \(feeling)
                         Are you enjoying Track?: \(dayTurnOut)
                         """
-                } else if surveyTask.id == Motivate.identifier() {
-                    let videoFinished = event.answerString(kind: Motivate.motivationIdentifier)
-                    view.instructionsLabel.text = """
+                    } else if identifier == Motivate.identifier() {
+                        let videoFinished = event.answerString(kind: Motivate.motivationIdentifier)
+                        view.instructionsLabel.text = """
                         \(videoFinished)
                         """
+                    }
+
+                } else {
+                    if let instructions = surveyTask.instructions {
+
+                        view.instructionsLabel.text = """
+                        \(instructions)
+                        """
+                    }
                 }
 
             } else {
-                if let instructions = surveyTask.instructions {
-
-                    view.instructionsLabel.text = """
-                        \(instructions)
-                        """
-                }
+                view.instructionsLabel.text = "Track Survey"
             }
-
-        } else {
-            view.instructionsLabel.text = "Track Survey"
         }
-    }
 }
