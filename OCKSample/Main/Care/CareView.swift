@@ -44,7 +44,7 @@ struct CareView: View {
                         #endif
                         Text("trackScore")
                             .font(.title3)
-                            .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconRed))
+                            .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
                             .fontWeight(.light)
                             .frame(width: 100, height: 50, alignment: .bottom)
                     }.frame(width: dimensionStyler.screenWidth)

@@ -78,21 +78,13 @@ class NewGoalsViewModel: ObservableObject {
             quantityType: .cumulative,
             unit: .cupUS())
         if healthTask == "Counting Sugar" {
-            healthKitLinkage = OCKHealthKitLinkage(quantityIdentifier: .dietarySugar,
-                quantityType: .cumulative,
-                unit: .gram())
+            healthKitLinkage = HealthKitLinkages.countingSugar
         } else if healthTask == "Water intake" {
-            healthKitLinkage = OCKHealthKitLinkage(quantityIdentifier: .dietaryWater,
-                quantityType: .cumulative,
-                unit: .fluidOunceUS())
+            healthKitLinkage = HealthKitLinkages.waterIntake
         } else if healthTask == "Protein" {
-            healthKitLinkage = OCKHealthKitLinkage(quantityIdentifier: .dietaryProtein,
-                quantityType: .cumulative,
-                unit: .gram())
+            healthKitLinkage = HealthKitLinkages.protein
         } else if healthTask == "Flights Climbed" {
-            healthKitLinkage = OCKHealthKitLinkage(quantityIdentifier: .flightsClimbed,
-                quantityType: .cumulative,
-                unit: .count())
+            healthKitLinkage = HealthKitLinkages.flightsClimbed
         }
 
         var healthKitTask = OCKHealthKitTask(
