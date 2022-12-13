@@ -23,7 +23,7 @@ class LoginViewModel: ObservableObject {
              Publishes a notification to subscribers whenever this value changes.
              This is what the @Published property wrapper gives you for free
              everytime you use it to wrap a property.
-            */
+             */
             objectWillChange.send()
             if newValue {
                 self.sendUpdatedUserStatusToWatch()
@@ -61,8 +61,8 @@ class LoginViewModel: ObservableObject {
     private func finishCompletingSignIn(_ careKitPatient: OCKPatient? = nil) async throws {
         if let careKitUser = careKitPatient {
             guard var user = User.current,
-                let userType = careKitUser.userType,
-                let remoteUUID = careKitUser.remoteClockUUID else {
+                  let userType = careKitUser.userType,
+                  let remoteUUID = careKitUser.remoteClockUUID else {
                 return
             }
             user.lastTypeSelected = userType.rawValue
@@ -118,15 +118,15 @@ class LoginViewModel: ObservableObject {
         }
 
         // Added code to create a contact for the respective signed up user
-       let newContact = OCKContact(id: remoteUUID.uuidString,
-                                   name: newPatient.name,
-                                   carePlanUUID: nil)
+        let newContact = OCKContact(id: remoteUUID.uuidString,
+                                    name: newPatient.name,
+                                    carePlanUUID: nil)
 
-       // This is new contact that has never been saved before
-       _ = try await storeManager.store.addAnyContact(newContact)
+        // This is new contact that has never been saved before
+        _ = try await storeManager.store.addAnyContact(newContact)
 
-       try await appDelegate.store?.populateSampleData(patient.uuid)
-       try await appDelegate.healthKitStore.populateSampleData(patient.uuid)
+        try await appDelegate.store?.populateSampleData(patient.uuid)
+        try await appDelegate.healthKitStore.populateSampleData(patient.uuid)
 
         appDelegate.parseRemote.automaticallySynchronizes = true
 
@@ -139,13 +139,13 @@ class LoginViewModel: ObservableObject {
     // MARK: User intentional behavior
     /**
      Signs up the user *asynchronously*.
-
+     
      This will also enforce that the username is not already taken.
      - parameter username: The username the person signing up.
      - parameter password: The password the person signing up.
      - parameter firstName: The first name of the person signing up.
      - parameter lastName: The last name of the person signing up.
-    */
+     */
     @MainActor
     func signup(_ type: UserType,
                 username: String,
@@ -190,11 +190,11 @@ class LoginViewModel: ObservableObject {
 
     /**
      Logs in the user *asynchronously*.
-
+     
      The user must have already signed up.
      - parameter username: The username the person logging in.
      - parameter password: The password the person logging in.
-    */
+     */
     @MainActor
     func login(username: String,
                password: String) async {
@@ -227,7 +227,7 @@ class LoginViewModel: ObservableObject {
 
     /**
      Logs in the user anonymously *asynchronously*.
-    */
+     */
     @MainActor
     func loginAnonymously() async {
         do {
@@ -255,7 +255,7 @@ class LoginViewModel: ObservableObject {
 
     /**
      Logs out the currently logged in person *asynchronously*.
-    */
+     */
     @MainActor
     func logout() async {
         // You may not have seen "throws" before, but it's simple,

@@ -67,7 +67,7 @@ extension Motivate {
         if playbackCompleted {
             videoFinishedValue = OCKOutcomeValue("Video Finished ✊")
         } else {
-            videoFinishedValue = OCKOutcomeValue("Watched for\(round(videoResult[0].playbackStoppedTime)) s")
+            videoFinishedValue = OCKOutcomeValue("Watched for \(round(videoResult[0].playbackStoppedTime)) s")
         }
 
         videoFinishedValue.kind = Self.motivationIdentifier
