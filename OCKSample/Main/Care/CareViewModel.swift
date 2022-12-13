@@ -16,6 +16,7 @@ import ParseCareKit
 import ParseSwift
 import os.log
 
+@MainActor
 class CareViewModel: ObservableObject {
 
     init() {
@@ -25,7 +26,7 @@ class CareViewModel: ObservableObject {
                                                name: Notification.Name(rawValue: Constants.shouldRefreshView),
                                                object: nil)
     }
-    
+
     /// reload ViewModel to reflect changes in the view
     /// - Parameter notification: notification object passed by NotificationCenter
     @objc private func reloadViewModel(_ notification: Notification? = nil) {
@@ -34,8 +35,8 @@ class CareViewModel: ObservableObject {
         }
     }
 
-    @MainActor
     /// observer function
+    @MainActor
     private func findAndObserveCurrentUser() async {
 
         do {
@@ -45,8 +46,8 @@ class CareViewModel: ObservableObject {
         }
     }
 
-    @MainActor
     /// fetches trackScore from Parse database to update published variable
+    @MainActor
     private func fetchTrackScore() async throws {
 
         guard let currentUser = try await User.current?.fetch() else {
@@ -61,9 +62,15 @@ class CareViewModel: ObservableObject {
         }
 
     }
-    
+
+    @MainActor
+    func updateTrackScore() {
+        self.trackScore += 1
+    }
+
     /// trackScore variable that saves to database when changed
-    @Published var trackScore = 0 {
+    @MainActor
+    @Published private(set) var trackScore = 0 {
         willSet {
             Task {
                 guard var currentUser = User.current else {

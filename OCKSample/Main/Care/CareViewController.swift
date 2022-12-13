@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// swiftlint:disable all
+
 import Foundation
 import UIKit
 import SwiftUI
@@ -45,18 +47,16 @@ class CareViewController: OCKDailyPageViewController {
     private let colorStyler = ColorStyler()
     @ObservedObject var careViewModel: CareViewModel
 
-   
     /// Init function
     /// - Parameters:
     ///   - storeManager: manages store info
     ///   - adherenceAggregator: computes adherence based on array of events
     ///   - careViewModel: viewmodel that updates the UI/trackscore based on actions taken in the feed
-    // swiftlint:disable:next line_length
     init(storeManager: OCKSynchronizedStoreManager, adherenceAggregator: OCKAdherenceAggregator = .compareTargetValues, careViewModel: CareViewModel) {
         self.careViewModel = careViewModel
         super.init(storeManager: storeManager)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
@@ -79,6 +79,7 @@ class CareViewController: OCKDailyPageViewController {
             object: nil)
     }
 
+    @MainActor
     @objc private func updateSynchronizationProgress(_ notification: Notification) {
         guard let receivedInfo = notification.userInfo as? [String: Any],
             let progress = receivedInfo[Constants.progressUpdate] as? Int else {
@@ -106,9 +107,9 @@ class CareViewController: OCKDailyPageViewController {
                     action: #selector(self.synchronizeWithRemote))
                 self.navigationItem.rightBarButtonItem?.tintColor = TintColorKey.defaultValue
             }
+            
+            self.careViewModel.updateTrackScore()
         }
-
-        self.careViewModel.trackScore += 1
     }
 
     @MainActor
@@ -142,18 +143,14 @@ class CareViewController: OCKDailyPageViewController {
         }
     }
 
-    /*
-     This will be called each time the selected date changes.
-     Use this as an opportunity to rebuild the content shown to the user.
-     */
-    /// <#Description#>
+    /// This will be called each time the selected date changes.
     /// - Parameters:
     ///   - dailyPageViewController: controls the dailyView includes the date and completion graph
     ///   - listViewController: controlls the listview in the feed
     ///   - date: day that is requested
     // swiftlint:disable:next line_length
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController, prepare listViewController: OCKListViewController, for date: Date) {
-
+        
         Task {
             guard await checkIfOnboardingIsComplete() else {
                 let onboardSurvey = Onboard()
@@ -265,13 +262,13 @@ class CareViewController: OCKDailyPageViewController {
             }
 
             // swiftlint:disable:next line_length
-            let surveyCard = OCKSurveyTaskViewController(taskID: surveyTask.survey.type().identifier(), eventQuery: OCKEventQuery(for: date),
+            let surveyCard = OCKSurveyTaskViewController(taskID: surveyTask.id, eventQuery: OCKEventQuery(for: date),
                 storeManager: self.storeManager,
                 survey: surveyTask.survey.type().createSurvey(),
                 viewSynchronizer: SurveyViewSynchronizer(),
                 extractOutcome: surveyTask.survey.type().extractAnswers
-
             )
+            
             surveyCard.surveyDelegate = self
             return [surveyCard]
         case ViewType.counter.rawValue:

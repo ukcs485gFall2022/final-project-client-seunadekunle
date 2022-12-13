@@ -24,26 +24,33 @@ struct CareView: View {
 
     @ObservedObject var careViewModel: CareViewModel
 
+    @State private var score = 0
+
     var body: some View {
         NavigationView {
             ZStack {
-                VStack(spacing: 15) {
-
-                    if let score = careViewModel.trackScore {
+                VStack {
+                    HStack {
                         Text("\(score)")
-                            .font(.largeTitle)
-                            .foregroundColor(.black)
+                            .font(.custom("Helvetica", fixedSize: 50))
+                            .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
                             .fontWeight(.semibold)
-                            #if os(iOS)
-                            .padding(EdgeInsets(top: dimensionStyler.sidePadding,
-                                                leading: dimensionStyler.sidePadding + 17,
-                                                bottom: dimensionStyler.sidePadding / 3,
-                                                trailing: dimensionStyler.sidePadding + 17))
-                            #endif
-                    }
 
+                        #if os(iOS)
+                            .padding(EdgeInsets(top: dimensionStyler.sidePadding,
+                                leading: dimensionStyler.sidePadding + 17,
+                                bottom: dimensionStyler.sidePadding / 3,
+                                trailing: 0))
+                        #endif
+                        Text("trackScore")
+                            .font(.title3)
+                            .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconRed))
+                            .fontWeight(.light)
+                            .frame(width: 100, height: 50, alignment: .bottom)
+                    }.frame(width: dimensionStyler.screenWidth)
+                        .background(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
                     CareViewControllerRepresentable(careViewModel: careViewModel)
-                }
+                }.frame(width: dimensionStyler.screenWidth)
                 VStack {
                     Spacer()
                     HStack {
@@ -51,26 +58,28 @@ struct CareView: View {
                         Button(action: {
                             showSheet.toggle()
                         }, label: {
-                            Text("+")
-                                .font(.system(.largeTitle))
-                                .frame(width: 77, height: 70)
-                                .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
-                                .padding(.bottom, 7)
-                        })
-                        .background(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
-                        .cornerRadius(38.5)
+                                Text("+")
+                                    .font(.system(.largeTitle))
+                                    .frame(width: 77, height: 70)
+                                    .foregroundColor(ColorStyler.convertToColor(color: ColorStyler.iconYellow))
+                                    .padding(.bottom, 7)
+                            })
+                            .background(ColorStyler.convertToColor(color: ColorStyler.iconBlue))
+                            .cornerRadius(38.5)
 
-                        .padding()
-                        .shadow(color: Color.black.opacity(0.3),
-                                radius: 3,
-                                x: 3,
-                                y: 3) }
+                            .padding()
+                            .shadow(color: Color.black.opacity(0.3),
+                            radius: 3,
+                            x: 3,
+                            y: 3) }
                 }
             }.sheet(isPresented: $showSheet) {
                 NewPlanView(viewModel: .init())
                     .presentationDetents([.fraction(0.5)])
                     .presentationDragIndicator(.hidden)
                     .cornerRadius(15)
+            }.onReceive(careViewModel.$trackScore) { value in
+                score = value
             }
         }
 

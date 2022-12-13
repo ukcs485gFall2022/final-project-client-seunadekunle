@@ -45,14 +45,14 @@ class ProfileViewModel: ObservableObject {
     @Published var profileUIImage = UIImage(systemName: "person.fill") {
         willSet {
             guard self.profileUIImage != newValue,
-                let inputImage = newValue else {
+                  let inputImage = newValue else {
                 return
             }
 
             if !isSettingProfilePictureForFirstTime {
                 Task {
                     guard var currentUser = User.current,
-                        let image = inputImage.jpegData(compressionQuality: 0.25) else {
+                          let image = inputImage.jpegData(compressionQuality: 0.25) else {
                         Logger.profile.error("User is not logged in or could not compress image")
                         return
                     }
@@ -150,9 +150,9 @@ class ProfileViewModel: ObservableObject {
         self.storeManager = storeManager ?? StoreManagerKey.defaultValue
         reloadViewModel()
         NotificationCenter.default.addObserver(self,
-            selector: #selector(reloadViewModel(_:)),
-            name: Notification.Name(rawValue: Constants.shouldRefreshView),
-            object: nil)
+                                               selector: #selector(reloadViewModel(_:)),
+                                               name: Notification.Name(rawValue: Constants.shouldRefreshView),
+                                               object: nil)
     }
     // MARK: Helpers (private)
     private func clearSubscriptions() {
@@ -186,8 +186,8 @@ class ProfileViewModel: ObservableObject {
         queryForCurrentPatient.ids = [uuid.uuidString] // Search for the current logged in user
         do {
             guard let appDelegate = AppDelegateKey.defaultValue,
-                let foundPatient = try await appDelegate.store?.fetchPatients(query: queryForCurrentPatient),
-                let currentPatient = foundPatient.first else {
+                  let foundPatient = try await appDelegate.store?.fetchPatients(query: queryForCurrentPatient),
+                  let currentPatient = foundPatient.first else {
                 // swiftlint:disable:next line_length
                 Logger.profile.error("Could not find patient with id \"\(uuid)\". It's possible they have never been saved.")
                 return
@@ -198,7 +198,7 @@ class ProfileViewModel: ObservableObject {
             var queryForCurrentContact = OCKContactQuery(for: Date())
             queryForCurrentContact.ids = [uuid.uuidString]
             guard let foundContact = try await appDelegate.store?.fetchContacts(query: queryForCurrentContact),
-                let currentContact = foundContact.first else {
+                  let currentContact = foundContact.first else {
                 // swiftlint:disable:next line_length
                 Logger.profile.error("Error: Could not find contact with id \"\(uuid)\". It's possible they have never been saved.")
                 return
@@ -213,11 +213,11 @@ class ProfileViewModel: ObservableObject {
     @MainActor
     private func observePatient(_ patient: OCKPatient) {
         storeManager.publisher(forPatient: patient,
-            categories: [.add, .update, .delete])
-            .sink { [weak self] in
+                               categories: [.add, .update, .delete])
+        .sink { [weak self] in
             self?.patient = $0 as? OCKPatient
         }
-            .store(in: &cancellables)
+        .store(in: &cancellables)
     }
 
     @MainActor
@@ -234,8 +234,8 @@ class ProfileViewModel: ObservableObject {
         queryForCurrentPatient.ids = [uuid.uuidString] // Search for the current logged in user
         do {
             guard let appDelegate = AppDelegateKey.defaultValue,
-                let foundPatient = try await appDelegate.store?.fetchPatients(query: queryForCurrentPatient),
-                let currentPatient = foundPatient.first else {
+                  let foundPatient = try await appDelegate.store?.fetchPatients(query: queryForCurrentPatient),
+                  let currentPatient = foundPatient.first else {
                 // swiftlint:disable:next line_length
                 Logger.profile.error("Could not find patient with id \"\(uuid)\". It's possible they have never been saved.")
                 return
@@ -246,7 +246,7 @@ class ProfileViewModel: ObservableObject {
             var queryForCurrentContact = OCKContactQuery(for: Date())
             queryForCurrentContact.ids = [uuid.uuidString]
             guard let foundContact = try await appDelegate.store?.fetchContacts(query: queryForCurrentContact),
-                let currentContact = foundContact.first else {
+                  let currentContact = foundContact.first else {
                 // swiftlint:disable:next line_length
                 Logger.profile.error("Error: Could not find contact with id \"\(uuid)\". It's possible they have never been saved.")
                 return
@@ -264,11 +264,11 @@ class ProfileViewModel: ObservableObject {
     private func observeContact(_ contact: OCKContact) {
 
         storeManager.publisher(forContact: contact,
-            categories: [.add, .update, .delete])
-            .sink { [weak self] in
+                               categories: [.add, .update, .delete])
+        .sink { [weak self] in
             self?.contact = $0 as? OCKContact
         }
-            .store(in: &cancellables)
+        .store(in: &cancellables)
     }
 
     @MainActor
@@ -373,8 +373,8 @@ extension ProfileViewModel {
             }
 
             var newPatient = OCKPatient(id: remoteUUID,
-                givenName: firstName,
-                familyName: lastName)
+                                        givenName: firstName,
+                                        familyName: lastName)
             newPatient.birthday = birthday
 
             // This is new patient that has never been saved before
@@ -467,8 +467,8 @@ extension ProfileViewModel {
 
             // Added code to create a contact for the respective signed up user
             let newContact = OCKContact(id: remoteUUID,
-                name: patientName,
-                carePlanUUID: nil)
+                                        name: patientName,
+                                        carePlanUUID: nil)
 
             guard try await storeManager.store.addAnyContact(newContact) is OCKContact else {
                 Logger.profile.error("Could not cast to OCKContact")
