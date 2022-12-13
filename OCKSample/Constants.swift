@@ -107,7 +107,7 @@ enum TaskID {
     static let multistep = "multi-step"
     static let healthSugar = "healthSugar"
     static let drinkWater = "drinkWater"
-    static let countCalories = "countCalories"
+    static let countSugar = "countSugar"
     static let onboard = "onboard"
     static let repetition = "repetition"
     static let repetitionMood = "repetitionMood"

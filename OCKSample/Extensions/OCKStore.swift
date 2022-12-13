@@ -51,7 +51,7 @@ extension OCKStore {
                                           title: "Get More Social",
                                           patientUUID: patientUUID)
         let strengthCarePlan = OCKCarePlan(id: CarePlanID.stronger.rawValue,
-                                          title: "Get More Sttronger",
+                                          title: "Get More Stronger",
                                           patientUUID: patientUUID)
         try await AppDelegateKey
             .defaultValue?
@@ -154,7 +154,7 @@ extension OCKStore {
                                  carePlanUUID: nil,
                                  schedule: loudVoiceSchedule)
         repetitionPositive.impactsAdherence = false
-        repetitionPositive.instructions = "Input your positive speaking score"
+        repetitionPositive.instructions = "Increase when you speak positively"
         repetitionPositive.asset = "repeat.circle"
         repetitionPositive.carePlanUUID = carePlanUUIDs[CarePlanID.social]
         // swiftlint:disable:next line_length
@@ -201,40 +201,23 @@ extension OCKStore {
 //            return
 //        }
 
-        var contact1 = OCKContact(id: "jane", givenName: "Jane",
-                                  familyName: "Daniels", carePlanUUID: nil)
-        contact1.asset = "JaneDaniels"
-        contact1.title = "Family Practice Doctor"
-        contact1.role = "Dr. Daniels is a family practice doctor with 8 years of experience."
-        contact1.emailAddresses = [OCKLabeledValue(label: CNLabelEmailiCloud, value: "janedaniels@uky.edu")]
-        contact1.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 257-2000")]
-        contact1.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 357-2040")]
+        var contact1 = OCKContact(id: "pepetalk", givenName: "Peptoc Hotline",
+                                  familyName: "", carePlanUUID: nil)
+        contact1.asset = "phone.circle.fill"
+        contact1.title = "Mental health hotline"
+        contact1.role = "Call to get encouragement from young children"
+        contact1.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "707-998-8410")]
+        contact1.carePlanUUID = carePlanUUIDs[CarePlanID.social]
 //        contact1.remoteID = personUUIDString
-        contact1.address = {
-            let address = OCKPostalAddress()
-            address.street = "2195 Harrodsburg Rd"
-            address.city = "Lexington"
-            address.state = "KY"
-            address.postalCode = "40504"
-            return address
-        }()
 
-        var contact2 = OCKContact(id: "matthew", givenName: "Matthew",
-                                  familyName: "Reiff", carePlanUUID: nil)
-        contact2.asset = "MatthewReiff"
-        contact2.title = "OBGYN"
-        contact2.role = "Dr. Reiff is an OBGYN with 13 years of experience."
-        contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 257-1000")]
-        contact2.messagingNumbers = [OCKLabeledValue(label: CNLabelWork, value: "(859) 257-1234")]
+        var contact2 = OCKContact(id: "nami", givenName: "NAMI HelpLine",
+                                  familyName: "", carePlanUUID: nil)
+        contact1.asset = "phone.circle.fill"
+        contact2.title = "NAMI HelpLine"
+        // swiftlint:disable:next line_length
+        contact2.role = "HelpLine volunteers are working to answer questions, offer support and provide practical next steps."
+        contact2.phoneNumbers = [OCKLabeledValue(label: CNLabelWork, value: " 1-800-950-6264")]
 //        contact2.remoteID = personUUIDString
-        contact2.address = {
-            let address = OCKPostalAddress()
-            address.street = "1000 S Limestone"
-            address.city = "Lexington"
-            address.state = "KY"
-            address.postalCode = "40536"
-            return address
-        }()
 
         try await addContactsIfNotPresent([contact1, contact2])
     }
