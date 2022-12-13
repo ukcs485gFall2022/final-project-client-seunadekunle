@@ -19,7 +19,7 @@ Give a short description on what your project accomplishes and what tools is use
 
 -->
 
-An example application of [CareKit](https://github.com/carekit-apple/CareKit)'s OCKSample synchronizing CareKit data to the Cloud via [ParseCareKit](https://github.com/netreconlab/ParseCareKit). This app allows user to maintain habits and to track them the goal is to provide a centralized locations for users to stick to habits.
+An example application of [CareKit](https://github.com/carekit-apple/CareKit)'s OCKSample synchronizing CareKit data to the Cloud via [ParseCareKit](https://github.com/netreconlab/ParseCareKit). This app allows user to maintain habits and to track them the goal is to provide a centralized locations for users to stick to habits, this app also provides a trackScore that measures how devoted you are to making your app better.
 
 
 
@@ -33,18 +33,12 @@ Add the public link to your YouTube or video posted elsewhere.
 
 To learn more about this application, watch the video below:
 
-
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=mib_YioKAQQ
-
-" target="__blank">_<img src="http://img.youtube.com/vi/mib_YioKAQQ/0.jpg"
-
-_alt="Sample demo video" width="240" height="180" border="10" />_</a>
+<a href="https://youtu.be/8M3ye77BfZI" target="__blank" alt="Sample demo video"/>   ideo Link</a>
 
 
 
 ### Designed for the following users
-
+Anyone who is seeking self-improvement or just want a centralized tracking application. Track is designed for a wide variety of users and can accomodate most use cases.
 <!--
 
 Describe the types of users your app is designed for and who will benefit from your app.
@@ -60,15 +54,15 @@ In addition, you can drop screenshots directly into your README file to add them
 -->
 
 <img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-11-22%20at%2014.12.12.png?raw=true" width="300"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.27.png" width="300"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.38.png" width="300"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.40.png" width="300"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.48.png" width="300"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.13.00.png" width="300"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.21.31.png" width="300"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.40.44.png" width="300"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.43.55.png" width="300"> 
-<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.45.34.png" width="300">
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.27.png" width="150"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.38.png" width="150"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.40.png" width="150"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.48.png" width="150"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.13.00.png" width="150"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.21.31.png" width="150"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.40.44.png" width="150"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.43.55.png" width="150"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.45.34.png" width="150">
 
 
 <!--
@@ -81,7 +75,7 @@ link to each members respective GitHub profile
 
 Developed by:
 
-- [member1](https://github.com/seunadekunle) - `STUDENTS_UNIVERSITY`, `MAJOR`
+- [Seun Adekunle](https://github.com/seunadekunle) - `University of Kentucky`, `Computer Science`
 
 
 
@@ -108,7 +102,6 @@ ParseCareKit synchronizes the following entities to Parse tables/classes using [
 ****Use at your own risk. There is no promise that this is HIPAA compliant and we are not responsible for any mishandling of your data****
 
 
-
 <!--
 
 What features were added by you, this should be descriptions of features added from the [Code](https://uk.instructure.com/courses/2030626/assignments/11151475) and [Demo](https://uk.instructure.com/courses/2030626/assignments/11151413) parts of the final. Feel free to add any figures that may help describe a feature. Note that there should be information here about how the OCKTask/OCKHealthTask's and OCKCarePlan's you added pertain to your app.
@@ -117,11 +110,13 @@ What features were added by you, this should be descriptions of features added f
 
 ## Contributions/Features
 
-- Custom linkview so users can learn more about motivation
+- Custom FeaturedContentView so users can learn more about motivation
 
 - Custom Survey that involves a motivational video that can be played
 
 - Ability to add Care Plans
+
+- See added Care Plans
 
 - Custom form so users can add their own task with the ability to select different schedules, plot type, assets, Card views, and Care Plans
 
@@ -135,9 +130,9 @@ What features were added by you, this should be descriptions of features added f
 
 - Customized data shown for the different surveys employed in the app
 
+- Direct Link to the App Store
 
-
-
+- National Hotlines added as default contacts for Users to get encouragement/help
 
 
 
@@ -209,7 +204,7 @@ Describe at least 3 features you want to add in the future before releasing your
 
 -->
 
-1. Add a rudimentary social network feature where users can follow each other - Users can follow other users
+1. Add a rudimentary social network feature where users can follow each other - Users can follow other users, users can get badges and customizable content.
 
 2. Add UI changes for a dark theme and Implement a more flexible CareView - Developing a Care feed that would allow for grouping by care plans within a certain and integrate calculated data such as a TrackScore and user info (followers)
 
@@ -225,7 +220,7 @@ Describe any challenges you faced with learning Swift, your baseline app, or add
 
 -->
 
-One challenge was in implementing the trackScore feature was to find a way to trigger it, upload the changed value to the Parse Server. The main agent for doing this was the CareViewModel which was created and then passed through. To solve a warning involving background threads and the @Publisher variable changing the trackScore variable had to be done on the main thread since it was published this was done using DispatchQueue.main.async instead of other options that failed such receive(on:) and onReceive only. One unexpected obstacle was dealing with Swiftlint having to refactor code and change how some parts of the code was structured in order to resolve swiftlint build errors. Simply adding the file names to .swiftlint.yml or adding the disable all command wasn't the optimal solution.
+One challenge was in implementing the trackScore feature was to find a way to trigger it, upload the changed value to the Parse Server. The main agent for doing this was the CareViewModel which was created and then passed through. To solve a warning involving background threads and the @Publisher variable changing the trackScore variable had to be done on the main thread since it was published this was done using DispatchQueue.main.async instead of other options that failed such receive(on:) and onReceive only. One unexpected obstacle was dealing with Swiftlint having to refactor code and change how some parts of the code was structured in order to resolve swiftlint build errors. Simply adding the file names to .swiftlint.yml or adding the disable all command wasn't the optimal solution. Another issue was dealing with closures within forms there were multiple errors that occurred when attempting to use Pickers within forms, this error involved trailing closures and the 
 
 
 
@@ -235,12 +230,9 @@ One challenge was in implementing the trackScore feature was to find a way to tr
 ## Setup Your Parse Server
 
 
-
 ### Heroku
 
 The easiest way to setup your server is using the [one-button-click](https://github.com/netreconlab/parse-hipaa#heroku) deplyment method for [parse-hipaa](https://github.com/netreconlab/parse-hipaa).
-
-
 
 
 
