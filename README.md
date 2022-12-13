@@ -8,7 +8,7 @@ Name of your final project
 <!--
 Give a short description on what your project accomplishes and what tools is uses. Basically, what problems does it solve and why it's different from other apps in the app store.
 -->
-An example application of [CareKit](https://github.com/carekit-apple/CareKit)'s OCKSample synchronizing CareKit data to the Cloud via [ParseCareKit](https://github.com/netreconlab/ParseCareKit). This app allows user to maintain habits and to track them
+An example application of [CareKit](https://github.com/carekit-apple/CareKit)'s OCKSample synchronizing CareKit data to the Cloud via [ParseCareKit](https://github.com/netreconlab/ParseCareKit). This app allows user to maintain habits and to track them the goal is to provide a centralized locations for users to stick to habits.
 
 ### Demo Video
 <!--
@@ -53,6 +53,19 @@ ParseCareKit synchronizes the following entities to Parse tables/classes using [
 What features were added by you, this should be descriptions of features added from the [Code](https://uk.instructure.com/courses/2030626/assignments/11151475) and [Demo](https://uk.instructure.com/courses/2030626/assignments/11151413) parts of the final. Feel free to add any figures that may help describe a feature. Note that there should be information here about how the OCKTask/OCKHealthTask's and OCKCarePlan's you added pertain to your app.
 -->
 ## Contributions/Features
+- Custom linkview so users can learn more about motivation
+- Custom Survey that involves a motivational video that can be played
+- Ability to add Care Plans
+- Custom form so users can add their own task with the ability to select different schedules, plot type, assets, Card views, and Care Plans
+- Insights tab was added were plots could be shown with random colorful gradients
+- Trackscore is updated as user performs actions in the app and syncs with parse
+- Clean and minimalist UI that reflects the chosen color theme
+- Two custom cards, (LoggerCard and CounterCard) can be employed to track Quantitative and Qualitative data
+- Customized data shown for the different surveys employed in the app
+
+
+
+ 
 
 ## Final Checklist
 <!--
@@ -86,15 +99,17 @@ This is from the checkist from the final [Code](https://uk.instructure.com/cours
 <!--
 Describe at least 3 features you want to add in the future before releasing your app in the app-store
 -->
-1. feature one
-Add a rudimentary social network feature where users can follow each other
-2. feature two
-3. feature three
+1. Add a rudimentary social network feature where users can follow each other - Users can follow other users 
+2. Add UI changes for a dark theme and Implement a more flexible CareView - Developing a Care feed that would allow for grouping by care plans within a certain and integrate calculated data such as a TrackScore and user info (followers)
+3. Calculate trackScore using a more complex algorithm which will take into account streaks, time of completion, and other factors.
 
 ## Challenges faced while developing
 <!--
 Describe any challenges you faced with learning Swift, your baseline app, or adding features. You can describe how you overcame them.
 -->
+One challenge was in implementing the trackScore feature was to find a way to trigger it, upload the changed value to the Parse Server. The main agent for doing this was the CareViewModel which was created and then passed through. To solve a warning involving background threads and the @Publisher variable changing the trackScore variable had to be done on the main thread since it was published this was done using Dispatch.main.async instead of other options that failed such receive(on:) and onReceive only.
+
+
 
 ## Setup Your Parse Server
 
