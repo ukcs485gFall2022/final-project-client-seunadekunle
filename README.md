@@ -60,6 +60,15 @@ In addition, you can drop screenshots directly into your README file to add them
 -->
 
 <img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-11-22%20at%2014.12.12.png?raw=true"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.27.png"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.38.png"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.40.png"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.10.48.png"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.13.00.png"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-12%20at%2020.21.31.png"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.40.44.png"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.43.55.png"> 
+<img src="https://github.com/ukcs485gFall2022/final-project-client-seunadekunle/blob/README/demo_pictures/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202022-12-13%20at%2001.45.34.png">
 
 
 <!--
